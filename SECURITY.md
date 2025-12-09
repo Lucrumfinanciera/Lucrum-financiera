@@ -14,7 +14,7 @@ X-XSS-Protection: 0
 ```
 
 ## Integridad (SRI)
-- Los recursos locales se sirven con `integrity` y `crossorigin="anonymous"`. Si editas `assets/css/styles.css`, `js/main.js` o ficheros en `ld/`, recalcula los hashes SHA-384 y actualiza los atributos en los HTML.
+- Los recursos locales se sirven con `integrity` y `crossorigin="anonymous"`. Si editas `assets/css/styles.css`, `assets/js/main.js` o ficheros en `ld/`, recalcula los hashes SHA-384 y actualiza los atributos en los HTML.
 
 ## CSP
 - El CSP bloquea scripts inline y solo permite `script-src 'self'`. Si añades nuevos orígenes (CDN, analytics, etc.), actualiza `Content-Security-Policy` en `_headers` y en el meta http-equiv.
