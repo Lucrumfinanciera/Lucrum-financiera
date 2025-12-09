@@ -22,7 +22,7 @@ const FOOTER_FALLBACK=`
 <footer class="site-footer" id="footer">
   <div class="container footer-grid premium-footer">
     <div class="footer-brand">
-      <img class="footer-logo" src="img/logo2.png" alt="Logo Lucrum Financiera" width="180" height="48" loading="lazy" decoding="async">
+      <img class="footer-logo" src="img/logo2.webp" alt="Logo Lucrum Financiera" width="180" height="48" loading="lazy" decoding="async">
       <div class="social-row" aria-label="Redes sociales">
         <a href="https://www.facebook.com/share/162QvEmgM2/?mibextid=wwXIfr" aria-label="Facebook" target="_blank" rel="noopener" class="social-button">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.57 9.88v-7h-2.2V12h2.2V9.8c0-2.17 1.29-3.37 3.27-3.37.95 0 1.94.17 1.94.17v2.14h-1.09c-1.07 0-1.41.66-1.41 1.34V12h2.4l-.38 2.88h-2.02v7A10 10 0 0 0 22 12Z" fill="currentColor"/></svg>
