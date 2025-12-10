@@ -1228,6 +1228,19 @@ input:focus,select:focus,textarea:focus {
     order:-1
   }
 }
+@media (max-width:720px) {
+  .footer-cta,
+  .footer-links {
+    justify-content:center;
+    width:100%
+  }
+  .footer-cta .btn-primary,
+  .footer-links .btn-primary {
+    width:100%;
+    max-width:360px;
+    text-align:center
+  }
+}
 .accordion-trigger:focus-visible {
   background:#e7eef5
 }
@@ -1270,6 +1283,27 @@ input:focus,select:focus,textarea:focus {
 }
 .footer-legal .btn-primary {
   margin-top:8px
+}
+.footer-cta {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-start;
+  margin-top:12px
+}
+.footer-cta .btn-primary {
+  min-width:180px;
+  justify-content:center
+}
+.footer-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px
+}
+.footer-links .btn-primary {
+  justify-content:center
 }
 .footer-contact h3,.footer-legal h3 {
   color:#fff;
