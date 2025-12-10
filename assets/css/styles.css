@@ -312,19 +312,19 @@ ul {
   color:inherit
 }
 .main-nav a {
+  background:transparent;
   padding:8px 12px;
   border-radius:12px;
   transition:var(--transition);
   color:inherit;
-  font-weight:600
+  font-weight:600;
+  text-align:center
+}
+.main-nav a:not(.active) {
+  background:transparent
 }
 .main-nav a:hover,.main-nav a:focus-visible {
   background:#e7eef5
-}
-.main-nav a.active {
-  background:#e7eef5;
-  color:var(--azul);
-  font-weight:800
 }
 .menu-toggle {
   display:none;
@@ -1439,33 +1439,42 @@ input:focus,select:focus,textarea:focus {
 }
 @media (max-width:767px) {
   .main-nav {
-    position:absolute;
+    position:fixed;
     top:70px;
     right:16px;
     left:16px;
-    background:var(--blanco);
+    background:#fff;
     border-radius:14px;
-    box-shadow:var(--sombra);
+    box-shadow:0 20px 45px rgba(15,27,43,0.12);
     padding:14px;
     display:none;
     flex-direction:column;
-    gap:8px;
-    z-index:30
+    gap:10px;
+    z-index:30;
+    backdrop-filter:blur(10px)
   }
   .main-nav a {
     padding:12px;
-    border-radius:10px
+    border-radius:10px;
+    color:inherit;
+    width:100%
   }
   .header-inner {
     gap:12px;
     align-items:center
   }
   .header-actions {
-    gap:8px
+    gap:8px;
+    justify-content:center
+  }
+  .header-actions .btn {
+    justify-content:center;
+    text-align:center
   }
   .header-actions .btn-primary {
-    padding-inline:12px;
+    padding:10px 14px;
     font-size:0.9rem;
+    line-height:1.2;
     order:1
   }
   .menu-toggle {
@@ -1485,7 +1494,22 @@ input:focus,select:focus,textarea:focus {
   }
   body.nav-open .nav-overlay {
     opacity:1;
-    visibility:visible
+    visibility:visible;
+    backdrop-filter:blur(8px)
+  }
+  body.nav-open .header-actions {
+    position:fixed;
+    bottom:18px;
+    left:16px;
+    right:16px;
+    justify-content:center;
+    gap:10px;
+    z-index:32
+  }
+  body.nav-open .header-actions .btn-primary {
+    width:100%;
+    max-width:260px;
+    text-align:center
   }
   .teaser-content {
     grid-template-columns:1fr

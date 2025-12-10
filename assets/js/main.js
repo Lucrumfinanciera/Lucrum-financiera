@@ -22,7 +22,7 @@ const FOOTER_FALLBACK=`
 <footer class="site-footer" id="footer">
   <div class="container footer-grid premium-footer">
     <div class="footer-brand">
-      <img class="footer-logo" src="img/logo2.webp" alt="Logo Lucrum Financiera" width="180" height="48" loading="lazy" decoding="async">
+      <img class="footer-logo" src="/assets/img/logo2.webp" alt="Logo Lucrum Financiera" width="180" height="48" loading="lazy" decoding="async">
       <div class="social-row" aria-label="Redes sociales">
         <a href="https://www.facebook.com/share/162QvEmgM2/?mibextid=wwXIfr" aria-label="Facebook" target="_blank" rel="noopener" class="social-button">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.57 9.88v-7h-2.2V12h2.2V9.8c0-2.17 1.29-3.37 3.27-3.37.95 0 1.94.17 1.94.17v2.14h-1.09c-1.07 0-1.41.66-1.41 1.34V12h2.4l-.38 2.88h-2.02v7A10 10 0 0 0 22 12Z" fill="currentColor"/></svg>
@@ -45,11 +45,11 @@ const FOOTER_FALLBACK=`
     </div>
     <div class="footer-legal">
       <h3>Legal y programa</h3>
-      <a href="legal.html#terminos-condiciones">Términos</a>
-      <a href="legal.html#politica-privacidad">Políticas de privacidad</a>
+      <a href="/legal/#terminos-condiciones">Términos</a>
+      <a href="/legal/#politica-privacidad">Políticas de privacidad</a>
       <p>Conecta con nuestro equipo y crea beneficios de crédito por nómina.</p>
       <a class="btn btn-primary btn-pay" href="https://checkout.wompi.co/l/qQpQfA" target="_blank" rel="noopener">Quiero Pagar</a>
-      <a class="btn btn-primary" href="index.html#lead-form">Ir a aliados</a>
+      <a class="btn btn-primary" href="/#lead-form">Ir a aliados</a>
       <a class="btn btn-primary" href="mailto:gestionhumana@lucrumfinanciera.com?subject=Hoja%20de%20vida%20-%20Lucrum%20Financiera&body=Adjunta%20tu%20hoja%20de%20vida%20para%20revisi%C3%B3n.">Trabaja con Nosotros</a>
     </div>
   </div>
