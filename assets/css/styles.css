@@ -411,6 +411,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
   background:linear-gradient(120deg,rgba(15,27,43,0.78),rgba(15,27,43,0.55)),url("../img/home.webp");
   background-size:cover;
   background-position:top;
+  background-repeat:no-repeat;
   color:#f5f8fc
 }
 .hero-bg h1,.hero-bg h2,.hero-bg p,.hero-bg .lead {
@@ -439,8 +440,13 @@ body.nav-open .menu-toggle span:nth-child(3) {
   gap:28px
 }
 @media (max-width:767px) {
+  .hero {
+    padding-top:100px
+  }
   .hero-bg {
-    background-position:var(--hero-mobile-bg-x,60%) top
+    background-image:linear-gradient(180deg,rgba(15,27,43,0.92) 0%,rgba(15,27,43,0.8) 46%,rgba(15,27,43,0.9) 100%),url("../img/home.webp");
+    background-position:var(--hero-mobile-bg-x,55%) 12%;
+    background-size:cover
   }
 }
 .mode-toggle {
