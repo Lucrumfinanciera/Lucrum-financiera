@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-lucrum-secure'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://assets.zyrosite.com; form-action 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; block-all-mixed-content">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=(), payment=(), usb=()">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="canonical" href="https://lucrumfinanciera.com/prueba-formulario">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.webp">
+  <link rel="manifest" href="assets/img/logo.webp">
+  <link rel="icon" href="assets/img/logo.webp">
+  <title>Formulario de Conocimiento | Lucrum Financiera</title>
+  <meta name="description" content="Completa el formulario de conocimiento en 4 pasos y envía tus documentos a Lucrum Financiera.">
+  <meta property="og:site_name" content="Lucrum Financiera">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lucrumfinanciera.com/prueba-formulario">
+  <meta property="og:title" content="Formulario de Conocimiento | Lucrum Financiera">
+  <meta property="og:description" content="Completa el formulario de conocimiento en 4 pasos y envía tus documentos a Lucrum Financiera.">
+  <meta property="og:image" content="assets/img/hero-creditos-por-nomina.webp">
+  <meta property="og:image:alt" content="Formulario Lucrum Financiera">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Formulario de Conocimiento | Lucrum Financiera">
+  <meta name="twitter:description" content="Completa el formulario de conocimiento en 4 pasos y envía tus documentos a Lucrum Financiera.">
+  <meta name="twitter:image" content="assets/img/hero-creditos-por-nomina.webp">
+  <link rel="preconnect" href="https://assets.zyrosite.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script type="application/ld+json" nonce="lucrum-secure">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialProduct",
+      "name": "Formulario de conocimiento Lucrum Financiera",
+      "description": "Completa los 4 pasos del formulario de conocimiento y envía tus documentos en línea.",
+      "url": "https://lucrumfinanciera.com/prueba-formulario",
+      "provider": {
+        "@type": "Organization",
+        "name": "Lucrum Financiera",
+        "url": "https://lucrumfinanciera.com/"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Colombia"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Aquí se insertará el formulario -->
+  <div id="formContainer"></div>
+
+  <!-- Contenedor oculto con el formulario completo -->
+  <template id="formTemplate">
+    <!-- 🔹 Aquí empieza tu formulario (sin DOCTYPE ni <html>) -->
+    
+    <style>
+  /* ====== Tema y base ====== */
+  :root{
+    --clr-bg:#fff; --clr-card:#f2f1ec; --clr-primary:#204E78; --clr-accent:#3A6DAE; --clr-text:#333;
+    --gap-sm:8px; --gap-md:16px; --gap-lg:24px; --radius:10px; --fs-base:.95rem; --fs-lg:1.2rem;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--clr-bg);font-family:Segoe UI,system-ui,-apple-system,sans-serif;color:var(--clr-text);line-height:1.45;padding:var(--gap-lg)}
+  .logo-img{display:block;margin:0 auto var(--gap-md);max-width:80px}
+
+  .form-shell{
+  max-width:none;   /* elimina el límite */
+  width:100%;
+  margin-inline:auto; /* conservas el centrado general */
+}
+  .secure-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .secure-badge{font-size:.8rem;color:#0a6f2b;background:#e8f7ee;border:1px solid #bfe7cd;border-radius:999px;padding:6px 10px;display:inline-flex;gap:6px;align-items:center}
+  .secure-badge svg{width:14px;height:14px}
+
+  .form-container{background:var(--clr-card);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.06);padding:28px}
+  h1{font-size:1.6rem;color:var(--clr-primary);text-align:center;margin-bottom:0}
+  .subtitle{font-size:.9rem;color:#5b6b7b;margin-bottom:22px;text-align:center}
+
+  /* ====== Progreso / pasos ====== */
+  .steps{display:flex;gap:14px;align-items:center;margin:8px 0 24px}
+  .step-dot{width:28px;height:28px;border-radius:50%;border:2px solid #cfd8e3;display:grid;place-items:center;font-weight:600;color:#7b8a9b;background:#fff;transition:.2s}
+  .step-dot.current{border-color:var(--clr-accent);color:#fff;background:var(--clr-accent)}
+  .step-dot.done{border-color:#16a34a;background:#16a34a;color:#fff}
+  .step-line{height:2px;flex:1;background:#cfd8e3;transition:background .2s}
+  .step-line.active{background:linear-gradient(90deg,var(--clr-accent),#7fb0ea)}
+  #progressBar{display:flex;justify-content:space-between;align-items:center;padding:0 30px}
+
+  /* ====== Hero (opcional) ====== */
+  .hero{display:grid;place-items:center;margin:10px 0 10px}
+  .hero img{width:auto;height:150px;object-fit:contain;object-position:center;border:none;border-radius:0;opacity:.9}
+
+  /* ====== Grid responsivo ====== */
+  .grid-dos-columnas,.grid-tres-columnas,.grid-cuatro-columnas,.grid-cinco-columnas{display:grid;gap:var(--gap-md);grid-template-columns:1fr}
+  @media (min-width:600px){
+    .grid-dos-columnas{grid-template-columns:repeat(2,1fr)}
+    .grid-tres-columnas{grid-template-columns:repeat(3,1fr)}
+    .grid-cuatro-columnas{grid-template-columns:repeat(4,1fr)}
+    .grid-cinco-columnas{grid-template-columns:repeat(5,1fr)}
+  }
+  .grid-span-all{grid-column:1/-1}
+
+  /* ====== Tipografía y campos ====== */
+  label{display:block;font-size:.92rem;margin-bottom:6px;color:var(--clr-primary)}
+  input,select,textarea{
+    width:100%;font-size:var(--fs-base);padding:10px 12px;border:1px solid #cbd5e1;border-radius:var(--radius);
+    background:#fff;color:var(--clr-text);transition:border-color .2s,box-shadow .2s
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--clr-accent);box-shadow:0 0 0 4px rgba(58,109,174,.15)}
+  .invalid{border-color:#dc2626!important;box-shadow:0 0 0 3px rgba(220,38,38,.12)!important}
+  .help-error{font-size:.78rem;color:#b42318;margin-top:6px;display:none}
+
+  fieldset{border:none;margin:0}
+  legend{font-weight:700;font-size:1.05rem;color:var(--clr-primary);margin:8px 0 12px;border-bottom:2px solid #dbe6f6;display:inline-block;padding-bottom:6px}
+  .sublegend-inline{font-weight:700;font-size:1.05rem;color:var(--clr-primary);margin:8px 0 12px;border-bottom:2px solid #dbe6f6;display:inline-block;padding-bottom:6px}
+  .label-center{text-align:center;display:block}
+
+  /* ====== Navegación de pasos ====== */
+  .step-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+  .btn{appearance:none;border:none;border-radius:12px;padding:12px 18px;font-weight:600;cursor:pointer}
+  .btn-primary{background:linear-gradient(90deg,var(--clr-primary),var(--clr-accent));color:#fff}
+  .btn-primary:disabled{opacity:.6;cursor:not-allowed}
+  .btn-ghost{background:#eef2f7;color:#1f2a37}
+
+  /* ====== Estados pasos (visibilidad/animación) ====== */
+  .hidden{display:none!important}
+  .form-step{animation:fadeSlide .22s ease}
+  @keyframes fadeSlide{
+    from{opacity:0;transform:translateY(6px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* ====== Radio “botonizados” accesibles ====== */
+  .button-group{width:100%}
+  .button-group--inline{
+    display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-sm);align-items:stretch;margin-top:5px
+  }
+  .button-group--inline input[type="radio"]{position:absolute;opacity:0;pointer-events:none}
+  .button-group--inline .option-btn{
+    display:flex;justify-content:center;align-items:center;width:100%;padding:var(--gap-sm) var(--gap-md);
+    border:1px solid #ccc;border-radius:var(--radius);background-color:#fff;font-size:var(--fs-base);line-height:1.2;
+    cursor:pointer;user-select:none;transition:background-color .2s,border-color .2s,box-shadow .2s;text-align:center
+  }
+  .button-group--inline .option-btn:hover{background-color:#f0f0f0}
+  .button-group--inline input[type="radio"]:focus + .option-btn{border-color:var(--clr-accent);box-shadow:0 0 4px rgba(58,109,174,.4)}
+  .button-group--inline input[type="radio"]:checked + .option-btn{background-color:var(--clr-primary);color:#fff;border-color:var(--clr-primary)}
+  @media (max-width:480px){.button-group--inline{grid-template-columns:1fr}}
+
+  /* ====== Declaraciones con sí/no a la derecha ====== */
+  .declaracion-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:1rem;flex-wrap:wrap}
+  .declaracion-text{flex:1 1 60%;font-weight:500}
+  .declaracion-options{flex:1 1 35%;display:flex;justify-content:flex-end;gap:1rem}
+  .declaracion-options label{display:flex;align-items:center;gap:.25rem}
+
+  /* ====== Layout etiqueta izquierda / botones derecha ====== */
+  .form-group-inline{display:grid;grid-template-columns:2fr 1fr;align-items:center;gap:var(--gap-md)}
+  .form-group-inline > label{margin-bottom:0;text-align:left}
+  @media (max-width:600px){
+    .form-group-inline{grid-template-columns:1fr;align-items:stretch;gap:var(--gap-sm)}
+    .form-group-inline > label{margin-bottom:var(--gap-sm)}
+  }
+
+  /* ====== Select: apariencia consistente ====== */
+  select{
+    -webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:2rem;
+    background-image:url("data:image/svg+xml;utf8,<svg fill='%23204E78' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;background-size:16px
+  }
+
+  /* ====== Ajuste específico paso 4 (si necesitas una sola columna) ====== */
+section[data-step="4"] .grid-dos-columnas{display:block}
+
+ /* Toggle Sí/No compacto en una sola “píldora” */
+.toggle-btn-group{
+  display: inline-flex;
+  border: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;          /* opcional: limita el ancho del control */
+  background: #fff;
+}
+.toggle-btn-group input{
+  display: none;
+}
+.toggle-btn-group label{
+  flex: 1 1 50%;
+  text-align: center;
+  padding: var(--control-pad-y) var(--control-pad-x);
+  line-height: var(--control-lh);
+  cursor: pointer;
+  user-select: none;
+  background: #fff;
+  color: var(--clr-primary);
+  border: 1px solid #ccc;
+  border-left: none;
+  transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+}
+.toggle-btn-group label:first-of-type{
+  border-left: 1px solid #ccc;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.toggle-btn-group label:last-of-type{
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.toggle-btn-group label + label{
+  margin-left: -1px; /* evita doble borde visible */
+}
+.toggle-btn-group input:checked + label{
+  background: var(--clr-accent);
+  color: #fff;
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 1px var(--clr-accent);
+}
+
+/* Alineación tipo cuestionario: pregunta izq / respuesta der */
+.form-row.cols-2 > .form-group:first-child{
+  display: flex; justify-content: flex-end; align-items: center;
+  padding-right: var(--gap-md); text-align: right;
+}
+.form-row.cols-2 > .form-group:last-child{
+  display: flex; align-items: center;
+}
+
+/* helper para ocultar filas completas */
+.hidden{ display: none !important; }
+
+/* Asegurar que las dos columnas de la fila tengan la misma altura */
+.form-row.cols-2{
+  align-items: stretch; /* fuerza mismo alto */
+}
+
+/* El contenedor de la respuesta ocupa todo el alto de la fila */
+.form-row.cols-2 > .form-group:last-child{
+  display: flex;
+  align-items: center;   /* centra los botones verticalmente */
+  height: 100%;
+}
+
+/* El grupo de botones se estira al 100% */
+.form-row.cols-2 .toggle-btn-group{
+  flex: 1;
+  height: 50px;
+  display: flex;
+}
+
+/* Cada opción ocupa 50% del alto y ancho */
+.form-row.cols-2 .toggle-btn-group label{
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* 🔹 iguala el alto al contenedor */
+}
+
+/* FATCA: tarjetas en un grid de tres columnas */
+.fatca-section{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap-lg);
+  align-items: stretch;
+}
+.fatca-question{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+  padding: var(--gap-md) var(--gap-lg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(32,78,120,.06);
+  height: 100%;
+}
+.fatca-question__label{
+  font-size: .92rem;
+  color: var(--clr-primary);
+  line-height: 1.35;
+}
+.fatca-question__control{
+  width: 100%;
+  display: flex;
+}
+.fatca-question .toggle-btn-group{
+  height: 40px;
+  max-width: 360px;
+  width: 100%;
+}
+.fatca-question .toggle-btn-group label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  height: 100%;
+}
+.fatca-question--sub{
+  border-style: dashed;
+  background: #f7faff;
+}
+.fatca-subgrid{
+  width: 100%;
+  display: grid;
+  gap: var(--gap-md);
+}
+.fatca-field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fatca-field__label{
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+}
+.fatca-field--tooltip{
+  position: relative;
+}
+.fatca-question--sub .toggle-btn-group{
+  width: 100%;
+  max-width: none;
+}
+.fatca-question--sub .toggle-btn-group label{
+  font-weight: 600;
+}
+@media (min-width:720px){
+  .fatca-subgrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width:1024px){
+  .fatca-section{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width:720px){
+  .fatca-section{
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width:600px){
+  .fatca-question{
+    padding: var(--gap-md);
+  }
+  .fatca-question .toggle-btn-group{
+    max-width: 100%;
+  }
+}
+
+/* Icono de ayuda */
+.help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Tooltip oculto por defecto */
+.help-tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  width: 320px;
+  max-width: 90vw;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  z-index: 10;
+}
+
+/* Mostrar tooltip en hover o foco */
+.help-icon:hover + .help-tooltip,
+.help-icon:focus + .help-tooltip {
+  display: block;
+}
+
+/* Lista de declaraciones: una columna, tarjeta limpia */
+.decl-list{
+  display: grid;
+  gap: var(--gap-md);
+}
+
+/* Cada declaración: checkbox a la izquierda | texto a la derecha */
+.decl-item{
+  display: grid;
+  grid-template-columns: auto 1fr;  /* ⬅️ checkbox | texto */
+  align-items: start;               /* alinea arriba cuando el texto tiene varias líneas */
+  gap: var(--gap-md);
+  padding: var(--gap-md);
+  border: 1px solid #e6e6e6;        /* devuelve el borde si lo quieres visible */
+  border-radius: var(--radius);
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+  cursor: pointer;
+}
+
+.decl-check{            /* checkbox a la primera columna */
+  grid-column: 1;
+  justify-self: start;  /* evita que se centre si algún estilo lo afecta */
+  margin-top: 2px;      /* alinea con la primera línea del texto */
+}
+
+/* Texto */
+.decl-text{             /* texto a la segunda columna, alineado a la izquierda */
+  grid-column: 2;
+  flex: 1;              /* por compat con tu estilo previo */
+  text-align: left;
+  color: #204E78;
+  line-height: 1.45;
+}
+
+/* Checkbox “bonito” y llamativo */
+.decl-check{
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #cfcfcf;
+  border-radius: 6px;
+  background: #fff;
+  display: inline-grid;
+  place-content: center;
+  transition: border-color .2s, background-color .2s, box-shadow .2s, transform .05s;
+}
+.decl-item:hover .decl-check{
+  border-color: var(--clr-accent);
+}
+.decl-check:active{ transform: scale(.98); }
+
+/* Estado checked con check SVG blanco */
+.decl-check:checked{
+  border-color: var(--clr-accent);
+  background:
+    var(--clr-accent)
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>")
+    no-repeat center / 16px 16px;
+}
+
+/* Accesibilidad: foco visible al tabular */
+.decl-check:focus-visible{
+  outline: 2px solid rgba(58,109,174,.35); /* var(--clr-accent) translúcido */
+  outline-offset: 2px;
+}
+
+/* Espaciado más compacto si quieres apilar muchas */
+.decl-list.compact .decl-item{
+  padding: calc(var(--gap-sm) + 2px) var(--gap-md);
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+/* Escondemos el input nativo */
+.file-upload input[type="file"] {
+  display: none;
+}
+
+/* Botón personalizado */
+.file-btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 2px solid var(--clr-accent);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--clr-accent);
+  background: transparent;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Estado cuando ya se seleccionó */
+.file-btn.active {
+  background: var(--clr-accent);
+  color: #fff;
+}
+
+.documentos-grid{
+  align-items: stretch;
+}
+.frecuencia-selector{
+  display: flex;
+  flex-direction: column;
+  border: 1px dashed #cfd8e3;
+  border-radius: var(--radius);
+  background: #fff;
+  padding: var(--gap-md);
+  gap: var(--gap-sm);
+}
+.frecuencia-label{
+  font-weight: 600;
+  color: var(--clr-primary);
+  font-size: 0.92rem;
+}
+.frecuencia-selector .toggle-btn-group{
+  width: 100%;
+}
+.frecuencia-selector .toggle-btn-group label{
+  font-weight: 600;
+}
+.frecuencia-help{
+  font-size: 0.8rem;
+  color: #5b6b7b;
+}
+.documento-col{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  border-radius: var(--radius);
+  background: transparent;
+  padding: var(--gap-md);
+  min-height: 100%;
+}
+.documento-col__title{
+  font-weight: 600;
+  color: var(--clr-primary);
+  text-align: center;
+}
+.documento-col__content{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+.documento-col__content .file-upload > label{
+  text-align: center;
+}
+.documento-col .file-upload{
+  gap: var(--gap-sm);
+}
+.documento-col:not(.quincenal-active) .file-upload + .file-upload{
+  padding-top: var(--gap-sm);
+  border-top: 1px solid rgba(32,78,120,.1);
+}
+.documento-col.quincenal-active{
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cee0f3;
+}
+.documento-col.quincenal-active .documento-col__content{
+  display: grid;
+  gap: var(--gap-md);
+  grid-template-columns: 1fr;
+}
+.documento-col.quincenal-active .file-upload{
+  padding-top: 0;
+  border-top: none;
+}
+@media (min-width:640px){
+  .documento-col.quincenal-active .documento-col__content{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width:600px){
+  .frecuencia-selector,
+  .documento-col{
+    padding: var(--gap-sm) var(--gap-md);
+  }
+}
+
+/* Add to your CSS for better responsive layout for section 5 */
+.form-step .form-row.cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-md);
+  align-items: center;
+  margin-bottom: 18px;
+}
+.form-group.question-col {
+  text-align: right;
+  padding-right: var(--gap-md);
+}
+.form-group.answer-col {
+  text-align: left;
+}
+@media (max-width: 700px) {
+  .form-step .form-row.cols-2 {
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+  }
+  .form-group.question-col {
+    text-align: left;
+    padding-right: 0;
+    margin-bottom: 4px;
+  }
+}
+
+/* ===== Progress bar más compacto en móvil ===== */
+@media (max-width: 600px) {
+  /* Ajustes rápidos (baja estos valores para ver aún más pasos) */
+  :root{
+    --pb-dot-size: 30px;   /* tamaño del círculo */
+    --pb-line-size: 26px;  /* largo de cada tramo de línea */
+    --pb-font-size: 0.78rem; /* tamaño del número dentro del punto */
+    --pb-gap: 8px;         /* separación entre elementos */
+    --pb-pad: 8px;         /* padding lateral del contenedor */
+  }
+
+  #progressBar{
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--pb-gap);
+    padding: 0 var(--pb-pad);
+    scroll-snap-type: x proximity;
+  }
+
+  #progressBar .step-dot{
+    flex: 0 0 var(--pb-dot-size);
+    width: var(--pb-dot-size);
+    height: var(--pb-dot-size);
+    font-size: var(--pb-font-size);
+    scroll-snap-align: center;
+    border-width: 1.5px; /* más fino para que se vea más “ligero” */
+  }
+
+  #progressBar .step-line{
+    flex: 0 0 var(--pb-line-size);
+    height: 2px;
+  }
+}
+
+@media (max-width: 700px) {
+  .form-step .form-row.cols-2 {
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+  }
+  .form-group.question-col {
+    text-align: left !important;
+    padding-right: 0;
+    margin-bottom: 4px;
+  }
+  .form-group.question-col label {
+    display: block;
+    text-align: left !important;
+  }
+}
+
+@media (max-width:700px){
+  .step-footer{
+    flex-direction: column;   /* apila en columna */
+    align-items: stretch;     /* que los botones ocupen todo el ancho */
+    gap: 10px;                /* espacio entre elementos */
+  }
+
+  .step-footer .btn.btn-primary{ order:1; width:100%; }  /* Siguiente arriba */
+  .step-footer .steps-counter{ order:2; text-align:center; font-weight:600; }
+  .step-footer .btn.btn-ghost{ order:3; width:100%; }    /* Anterior abajo */
+}
+
+/* Vista de gracias */
+#thankyouView .thankyou-wrap{
+  text-align:center;
+  padding:28px;
+}
+#thankyouView .thank-img{
+  width: 140px;
+  height: auto;
+  margin: 0 auto 12px;
+  display:block;
+}
+#thankyouView .thank-title{
+  color: var(--clr-primary);
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+}
+#thankyouView .thank-subtitle{
+  margin-bottom: 24px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Botones: fila en desktop, columna en móvil */
+#thankyouView .thank-actions{
+  display:flex;
+  justify-content:center;
+  gap: 16px;
+  margin-top: 20px;
+}
+#thankyouView .thank-actions .btn{
+  min-width: 220px;
+}
+
+/* En móvil se apilan */
+@media (max-width:700px){
+  #thankyouView .thank-actions{
+    flex-direction: column;
+    align-items: center;
+  }
+  #thankyouView .thank-actions .btn{
+    width:100%;
+    max-width:320px;
+  }
+}
+
+/* Botón WhatsApp */
+.btn-whatsapp{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25D366;   /* verde WhatsApp */
+  color:#fff;
+}
+.btn-whatsapp:hover{ filter: brightness(1.05); }
+.btn-whatsapp .wa-ico{
+  width: 18px;
+  height: 18px;
+}
+
+/* Logo encima del título */
+.secure-logo {
+  display: block;        /* asegura que se comporte como bloque */
+  margin: 0 auto 10px;   /* centrado horizontal con espacio debajo */
+  height: 50px;          /* alto del logo, puedes ajustarlo */
+  max-width: 180px;      /* evita que se deforme en pantallas grandes */
+  object-fit: contain;   /* mantiene proporciones */
+}
+
+
+.legal-bar {
+  font-size: 0.85rem;
+  color: #204e78;
+  margin-top: 16px;
+  text-align: right;
+}
+@media (max-width: 700px) {
+  .legal-bar {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+}
+
+/* Badge en escritorio: a la izquierda */
+.secure-top{
+  display: flex;
+  justify-content: flex-start;  /* 🔹 alineado a la izquierda */
+}
+
+/* Móvil: centrar el badge */
+@media (max-width:700px){
+  .secure-top{
+    justify-content: center;    /* 🔹 centrado en pantallas pequeñas */
+  }
+}
+
+.col-1 {
+    grid-column: span 1;
+    min-width: 0; /* evita desbordes */
+  }
+
+  /* Contenedor de los 2 campos (lado a lado en pantallas >=480px) */
+  .field-pair {
+    display: grid;
+    grid-template-columns: 1fr;      /* móvil: apilado */
+    gap: .75rem;
+  }
+  @media (min-width: 480px) {
+    .field-pair {
+      grid-template-columns: 1.1fr 1.9fr; /* más espacio para el número */
+      align-items: end;
+    }
+  }
+
+  /* Estilos base limpios y accesibles */
+  .form-control label {
+    display: block;
+    font-size: .9rem;
+    font-weight: 600;
+    margin-bottom: .35rem;
+  }
+  .form-control select,
+  .form-control input {
+    width: 100%;
+    height: 40px;
+    padding: 0 .75rem;
+    border: 1px solid #d4d7dd;
+    border-radius: .5rem;
+    outline: none;
+    min-width: 0;
+  }
+  .form-control select:focus,
+  .form-control input:focus {
+    border-color: #214e77;
+    box-shadow: 0 0 0 3px rgba(33,78,119,.12);
+  }
+  .hint {
+    font-size: .8rem;
+    color: #6b7280;
+    margin-top: .25rem;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class="form-shell">
+
+    <!-- Header de confianza (puedes quitarlo si no lo necesitas) -->
+    <div class="secure-top">
+      <div></div>
+      <span class="secure-badge">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3l7 4v5c0 5-3.5 9.5-7 10-3.5-.5-7-5-7-10V7l7-4z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cifrado & verificación de datos
+      </span>
+    </div>
+
+    <div class="form-container" role="form">
+        
+        <img class="secure-logo"
+     src="https://assets.zyrosite.com/AMq1Kr5MDyteLG4E/2-d954NWNMXJiE5bNx.png"
+     alt="Lucrum Financiera Logo" />
+
+      <h1>Formulario de Conocimiento</h1>
+      <p class="subtitle">Completa los 4 pasos. Solo avanzas si los campos requeridos están completos.</p>
+
+      <!-- Barra de progreso -->
+      <div class="steps" id="progressBar"></div>
+
+      <form
+      id="formulario-conocimiento"
+      action="https://script.google.com/macros/s/AKfycbwrqYcqWKn8QNYSy29IOcrjONYChB47psgbB2bZqjYdl5Sr5KB9m3AX4IjGC_ErXtvePA/exec"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+        <!-- ============ SECCIÓN 1 ============ -->
+        <section class="form-step" data-step="1">
+          
+          <legend>INFORMACIÓN DE CRÉDITO Y CONTACTO</legend>
+          <fieldset>
+        <div class="grid-cuatro-columnas">
+<label class="campo-monto">
+  Monto Solicitado:*
+  <input
+    id="montoVisual"
+    class="monto-visual"
+    type="text"
+    inputmode="numeric"
+    placeholder="$0"
+    required
+  />
+  <!-- campo oculto que enviará el número puro -->
+  <input
+    id="montoReal"
+    class="monto-real"
+    type="hidden"
+    name="monto_solicitado"
+  />
+</label>
+
+          <label>Meses:*
+            <select name="meses" placeholder="6" required>
+              <option value=""> </option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+            </select>
+          </label>
+          <label>Promesa de uso:*
+            <input type="text" name="promesa_uso" placeholder="Para qué se usará el dinero" required/>
+          </label>
+          <input type="hidden" id="fecha" name="fecha_envio"/>
+          <div class="form-group">
+  <label id="tipo_cliente_label" class="label-center">Tipo de cliente:*</label>
+  <div class="button-group button-group--inline" role="radiogroup" aria-labelledby="tipo_cliente_label">
+    <input type="radio" id="tc_ingreso" name="tipo_cliente" value="Ingreso" required>
+    <label for="tc_ingreso" class="option-btn">Ingreso</label>
+
+    <input type="radio" id="tc_actualizacion" name="tipo_cliente" value="Actualización" required>
+    <label for="tc_actualizacion" class="option-btn">Actualización</label>
+  </div>
+</div>
+</div>
+<div class="grid-cuatro-columnas">
+  <label>Primer nombre:*
+            <input type="text" name="primer_nombre" required/>
+          </label>
+          <label>Segundo nombre:
+            <input type="text" name="segundo_nombre"/>
+          </label>
+          <label>Primer apellido:*
+            <input type="text" name="primer_apellido" required/>
+          </label>
+          <label>Segundo apellido:*
+            <input type="text" name="segundo_apellido" required/>
+          </label>
+                  <div class="form-group">
+  <label id="genero_label" class="label-center">Género:*</label>
+  <div class="button-group button-group--inline" role="radiogroup" aria-labelledby="genero_label">
+    
+    <input type="radio" id="genero_femenino" name="genero" value="Femenino" required>
+    <label for="genero_femenino" class="option-btn">Femenino</label>
+
+    <input type="radio" id="genero_masculino" name="genero" value="Masculino" required>
+    <label for="genero_masculino" class="option-btn">Masculino</label>
+
+  </div>
+</div>
+          
+<div class="form-group">
+  <label id="madre_cabeza_label" class="label-center">Madre cabeza de hogar:</label>
+  <div class="button-group button-group--inline" role="radiogroup" aria-labelledby="madre_cabeza_label">
+    
+    <input type="radio" id="madre_cabeza_si" name="madre_cabeza" value="Sí">
+    <label for="madre_cabeza_si" class="option-btn">Sí</label>
+
+    <input type="radio" id="madre_cabeza_no" name="madre_cabeza" value="No">
+    <label for="madre_cabeza_no" class="option-btn">No</label>
+
+  </div>
+</div>
+
+    <div class="form-group">
+  <label id="hijos_label" class="label-center">Hijos: *</label>
+  <div class="button-group button-group--inline" role="radiogroup" aria-labelledby="hijos_label">
+    
+    <input type="radio" id="hijos_si" name="hijos" value="Sí" required>
+    <label for="hijos_si" class="option-btn">Sí</label>
+
+    <input type="radio" id="hijos_no" name="hijos" value="No" required>
+    <label for="hijos_no" class="option-btn">No</label>
+
+  </div>
+</div>
+
+      <div class="col-1">
+  <div class="field-pair-50">
+    <div class="form-control">
+          <label>Personas a cargo: *<input type="number" name="personas_a_cargo" required></label>
+          </div>
+          <div class="form-control">
+<label>Estado Civil: *
+      <select name="estado_civil" required>
+        <option value=""> </option>
+        <option>Soltero/a</option>
+        <option>Casado/a</option>
+        <option>U. Libre</option>
+        <option>Separado/a</option>
+        <option>Viudo/a</option>
+      </select>
+    </label>
+    </div>
+    </div>
+    </div>
+
+      <div class="col-1">
+  <div class="field-pair-50">
+    <div class="form-control">
+            <label>Nivel de estudio: *
+              <select name="nivel_estudio" required>
+                <option value=""> </option>
+                <option>Bachiller</option>
+                <option>Tecnológico</option>
+                <option>Universitario</option>
+                <option>Posgrado</option>
+              </select>
+            </label>
+            </div>
+            <div class="form-control">
+          <label>Ocupación: *<input type="text" name="ocupacion" required></label>
+          </div>
+    </div>
+    </div>
+
+    <div class="col-1">
+  <div class="field-pair-50">
+    <div class="form-control">
+            <label>Departamento:*
+            <select name="departamento" required>
+              <option value=""> <option>Amazonas</option> <option>Antioquia</option> <option>Arauca</option> <option>Atlántico</option> <option>Bolívar</option> <option>Boyacá</option> <option>Caldas</option> <option>Caquetá</option> <option>Casanare</option> <option>Cauca</option> <option>Cesar</option> <option>Chocó</option> <option>Córdoba</option> <option>Cundinamarca</option> <option>Guainía</option> <option>Guaviare</option> <option>Huila</option> <option>La Guajira</option> <option>Magdalena</option> <option>Meta</option> <option>Nariño</option> <option>Norte de Santander</option> <option>Putumayo</option> <option>Quindío</option> <option>Risaralda</option> <option>San Andrés y Providencia</option> <option>Santander</option> <option>Sucre</option> <option>Tolima</option> <option>Valle del Cauca</option> <option>Vaupés</option> <option>Vichada</option>
+            </select>
+          </label>
+            </div>
+            <div class="form-control">
+          <label>Ciudad: *<input type="text" name="ciudad" required></label>
+          </div>
+    </div>
+    </div>
+
+    <div class="col-1">
+  <div class="field-pair-50">
+    <div class="form-control">
+            <label>Barrio: *<input type="text" name="barrio" required></label>
+            </div>
+            <div class="form-control">
+          <label>Estrato: *<input type="number" name="estrato" required></label>
+          </div>
+    </div>
+    </div>
+
+    <label>Dirección: *<input type="text" name="direccion" placeholder="Calle 10 # 10-10" required></label>
+
+          <label>Celular #1: *<input type="text" name="celular_1" placeholder="WhatsApp" required></label>
+          <label>Celular #2:<input type="text" name="celular_2"></label>
+          <label>Correo Electrónico: *<input type="email" name="email" required></label>
+          <label>Lugar de nacimiento:*
+            <input type="text" name="lugar_nacimiento" required/>
+          </label>
+          <label>Fecha de nacimiento:*
+            <input type="date" name="fecha_nacimiento" required/>
+          </label>          
+          <div class="col-1">
+    <div class="field-pair">
+      <div class="form-control">
+          <label>Tipo:*
+            <select name="tipo_identificacion" required>
+              <option value=""> </option>
+              <option>C.C.</option><option>T.I.</option><option>P.P.</option><option>Otro</option>
+            </select>
+            </div>
+            <div class="form-control">
+          </label>
+          <label>No. identificación:*
+            <input type="text" name="numero_identificacion" required/>
+          </label>
+          </div>
+          </div>
+          </div>
+          <label>Fecha de expedición:*
+            <input type="date" name="fecha_expedicion" required/>
+          </label>
+          <label>Expedido en:*
+            <input type="text" name="expedido_en" placeholder="Ciudad" required/>
+</div>
+</fieldset>
+
+          <div class="step-footer">
+            <span class="step-indicator">Paso <strong>1</strong> de 4</span>
+            <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- ============ SECCIÓN 2 ============ -->
+        <section class="form-step hidden" data-step="2">
+           <legend>INFORMACIÓN ECONÓMICA</legend>
+          <fieldset>
+  <div class="grid-cuatro-columnas">
+
+    <!-- 2. Ingresos mensuales -->
+    <div class="campo-monto">
+<label class="campo-monto">
+  Ingresos Mensuales:*
+      <div class="campo-doble">
+  <input
+    id="ingresosVisual"
+    class="monto-visual"
+    type="text"
+    inputmode="numeric"
+    placeholder="$0"
+    required
+  />
+  <!-- hidden que enviará el valor sin formato -->
+  <input
+    id="ingresosReal"
+    class="monto-real"
+    type="hidden"
+    name="ingresos"
+  />
+</label>
+
+      </div>
+      <input type="text"
+             name="concepto_ingresos"
+             placeholder="Concepto"
+             required />
+    </div>
+
+    <!-- 3. Egresos mensuales -->
+   <div class="campo-monto">
+<label class="campo-monto">
+  Egresos Mensuales:*
+      <div class="campo-doble">
+  <input
+    id="egresosVisual"
+    class="monto-visual"
+    type="text"
+    inputmode="numeric"
+    placeholder="$0"
+    required
+  />
+  <!-- hidden que enviará el valor sin formato -->
+  <input
+    id="egresosReal"
+    class="monto-real"
+    type="hidden"
+    name="egresos"
+  />
+</label>
+      </div>
+      <input type="text"
+             name="concepto_egresos"
+             placeholder="Concepto"
+             required />
+    </div>
+
+    <!-- 4. Activos mensuales -->
+   <div class="campo-monto">
+  <label class="campo-monto">
+    Activos:*
+    <div class="campo-doble">
+      <input
+        id="activosVisual"
+        class="monto-visual"
+        type="text"
+        inputmode="numeric"
+        placeholder="$0"
+        required
+      />
+      <!-- hidden que enviará el valor sin formato -->
+      <input
+        id="activosReal"
+        class="monto-real"
+        type="hidden"
+        name="activos"
+      />
+  </label>
+  </div>
+  <input type="text" name="concepto_activos" placeholder="Concepto" required />
+</div>
+
+    <!-- 5. Pasivos mensuales -->
+   <div class="campo-monto">
+<label class="campo-monto">
+  Pasivos:*
+      <div class="campo-doble">
+  <input
+    id="PasivosVisual"
+    class="monto-visual"
+    type="text"
+    inputmode="numeric"
+    placeholder="$0"
+    required
+  />
+  <!-- hidden que enviará el valor sin formato -->
+  <input
+    id="PasivosReal"
+    class="monto-real"
+    type="hidden"
+    name="pasivos"
+  />
+</label>
+      </div>
+      <input type="text"
+             name="concepto_pasivos"
+             placeholder="Deudas"
+             required />
+    </div>
+
+  </div>
+</fieldset>
+
+<legend>REFERENCIAS BANCARIAS</legend>
+          <fieldset>
+  <div class="grid-dos-columnas">
+    <!-- Columna Izquierda: Referencia Bancaria 1 -->
+    <div>
+      <label>Referencia Bancaria 1: *
+        <input type="text" name="entidad1" required>
+      </label>
+      <label>Sucursal: *
+        <input type="text" name="sucursal1" placeholder="Ciudad" required>
+      </label>
+      <label>Número de cuenta: *
+        <input type="text" name="cuenta1" required>
+      </label>
+      <div class="form-group">
+  <label id="tipo_cuenta1_label" class="label-center">Tipo de cuenta: *</label>
+  <div class="button-group button-group--inline" role="radiogroup" aria-labelledby="tipo_cuenta1_label">
+    
+    <input type="radio" id="cuenta1_ahorros" name="tipo_cuenta1" value="Ahorros" required>
+    <label for="cuenta1_ahorros" class="option-btn">Ahorros</label>
+
+    <input type="radio" id="cuenta1_corriente" name="tipo_cuenta1" value="Corriente" required>
+    <label for="cuenta1_corriente" class="option-btn">Corriente</label>
+
+  </div>
+</div>
+    </div>
+
+    <!-- Columna Derecha: Referencia Bancaria 2 -->
+    <div>
+      <label>Referencia Bancaria 2:
+        <input type="text" name="entidad2">
+      </label>
+      <label>Sucursal:
+        <input type="text" name="sucursal2" placeholder="Ciudad">
+      </label>
+      <label>Número de cuenta:
+        <input type="text" name="cuenta2">
+      </label>
+      <div class="form-group">
+  <label id="tipo_cuenta_label" class="label-center">Tipo de cuenta:</label>
+  <div class="button-group button-group--inline" role="radiogroup" aria-labelledby="tipo_cuenta_label">
+    
+    <input type="radio" id="cuenta_ahorros" name="tipo_cuenta2" value="Ahorros">
+    <label for="cuenta_ahorros" class="option-btn">Ahorros</label>
+
+    <input type="radio" id="cuenta_corriente" name="tipo_cuenta2" value="Corriente">
+    <label for="cuenta_corriente" class="option-btn">Corriente</label>
+
+</div>
+</div>
+    </div>
+</fieldset>
+
+          <div class="step-footer">
+            <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
+            <span class="step-indicator">Paso <strong>2</strong> de 4</span>
+            <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- ============ SECCIÓN 3 ============ -->
+        <section class="form-step hidden" data-step="3">
+         
+          <fieldset>
+            <legend>
+    RECURSOS PÚBLICOS Y DECLARACIÓN FATCA
+    <span class="legend-sub">(Ley de Cumplimiento Fiscal de Cuentas Extranjeras)</span>
+  </legend>
+            <div class="fatca-section">
+  <!-- ¿Maneja recursos públicos? -->
+  <div class="fatca-question">
+    <label id="recursos_publicos_label" class="fatca-question__label">¿Maneja recursos públicos? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="recursos_publicos_label">
+        <input type="radio" id="recursos_no" name="recursos_publicos" value="No" required>
+        <label for="recursos_no">No</label>
+        <input type="radio" id="recursos_si" name="recursos_publicos" value="Sí" required>
+        <label for="recursos_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ¿Ejerce cargos públicos? -->
+  <div class="fatca-question">
+    <label id="cargos_publicos_label" class="fatca-question__label">¿Ejerce cargos públicos? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="cargos_publicos_label">
+        <input type="radio" id="cargos_no" name="cargos_publicos" value="No" required>
+        <label for="cargos_no">No</label>
+        <input type="radio" id="cargos_si" name="cargos_publicos" value="Sí" required>
+        <label for="cargos_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+    <!-- Nacimiento en EE.UU. -->
+  <div class="fatca-question">
+    <label id="fatca_nacimiento_label" class="fatca-question__label">¿Nació en Estados Unidos? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_nacimiento_label">
+        <input type="radio" id="fatca_nacimiento_no" name="fatca_nacimiento" value="No" required>
+        <label for="fatca_nacimiento_no">No</label>
+        <input type="radio" id="fatca_nacimiento_si" name="fatca_nacimiento" value="Sí" required>
+        <label for="fatca_nacimiento_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ¿Tiene reconocimiento público? -->
+  <div class="fatca-question">
+    <label id="reconocimiento_label" class="fatca-question__label">¿Tiene reconocimiento público?*</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="reconocimiento_label">
+        <input type="radio" id="reconocimiento_no" name="reconocimiento_publico" value="No" required>
+        <label for="reconocimiento_no">No</label>
+        <input type="radio" id="reconocimiento_si" name="reconocimiento_publico" value="Sí" required>
+        <label for="reconocimiento_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ¿Parentesco con PEP? -->
+  <div class="fatca-question">
+    <label id="parentesco_label" class="fatca-question__label">¿Tiene parentesco de 2º de afinidad o consanguinidad con un PEP? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="parentesco_label">
+        <input type="radio" id="parentesco_no" name="parentesco_pep" value="No" required>
+        <label for="parentesco_no">No</label>
+        <input type="radio" id="parentesco_si" name="parentesco_pep" value="Sí" required>
+        <label for="parentesco_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nacionalidad estadounidense -->
+  <div class="fatca-question">
+    <label id="fatca_nacionalidad_label" class="fatca-question__label">¿Como persona natural, posee usted Nacionalidad Estadounidense? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_nacionalidad_label">
+        <input type="radio" id="fatca_nacionalidad_no" name="fatca_nacionalidad" value="No" required>
+        <label for="fatca_nacionalidad_no">No</label>
+        <input type="radio" id="fatca_nacionalidad_si" name="fatca_nacionalidad" value="Sí" required>
+        <label for="fatca_nacionalidad_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+      <!-- ¿Relación con PEP? -->
+  <div class="fatca-question">
+    <label id="relacion_pep_label" class="fatca-question__label">¿Tiene relación con persona expuesta públicamente (PEP)? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="relacion_pep_label">
+        <input type="radio" id="rel_pep_no" name="relacion_pep" value="No" required>
+        <label for="rel_pep_no">No</label>
+        <input type="radio" id="rel_pep_si" name="relacion_pep" value="Sí" required>
+        <label for="rel_pep_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campo extra si responde Sí a PEP -->
+  <div id="pep_info" class="fatca-question hidden">
+    <label for="pep_nombre" class="fatca-question__label">Nombre y cargo del PEP (si aplica):</label>
+    <input type="text" id="pep_nombre" name="pep_nombre" placeholder="Ej: Juan Pérez, Viceministro">
+  </div>
+
+  <!-- Opciones de transacción (visible si transacciones_exterior = Sí) -->
+  <div id="opcionesMoneda" class="fatca-question fatca-question--sub hidden">
+    <p class="fatca-question__label">Detalle de transacciones en moneda extranjera</p>
+    <div class="fatca-subgrid">
+      <div class="fatca-field">
+        <label for="tipoTransaccion" id="tipo_transaccion_label" class="fatca-field__label">Seleccione el tipo de transacción *</label>
+        <select id="tipoTransaccion" name="tipo_transaccion_moneda">
+          <option value=""></option>
+          <option value="Importaciones">Importaciones</option>
+          <option value="Exportaciones">Exportaciones</option>
+          <option value="Inversiones">Inversiones</option>
+          <option value="Transferencias">Transferencias</option>
+          <option value="Préstamos en moneda extranjera">Préstamos en moneda extranjera</option>
+          <option value="Pago de Servicio">Pago de Servicio</option>
+          <option value="Otros">Otros</option>
+        </select>
+      </div>
+      <div id="otroTipoInput" class="fatca-field hidden">
+        <label for="otro_tipo_transaccion" class="fatca-field__label">Especifique otro tipo de transacción</label>
+        <input type="text" id="otro_tipo_transaccion" name="otro_tipo_transaccion" placeholder="Ej: Pago de nómina en el exterior">
+      </div>
+      <div class="fatca-field">
+        <span id="obligaciones_tributarias_label" class="fatca-field__label">¿Es sujeto de obligaciones tributarias en otro país? *</span>
+        <div class="toggle-btn-group" role="radiogroup" aria-labelledby="obligaciones_tributarias_label">
+          <input type="radio" id="obligaciones_no" name="obligaciones_tributarias_otro_pais" value="No">
+          <label for="obligaciones_no">No</label>
+          <input type="radio" id="obligaciones_si" name="obligaciones_tributarias_otro_pais" value="Sí">
+          <label for="obligaciones_si">Sí</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Green Card -->
+  <div class="fatca-question">
+    <label id="fatca_green_card_label" class="fatca-question__label">¿Usted posee Tarjeta de Residencia Americana (Green Card)? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_green_card_label">
+        <input type="radio" id="fatca_green_card_no" name="fatca_green_card" value="No" required>
+        <label for="fatca_green_card_no">No</label>
+        <input type="radio" id="fatca_green_card_si" name="fatca_green_card" value="Sí" required>
+        <label for="fatca_green_card_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+    <!-- ¿Realiza transacciones en moneda extranjera? -->
+  <div class="fatca-question">
+    <label id="transacciones_exterior_label" class="fatca-question__label">¿Realiza transacciones en moneda extranjera? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="transacciones_exterior_label">
+        <input type="radio" id="transacciones_exterior_no" name="transacciones_exterior" value="No">
+        <label for="transacciones_exterior_no">No</label>
+        <input type="radio" id="transacciones_exterior_si" name="transacciones_exterior" value="Sí">
+        <label for="transacciones_exterior_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Residencia 2/3 del año anterior en EE.UU. -->
+  <div class="fatca-question">
+    <label id="fatca_residencia_label" class="fatca-question__label">¿Vivió las 2/3 partes del año anterior en Estados Unidos? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_residencia_label">
+        <input type="radio" id="fatca_residencia_no" name="fatca_residencia" value="No" required>
+        <label for="fatca_residencia_no">No</label>
+        <input type="radio" id="fatca_residencia_si" name="fatca_residencia" value="Sí" required>
+        <label for="fatca_residencia_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transfiere fondos a cuenta en EE.UU. -->
+  <div class="fatca-question">
+    <label id="fatca_transferencias_label" class="fatca-question__label">¿Usted transfiere o da instrucciones permanentes para transferir fondos a una cuenta de Estados Unidos? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_transferencias_label">
+        <input type="radio" id="fatca_transferencias_no" name="fatca_transferencias" value="No" required>
+        <label for="fatca_transferencias_no">No</label>
+        <input type="radio" id="fatca_transferencias_si" name="fatca_transferencias" value="Sí" required>
+        <label for="fatca_transferencias_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub-sección visible si transfiere = Sí -->
+  <div id="seccionTransferencia" class="fatca-question fatca-question--sub hidden">
+    <p class="fatca-question__label">Da instrucciones permanentes para transferir fondos a una cuenta de Estados Unidos *</p>
+    <div class="fatca-subgrid">
+      <div class="fatca-field">
+        <label for="nombre_del_titular" class="fatca-field__label">Nombre del titular</label>
+        <input type="text" id="nombre_del_titular" name="nombre_del_titular" placeholder="Nombre del titular">
+      </div>
+      <div class="fatca-field">
+        <label for="entidad" class="fatca-field__label">Entidad o concepto</label>
+        <input type="text" id="entidad" name="entidad" placeholder="Entidad o concepto">
+      </div>
+      <div class="fatca-field fatca-field--tooltip">
+        <label for="tin" class="fatca-field__label">Número de identificación tributaria TIN *</label>
+        <input type="text" id="tin" name="tin">
+        <span class="help-icon" tabindex="0">?</span>
+        <div class="help-tooltip" role="tooltip">
+          Ley de Cumplimiento Fiscal de Cuentas en el Extranjero (FATCA, por su sigla en inglés). 
+          Es una ley extraterritorial de los Estados Unidos de América sancionada el 18 marzo de 2010 
+          con el objetivo de identificar y obtener información sobre los ciudadanos, residentes y 
+          responsables fiscales de Estados Unidos (US person) que tengan dinero u otros activos financieros 
+          fuera de ese país. Carta Circular No. 62 de 2013 de la Superintendencia Financiera de Colombia 
+          y no incluye, ni pretende incluir todos los aspectos relevantes de esta regulación. 
+          La información aquí contenida está sujeta a cambios normativos en Colombia y en Estados Unidos, 
+          como también a cambios de interpretación de las normas colombianas o extranjeras por parte de las 
+          autoridades, o de las entidades financieras en ambos países. Esta publicación no pretende brindar 
+          asesoría o formular recomendaciones relacionadas con FATCA y no sustituye la asesoría o consultoría 
+          especializada que pueda requerirse.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activos/ingresos en EE.UU. >= 50% -->
+  <div class="fatca-question">
+    <label id="fatca_ingresos_label" class="fatca-question__label">¿Del 50% o más de sus activos totales y/o los ingresos provienen de activos de inversión en Estados Unidos? *</label>
+    <div class="fatca-question__control">
+      <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_ingresos_label">
+        <input type="radio" id="fatca_ingresos_no" name="fatca_ingresos" value="No" required>
+        <label for="fatca_ingresos_no">No</label>
+        <input type="radio" id="fatca_ingresos_si" name="fatca_ingresos" value="Sí" required>
+        <label for="fatca_ingresos_si">Sí</label>
+      </div>
+    </div>
+  </div>
+
+</fieldset>
+
+<legend>DECLARACIONES LEGALES</legend>
+          <fieldset>
+  <div class="grid-dos-columnas">
+    <!-- A -->
+    <label class="decl-item" for="declaracion_a">
+      <input type="checkbox" id="declaracion_a" name="declaracion_a" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+        <strong>a.</strong> Mi actividad comercial, profesión u oficio es lícita y la ejerzo dentro del marco legal; 
+        los recursos que poseo no provienen de actividades ilícitas de las contempladas en el Código Penal Colombiano. *
+      </span>
+    </label>
+
+    <!-- B -->
+    <label class="decl-item" for="declaracion_b">
+      <input type="checkbox" id="declaracion_b" name="declaracion_b" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+        <strong>b.</strong> La información que he suministrado en este formato es veraz y verificable; me obligo a confirmar
+        los datos y actualizarlos anualmente conforme a los procedimientos establecidos por la Cooperativa. *
+      </span>
+    </label>
+
+    <!-- C -->
+    <label class="decl-item" for="declaracion_c">
+      <input type="checkbox" id="declaracion_c" name="declaracion_c" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+        <strong>c.</strong> El incumplimiento del literal b) faculta a la Cooperativa para revocar unilateralmente el contrato.
+        Los recursos derivados no se destinarán a la financiación del terrorismo, grupos terroristas o actividades terroristas. *
+      </span>
+    </label>
+
+    <!-- D -->
+    <label class="decl-item" for="declaracion_d">
+      <input type="checkbox" id="declaracion_d" name="declaracion_d" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+        <strong>d.</strong> No he sido declarado responsable judicialmente por delitos contra la Administración Pública
+        con pena privativa de la libertad ni por delitos relacionados con grupos ilegales, lesa humanidad, narcotráfico
+        (en Colombia o en el exterior), soborno transnacional, cohecho, tráfico de influencias, colusión o corrupción privada. *
+      </span>
+    </label>
+
+    <!-- E -->
+    <label class="decl-item" for="declaracion_e">
+      <input type="checkbox" id="declaracion_e" name="declaracion_e" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+        <strong>e.</strong> Las declaraciones contenidas en estos documentos son exactas, completas y verídicas en la forma en que aparecen escritas. *
+      </span>
+    </label>
+
+    <!-- F -->
+    <label class="decl-item" for="declaracion_f">
+      <input type="checkbox" id="declaracion_f" name="declaracion_f" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+        <strong>f.</strong> He leído y entiendo el contenido de este documento y acepto las responsabilidades civiles, fiscales
+        y penales respecto de la veracidad de esta información. *
+      </span>
+    </label>
+  </div>
+</fieldset>
+
+          <div class="step-footer">
+            <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
+            <span class="step-indicator">Paso <strong>3</strong> de 4</span>
+            <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- ============ SECCIÓN 4 ============ -->
+        <section class="form-step hidden" data-step="4">
+
+<legend style="font-weight: bold;">DOCUMENTACIÓN ANEXA A ESTA SOLICITUD</legend>
+      <fieldset>
+          <label class="decl-item" for="consentimiento">
+      <input type="checkbox" id="consentimiento" name="consentimiento" value="Sí" class="decl-check" required>
+      <span class="decl-text">
+ DECLARO QUE LA INFORMACIÓN SUMINISTRADA EN ESTA SOLICITUD ES REAL Y VERIFICABLE Y ASUMO PLENA RESPONSABILIDAD POR LA INFORMACIÓN ERRÓNEA, FALSA O INEXACTA QUE HUBIERE
+PROPORCIONADO EN ESTE DOCUMENTO. ACEPTO QUE CUALQUIER ERROR O INEXACTITUD PODRÁ ACARREAR LA RESERVA DEL DERECHO DE ACEPTAR O RECHAZAR LA PRESENTE SOLICITUD Y A QUE NO SE ME DE
+EXPLICACIÓN ALGUNA NI RESPONDA LA PRESENTE SOLICITUD EN CASO DE RECHAZO DE LA MISMA; TAMBIÉN ME COMPROMETO A ACTUALIZAR MIS DATOS AL MENOS UNA VEZ AL AÑO O EN SU DEFECTO CADA VEZ QUE
+CAMBIE DE DOMICILIO. AUTORIZAMOS A FIANCOL PARA QUE REALICEN EL TRATAMIENTO DE NUESTROS DATOS PERSONALES, CON EL FIN DE EJECUTAR ACTIVIDADES DE EVALUACIONES, SELECCIÓN, CONTROL Y
+REGISTRO CONTABLE, CUMPLIR ASPECTOS FISCALES Y LEGALES, COMUNICAR LAS POLÍTICAS Y PROCEDIMIENTOS, AUDITAR Y REVISAR ASPECTOS DERIVADOS DE LA RELACIÓN. EXIMO A FIANCOL DE TODA
+RESPONSABILIDAD QUE SE DERIVE POR INFORMACIÓN ERRÓNEA, FALSA O INEXACTA QUE HUBIERE PROPORCIONADO EN ESTE DOCUMENTO O DE LA VIOLACIÓN DEL MISMO; ME COMPROMETO IGUALMENTE A CUMPLIR
+Y APLICAR TODOS LOS PROCEDIMIENTOS INTERNOS DEL SARLAFT DE FIANCOL. ASÍ MISMO AUTORIZO EXPRESA E IRREVOCABLEMENTE A FIANCOL A QUE CONSULTE ANTE LAS ENTIDADES QUE MANEJEN Y/O
+ADMINISTRAN BASES DE DATOS TALES COMO CENTRALES DE RIESGO, LISTAS DE CONTROL SARLAFT Y/O CUALQUIER OTRA LISTAS INFORMATIVAS Y SEA REPORTADO A LAS MISMAS DE SER NECESARIO. LA FIRMA DE
+ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFORMACIÓN AQUÍ DILIGENCIADA. *
+        </label>
+      </fieldset>
+
+          <fieldset>
+        <legend>SUBIR DOCUMENTOS</legend>
+        <div class="grid-cuatro-columnas documentos-grid">
+  <!-- Cédula -->
+<div class="file-upload">
+  <label for="file-cedula">Cédula Frontal (PDF/JPG/PNG)*</label>
+  <input type="file" id="file-cedula" name="filedata_cedula"
+         accept=".pdf,.jpg,.jpeg,.png" required />
+  <span class="file-btn">📂 Seleccionar archivo</span>
+</div>
+
+<div class="file-upload">
+  <label for="file-cedula2">Cédula Reverso (PDF/JPG/PNG)*</label>
+  <input type="file" id="file-cedula2" name="filedata_cedula2"
+         accept=".pdf,.jpg,.jpeg,.png" required />
+  <span class="file-btn">📂 Seleccionar archivo</span>
+</div>
+
+<!-- Certificaciones -->
+<div class="file-upload">
+  <label for="file-bancaria">Certificación Bancaria*</label>
+  <input type="file" id="file-bancaria" name="filedata_bancaria"
+         accept=".pdf,.jpg,.jpeg,.png" required />
+  <span class="file-btn">📂 Seleccionar archivo</span>
+</div>
+
+<div class="file-upload">
+  <label for="file-laboral">Certificación Laboral (Menor a 30 días)*</label>
+  <input type="file" id="file-laboral" name="filedata_laboral"
+         accept=".pdf,.jpg,.jpeg,.png" required />
+  <span class="file-btn">📂 Seleccionar archivo</span>
+</div>
+
+<div class="frecuencia-selector">
+  <p class="frecuencia-label" id="frecuencia-pago-label">¿Con qué frecuencia recibe su pago?*</p>
+  <div class="toggle-btn-group" role="radiogroup" aria-labelledby="frecuencia-pago-label">
+    <input type="radio" id="frecuencia-mensual" name="frecuencia_pago" value="mensual" required>
+    <label for="frecuencia-mensual">Mensual</label>
+    <input type="radio" id="frecuencia-quincenal" name="frecuencia_pago" value="quincenal">
+    <label for="frecuencia-quincenal">Quincenal</label>
+  </div>
+  <p class="frecuencia-help">Selecciona la opción que corresponda para ajustar los soportes requeridos.</p>
+</div>
+
+<div class="documento-col hidden" data-mes="1">
+  <p class="documento-col__title">Mes 1 - Volantes de Pago</p>
+  <div class="documento-col__content">
+    <div class="file-upload" data-role="mes-1-a">
+      <label for="file-volantes"
+             data-label-mensual="Volantes de Pago Últimos 3 meses*"
+             data-label-quincenal="Quincena (1/6)*">
+        Volantes de Pago Últimos 3 meses (Mes 1)*
+      </label>
+      <input type="file" id="file-volantes" name="filedata_volantes"
+             accept=".pdf,.jpg,.jpeg,.png" />
+      <span class="file-btn">📂 PDF/JPG/PNG</span>
+    </div>
+    <div class="file-upload hidden" data-role="mes-1-b">
+      <label for="file-volantes1b">Quincena (2/6)*</label>
+      <input type="file" id="file-volantes1b" name="filedata_volantes1b"
+             accept=".pdf,.jpg,.jpeg,.png" />
+      <span class="file-btn">📂 PDF/JPG/PNG</span>
+    </div>
+  </div>
+</div>
+
+<div class="documento-col hidden" data-mes="2">
+  <p class="documento-col__title">Mes 2 - Volantes de Pago</p>
+  <div class="documento-col__content">
+    <div class="file-upload" data-role="mes-2-a">
+      <label for="file-volantes2"
+             data-label-mensual="Volantes de Pago Últimos 3 meses*"
+             data-label-quincenal="Quincena (3/6)*">
+        Volantes de Pago Últimos 3 meses (Mes 2)*
+      </label>
+      <input type="file" id="file-volantes2" name="filedata_volantes2"
+             accept=".pdf,.jpg,.jpeg,.png" />
+      <span class="file-btn">📂 PDF/JPG/PNG</span>
+    </div>
+    <div class="file-upload hidden" data-role="mes-2-b">
+      <label for="file-volantes2b">Quincena (4/6)*</label>
+      <input type="file" id="file-volantes2b" name="filedata_volantes2b"
+             accept=".pdf,.jpg,.jpeg,.png" />
+      <span class="file-btn">📂 PDF/JPG/PNG</span>
+    </div>
+  </div>
+</div>
+
+<div class="documento-col hidden" data-mes="3">
+  <p class="documento-col__title">Mes 3 - Volantes de Pago</p>
+  <div class="documento-col__content">
+    <div class="file-upload" data-role="mes-3-a">
+      <label for="file-volantes3"
+             data-label-mensual="Volantes de Pago Últimos 3 meses*"
+             data-label-quincenal="Quincena (5/6)*">
+        Volantes de Pago Últimos 3 meses (Mes 3)*
+      </label>
+      <input type="file" id="file-volantes3" name="filedata_volantes3"
+             accept=".pdf,.jpg,.jpeg,.png" />
+      <span class="file-btn">📂 PDF/JPG/PNG</span>
+    </div>
+    <div class="file-upload hidden" data-role="mes-3-b">
+      <label for="file-volantes3b">Quincena (6/6)*</label>
+      <input type="file" id="file-volantes3b" name="filedata_volantes3b"
+             accept=".pdf,.jpg,.jpeg,.png" />
+      <span class="file-btn">📂 PDF/JPG/PNG</span>
+    </div>
+  </div>
+</div>
+</div>
+      </fieldset>
+
+          <div class="step-footer">
+            <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
+            <span class="step-indicator">Paso <strong>4</strong> de 4</span>
+            <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Enviar</button>
+          </div>
+        </section>
+
+        </form>
+
+
+      <!-- ========== OVERLAY DE CARGA (SPINNER) ========== -->
+      <div id="loadingOverlay" class="hidden" aria-live="polite" aria-busy="true"
+           style="position:fixed;inset:0;background:rgba(255,255,255,.75);backdrop-filter:saturate(1.2) blur(2px);display:grid;place-items:center;z-index:9999;">
+        <div role="status" aria-label="Enviando">
+          <div style="
+            width:54px;height:54px;border-radius:50%;
+            border:4px solid #cbd5e1;border-top-color: var(--clr-primary);
+            animation: spin .8s linear infinite;"></div>
+        </div>
+      </div>
+
+      <!-- Animación spinner (ligera, incrustada para que no toques tu <style>) -->
+      <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Columna única que contiene ambos campos */
+  .col-1 { grid-column: span 1; min-width: 0; }
+
+  /* Par de campos 50/50 */
+  .field-pair-50 {
+    display: grid;
+    grid-template-columns: 1fr;     /* móvil: apilado */
+    gap: .75rem;
+  }
+  @media (min-width: 480px) {
+    .field-pair-50 { grid-template-columns: 1fr 1fr; } /* 50/50 */
+  }
+
+  /* Estilos base */
+  .form-control label {
+    display: block;
+    font-size: .9rem;
+    font-weight: 400;
+    margin-bottom: .35rem;
+  }
+  .form-control input,
+  .form-control select {
+    width: 100%;
+    height: 40px;
+    padding: 0 .75rem;
+    border: 1px solid #d4d7dd;
+    border-radius: .5rem;
+    outline: none;
+    min-width: 0;
+  }
+  .form-control input:focus,
+  .form-control select:focus {
+    border-color: #214e77;
+    box-shadow: 0 0 0 3px rgba(33,78,119,.12);
+  }
+      </style>
+
+      <!-- ========== VISTA DE GRACIAS ========== -->
+<section id="thankyouView" class="hidden" aria-live="polite">
+  <div class="thankyou-wrap">
+    <!-- Imagen superior -->
+    <img
+      class="thank-img"
+      src="https://assets.zyrosite.com/AMq1Kr5MDyteLG4E/fondo-de-a06a-eliminado-A0xjyJrJqqUJ74kl.png"
+      alt="Gracias - Lucrum Financiera"
+      loading="lazy"
+    />
+
+    <h1 class="thank-title">¡Gracias por tu solicitud!</h1>
+    <p class="thank-subtitle">
+      Hemos recibido tus datos satisfactoriamente. <br />
+      <strong>Nos pondremos en contacto contigo en un plazo no mayor a 24 horas.</strong>
+    </p>
+
+    <!-- Botones -->
+    <div class="thank-actions">
+      <a class="btn btn-primary"
+         href="https://lucrumfinanciera.com/"
+         target="_blank" rel="noopener noreferrer">
+        Ir a la página principal
+      </a>
+
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/573008633225?text=Hola%20Lucrum%20Financiera%2C%20acabo%20de%20enviar%20mi%20solicitud%20desde%20la%20web%20y%20quiero%20saber%20el%20siguiente%20paso."
+         target="_blank" rel="noopener noreferrer">
+        <!-- Logo WhatsApp SVG -->
+        <svg class="wa-ico" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M19.11 17.21c-.28-.14-1.64-.8-1.9-.9-.26-.1-.45-.14-.64.14-.19.28-.74.9-.9 1.08-.17.19-.35.21-.64.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.3.42-.45.14-.16.19-.26.28-.45.09-.19.05-.35-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.48h-.55c-.19 0-.5.07-.76.35-.26.28-1 1-1 2.43 0 1.43 1.03 2.81 1.17 3 .14.19 2.03 3.1 4.92 4.34.69.3 1.22.48 1.64.62.69.22 1.31.19 1.81.12.55-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.26-.19-.54-.33zM26.87 5.14A13.87 13.87 0 1 0 4.1 26.91L3 30.99l4.19-1.1A13.87 13.87 0 1 0 26.87 5.14zm-5.2 19.49c-.45.12-1.02.21-1.68.21-1.4 0-3.1-.45-5.26-1.39-2.78-1.2-4.57-3.97-4.72-4.16-.14-.19-1.12-1.49-1.12-3.07 0-1.58.9-2.35 1.21-2.67.3-.31.64-.39.86-.39h1.24c.4 0 .62.01.9.69.34.81 1.09 2.65 1.18 2.85.09.19.14.42.02.66-.12.24-.18.38-.36.59-.19.22-.38.49-.54.64-.17.16-.35.33-.15.65.19.31.83 1.35 1.78 2.2 1.22 1.09 2.25 1.44 2.56 1.6.31.16.5.14.69-.07.19-.21.79-.92 1-1.24.21-.31.43-.26.71-.16.28.1 1.81.85 2.12 1 .3.14.5.23.57.36.07.14.07.81-.24 1.6-.3.79-1.17 1.09-1.62 1.21z" fill="currentColor"/>
+        </svg>
+        Enviar mensaje por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+    </div>
+  </div>
+
+  <div class="legal-bar">
+  © 2025 | Lucrum Financiera S.A.S. | Todos los derechos reservados
+</div>
+
+    <!-- 🔹 Aquí termina tu formulario -->
+  </template>
+
+  <!-- Script que monta el formulario (versión independiente de la página principal) -->
+  <script nonce="lucrum-secure">
+// ==========================================
+// Helpers
+// ==========================================
+const $  = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+const show = (el, on) => el && el.classList.toggle('hidden', !on);
+
+// ==========================================
+// Montaje del template ANTES de inicializar
+// ==========================================
+function mount() {
+  const tpl = $('#formTemplate');
+  const container = $('#formContainer');
+  if (tpl && container && !container.dataset.mounted) {
+    container.appendChild(tpl.content.cloneNode(true));
+    container.dataset.mounted = '1';
+  }
+}
+
+// ==========================================
+// Inicialización (listeners mínimos para navegar sin bloquear pasos)
+// ==========================================
+function init() {
+  // FATCA / Transferencias a EE.UU.
+  const trYes = $('#fatca_transferencias_si');
+  const trNo  = $('#fatca_transferencias_no');
+  const secTr = $('#seccionTransferencia');
+  const updTr = () => show(secTr, trYes && trYes.checked);
+  [trYes, trNo].forEach(r => r && r.addEventListener('change', updTr));
+  updTr();
+
+  // Transacciones en moneda extranjera
+  const exSi = $('#transacciones_exterior_si');
+  const exNo = $('#transacciones_exterior_no');
+  const opciones = $('#opcionesMoneda');
+  const updEx = () => {
+    const on = exSi && exSi.checked;
+    show(opciones, on);
+    if (!on) {
+      $$('#opcionesMoneda input[name="tipo_transaccion_moneda"]').forEach(i => i.checked = false);
+      show($('#otroTipoInput'), false);
+    }
+  };
+  [exSi, exNo].forEach(r => r && r.addEventListener('change', updEx));
+  updEx();
+
+  // “Otros” en tipo de transacción
+  (function () {
+    const select = $('#tipoTransaccion');
+    const otrosRow = $('#otroTipoInput');
+    const updateOtroTipo = () => otrosRow?.classList.toggle('hidden', !(select && select.value === 'Otros'));
+    select?.addEventListener('change', updateOtroTipo);
+    updateOtroTipo();
+  })();
+
+  // PEP (fila extra)
+  (function(){
+    const pepYes = $('#rel_pep_si');
+    const pepNo  = $('#rel_pep_no');
+    const pepRow = $('#pep_info');
+    const updatePep = () => pepRow?.classList.toggle('hidden', !(pepYes && pepYes.checked));
+    [pepYes, pepNo].forEach(el => el && el.addEventListener('change', updatePep));
+    updatePep();
+  })();
+
+  // Fecha de envío
+  (function(){
+    const el = $('#fecha');
+    if (!el) return;
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    el.value = `${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  })();
+
+  // Montos: .monto-visual ↔ .monto-real
+  (function(){
+    const formatMoney = (val) => val ? '$' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+    $$('.monto-visual').forEach((input) => {
+      let hidden = null;
+      if (input.id && input.id.endsWith('Visual')) hidden = document.getElementById(input.id.replace(/Visual$/, 'Real'));
+      if (!hidden) hidden = input.parentElement?.querySelector('.monto-real');
+      if (!hidden) return;
+
+      if (input.value) {
+        const digits = input.value.replace(/\D/g, '');
+        input.value = formatMoney(digits);
+        hidden.value = digits;
+      }
+      input.addEventListener('input', (e) => {
+        const digits = e.target.value.replace(/\D/g, '');
+        hidden.value = digits;
+        e.target.value = digits ? formatMoney(digits) : '';
+      });
+    });
+  })();
+
+  // Identificación con separador visual
+  (function(){
+    const numIdInput = document.querySelector('input[name="numero_identificacion"]');
+    if (!numIdInput) return;
+    const formatNumber = (val) => val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    numIdInput.addEventListener('input', (e) => {
+      const digits = e.target.value.replace(/\D/g, '');
+      e.target.value = digits ? formatNumber(digits) : '';
+    });
+  })();
+
+  // Teléfonos con máscara (301) 123-456
+  (function(){
+    const formatCelular = (val) => {
+      const digits = val.replace(/\D/g, '').slice(0, 10);
+      if (digits.length <= 3) return digits ? `(${digits}` : '';
+      if (digits.length <= 6) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+      return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    };
+    ['celular_1','celular_2','telefono'].forEach(name => {
+      const input = document.querySelector(`input[name="${name}"]`);
+      if (!input) return;
+      input.addEventListener('input', () => { input.value = formatCelular(input.value); });
+    });
+  })();
+
+  // Cuenta bancaria 900-150259-72
+  (function(){
+    const formatCuenta = (val) => {
+      const digits = val.replace(/\D/g, '').slice(0, 11);
+      if (digits.length <= 3) return digits;
+      if (digits.length <= 9)  return `${digits.slice(0,3)}-${digits.slice(3)}`;
+      return `${digits.slice(0,3)}-${digits.slice(3,9)}-${digits.slice(9)}`;
+    };
+    ['cuenta1','cuenta2'].forEach(name => {
+      const input = document.querySelector(`input[name="${name}"]`);
+      if (!input) return;
+      input.addEventListener('input', () => { input.value = formatCuenta(input.value); });
+    });
+  })();
+
+  // Botón custom para inputs file
+  (function(){
+    $$('.file-upload').forEach(wrapper => {
+      const fileInput = wrapper.querySelector('input[type=file]');
+      const btn = wrapper.querySelector('.file-btn');
+      if (!fileInput || !btn) return;
+      const defaultText = btn.dataset.defaultText || btn.textContent.trim() || '📂 Seleccionar archivo';
+      btn.dataset.defaultText = defaultText;
+      btn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+          btn.textContent = '📄 ' + fileInput.files[0].name;
+          btn.classList.add('active');
+        } else {
+          btn.textContent = btn.dataset.defaultText || '📂 Seleccionar archivo';
+          btn.classList.remove('active');
+        }
+      });
+    });
+  })();
+
+  // Control de frecuencia de pago para volantes
+  (function(){
+    const radios = Array.from(document.querySelectorAll('input[name="frecuencia_pago"]'));
+    if (!radios.length) return;
+
+    const monthColumns = $$('.documento-col');
+    const mensualWrappers = [
+      document.querySelector('[data-role="mes-1-a"]'),
+      document.querySelector('[data-role="mes-2-a"]'),
+      document.querySelector('[data-role="mes-3-a"]')
+    ].filter(Boolean);
+    const mensualInputs = mensualWrappers
+      .map(wrapper => wrapper.querySelector('input[type="file"]'))
+      .filter(Boolean);
+    const quincenaWrappers = [
+      document.querySelector('[data-role="mes-1-b"]'),
+      document.querySelector('[data-role="mes-2-b"]'),
+      document.querySelector('[data-role="mes-3-b"]')
+    ].filter(Boolean);
+    const quincenaInputs = quincenaWrappers
+      .map(wrapper => wrapper.querySelector('input[type="file"]'))
+      .filter(Boolean);
+    const labelNodes = $$('label[data-label-mensual]');
+
+    const resetInput = (input) => {
+      if (!input) return;
+      if (input.value) input.value = '';
+      const btn = input.closest('.file-upload')?.querySelector('.file-btn');
+      if (btn) {
+        btn.textContent = '📂 Seleccionar archivo';
+        btn.classList.remove('active');
+      }
+    };
+
+    const applyMode = (mode) => {
+      const showColumns = mode === 'mensual' || mode === 'quincenal';
+      const isQuincenal = mode === 'quincenal';
+
+      monthColumns.forEach(col => {
+        col.classList.toggle('hidden', !showColumns);
+        col.classList.toggle('quincenal-active', isQuincenal);
+      });
+
+      quincenaWrappers.forEach(wrapper => wrapper.classList.toggle('hidden', !isQuincenal));
+
+      mensualInputs.forEach(input => {
+        if (!input) return;
+        if (showColumns) {
+          input.setAttribute('required', 'required');
+        } else {
+          input.removeAttribute('required');
+          resetInput(input);
+        }
+      });
+
+      quincenaInputs.forEach(input => {
+        if (!input) return;
+        if (isQuincenal) {
+          input.setAttribute('required', 'required');
+        } else {
+          input.removeAttribute('required');
+          resetInput(input);
+        }
+      });
+
+      labelNodes.forEach(label => {
+        if (!label) return;
+        const text = isQuincenal ? label.dataset.labelQuincenal : label.dataset.labelMensual;
+        if (text) label.textContent = text;
+      });
+    };
+
+    const syncMode = () => {
+      const active = radios.find(radio => radio.checked);
+      applyMode(active ? active.value : null);
+    };
+
+    radios.forEach(radio => radio.addEventListener('change', syncMode));
+    applyMode(null);
+  })();
+
+  // Multipaso sin bloqueo por validaciones (permite avanzar sin llenar campos)
+  (function(){
+    const form = document.getElementById('formulario-conocimiento');
+    if (!form) return;
+
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const totalSteps = steps.length;
+    let current = 0;
+    let submitting = false;
+
+    const progressBar = $('#progressBar');
+    if (progressBar) {
+      progressBar.innerHTML = '';
+      for (let i = 0; i < totalSteps; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'step-dot' + (i === 0 ? ' current' : '');
+        dot.textContent = (i + 1);
+        progressBar.appendChild(dot);
+        if (i < totalSteps - 1) {
+          const line = document.createElement('div');
+          line.className = 'step-line' + (i === 0 ? ' active' : '');
+          progressBar.appendChild(line);
+        }
+      }
+    }
+
+    const getStep      = (idx) => steps[idx];
+    const getNextBtn   = (idx) => getStep(idx)?.querySelector('#nextBtn');
+    const getPrevBtn   = (idx) => getStep(idx)?.querySelector('#prevBtn');
+    const getSubmitBtn = () => document.getElementById('submitBtn');
+    const requiredInStep = (idx) => Array.from(getStep(idx)?.querySelectorAll('[required]') || []);
+
+    const loadingOverlay = $('#loadingOverlay');
+    const thankyouView   = $('#thankyouView');
+
+    function isStepValid() {
+      return true; // Avanza sin bloquear por validaciones
+    }
+
+    function updateButtonsState() {
+      const prev = getPrevBtn(current);
+      if (prev) prev.disabled = (current === 0);
+      const isLast = (current === totalSteps - 1);
+      const next = getNextBtn(current);
+      const submit = getSubmitBtn();
+      if (!isLast && next) next.disabled = false;
+      if (isLast && submit) submit.disabled = submitting;
+    }
+
+    function updateProgressBarUI() {
+      if (!progressBar) return;
+      const dots = progressBar.querySelectorAll('.step-dot');
+      const lines = progressBar.querySelectorAll('.step-line');
+      dots.forEach((d, i) => {
+        d.classList.remove('current', 'done');
+        if (i < current) d.classList.add('done');
+        if (i === current) d.classList.add('current');
+      });
+      lines.forEach((l, i) => l.classList.toggle('active', i < current));
+    }
+
+    function centerCurrentDotOnMobile(){
+      if (!progressBar) return;
+      if (!window.matchMedia('(max-width: 600px)').matches) return;
+      const currentDot = progressBar.querySelector('.step-dot.current');
+      if (!currentDot) return;
+      const left = currentDot.offsetLeft - (progressBar.clientWidth / 2 - currentDot.clientWidth / 2);
+      progressBar.scrollTo({ left: Math.max(left, 0), behavior: 'smooth' });
+    }
+
+    function showStep(idx) {
+      steps.forEach((s, i) => s.classList.toggle('hidden', i !== idx));
+      current = idx;
+      updateButtonsState();
+      updateProgressBarUI();
+      centerCurrentDotOnMobile();
+      const firstReq = requiredInStep(current)[0];
+      if (firstReq) firstReq.focus({ preventScroll: true });
+    }
+
+    steps.forEach((stepEl, idx) => {
+      const next = stepEl.querySelector('#nextBtn');
+      next?.addEventListener('click', () => showStep(Math.min(idx + 1, totalSteps - 1)));
+      const prev = stepEl.querySelector('#prevBtn');
+      prev?.addEventListener('click', () => showStep(Math.max(idx - 1, 0)));
+    });
+
+    // Submit con FormData + archivos en base64 (sin validación previa)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitting) return;
+      submitting = true;
+      updateButtonsState();
+
+      // Normalización antes de enviar
+      ['celular_1','celular_2','telefono','cuenta1','cuenta2','numero_identificacion'].forEach(name => {
+        const input = form.querySelector(`input[name="${name}"]`);
+        if (input) input.value = input.value.replace(/\D/g, '');
+      });
+      form.querySelectorAll('.monto-real').forEach(h => {
+        h.value = h.value.replace(/^0+/, '') || '0';
+      });
+
+      // 1) Campos (no file)
+      const fd = new FormData();
+      for (const el of Array.from(form.elements)) {
+        if (!el.name) continue;
+        if (el.type === 'file') continue;
+        if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) continue;
+        fd.append(el.name, el.value);
+      }
+
+      // 2) Archivos
+      const fileIds = [
+        'file-cedula',
+        'file-cedula2',
+        'file-bancaria',
+        'file-laboral',
+        'file-volantes',
+        'file-volantes1b',
+        'file-volantes2',
+        'file-volantes2b',
+        'file-volantes3',
+        'file-volantes3b'
+      ];
+      const toBase64 = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload  = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      for (const id of fileIds) {
+        const inp = document.getElementById(id);
+        if (inp?.files?.length) {
+          const file = inp.files[0];
+          const dataURL = await toBase64(file);
+          const b64 = String(dataURL).split(',')[1];
+          fd.append(inp.name, b64);
+          fd.append(inp.name + '_filename', file.name);
+          fd.append(inp.name + '_mimetype', file.type || 'application/octet-stream');
+        }
+      }
+
+      // UI: spinner
+      const loadingOverlay = $('#loadingOverlay');
+      loadingOverlay?.classList.remove('hidden');
+
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: fd });
+        if (!response.ok) {
+          let msg = 'No se pudo enviar el formulario';
+          try { msg = await response.text(); } catch(e){}
+          throw new Error(msg);
+        }
+        // Ocultar formulario → mostrar gracias
+        $('.subtitle')?.classList.add('hidden');
+        $('#progressBar')?.classList.add('hidden');
+        steps.forEach(s => s.classList.add('hidden'));
+        thankyouView?.classList.remove('hidden');
+      } catch (err) {
+        alert('Ocurrió un problema al enviar. Intenta de nuevo.\n' + (err.message || err));
+        console.error(err);
+      } finally {
+        loadingOverlay?.classList.add('hidden');
+        submitting = false;
+        updateButtonsState();
+      }
+    });
+
+    // Inicio en el paso 0
+    showStep(0);
+  })();
+}
+
+// ==========================================
+// Arranque ordenado
+// ==========================================
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => { mount(); init(); });
+} else {
+  mount(); init();
+}
+</script>
+
+</body>
+</html>

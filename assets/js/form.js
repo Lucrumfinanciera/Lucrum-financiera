@@ -416,8 +416,9 @@ function init() {
       loadingOverlay?.classList.remove('hidden');
 
       try {
-        const response = await fetch(form.action, { method: 'POST', body: fd });
-        if (!response.ok) {
+        const response = await fetch(form.action, { method: 'POST', body: fd, mode: 'cors', redirect: 'follow' });
+        const opaqueOk = response.type === 'opaque' || response.status === 0;
+        if (!response.ok && !opaqueOk) {
           let msg = 'No se pudo enviar el formulario';
           try { msg = await response.text(); } catch(e){}
           throw new Error(msg);
