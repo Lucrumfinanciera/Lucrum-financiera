@@ -72,69 +72,84 @@ function init() {
     el.value = `${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
   })();
 
-  // --------- 6) Formatos UX ---------
-  // 6a) Montos: .monto-visual ↔ .monto-real
-  (function(){
-    const formatMoney = (val) => val ? '$' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
-    $$('.monto-visual').forEach((input) => {
-      let hidden = null;
-      if (input.id && input.id.endsWith('Visual')) hidden = document.getElementById(input.id.replace(/Visual$/, 'Real'));
-      if (!hidden) hidden = input.parentElement?.querySelector('.monto-real');
-      if (!hidden) return;
+  // --------- 6) Formatos UX (dinero, identificación, celular, cuentas) ---------
+  function applyInputFormats() {
+    try {
+      // 6a) Montos: .monto-visual ↔ .monto-real
+      const formatMoney = (val) => val ? '$' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+      $$('.monto-visual').forEach((input) => {
+        let hidden = null;
+        if (input.id && input.id.endsWith('Visual')) hidden = document.getElementById(input.id.replace(/Visual$/, 'Real'));
+        if (!hidden) hidden = input.parentElement?.querySelector('.monto-real');
+        if (!hidden) return;
 
-      if (input.value) {
-        const digits = input.value.replace(/\D/g, '');
-        input.value = formatMoney(digits);
-        hidden.value = digits;
-      }
-      input.addEventListener('input', (e) => {
-        const digits = e.target.value.replace(/\D/g, '');
-        hidden.value = digits;
-        e.target.value = digits ? formatMoney(digits) : '';
+        const apply = () => {
+          const digits = input.value.replace(/\D/g, '');
+          hidden.value = digits;
+          input.value = digits ? formatMoney(digits) : '';
+        };
+        input.removeEventListener('input', apply); // avoid duplicates if re-run
+        input.addEventListener('input', apply);
+        input.addEventListener('blur', apply);
+        apply();
       });
-    });
-  })();
 
-  // 6b) Identificación con separador visual
-  (function(){
-    const numIdInput = document.querySelector('input[name="numero_identificacion"]');
-    if (!numIdInput) return;
-    const formatNumber = (val) => val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    numIdInput.addEventListener('input', (e) => {
-      const digits = e.target.value.replace(/\D/g, '');
-      e.target.value = digits ? formatNumber(digits) : '';
-    });
-  })();
+      // 6b) Identificación con separador visual
+      (function(){
+        const numIdInput = document.querySelector('input[name="numero_identificacion"]');
+        if (!numIdInput) return;
+        const formatNumber = (val) => val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        const apply = (e) => {
+          const digits = e.target.value.replace(/\D/g, '');
+          e.target.value = digits ? formatNumber(digits) : '';
+        };
+        numIdInput.oninput = apply;
+        numIdInput.onblur = apply;
+        apply({ target: numIdInput });
+      })();
 
-  // 6c) Teléfonos con máscara (301) 123-456
-  (function(){
-    const formatCelular = (val) => {
-      const digits = val.replace(/\D/g, '').slice(0, 10);
-      if (digits.length <= 3) return digits ? `(${digits}` : '';
-      if (digits.length <= 6) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
-      return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-    };
-    ['celular_1','celular_2','telefono'].forEach(name => {
-      const input = document.querySelector(`input[name="${name}"]`);
-      if (!input) return;
-      input.addEventListener('input', () => { input.value = formatCelular(input.value); });
-    });
-  })();
+      // 6c) Teléfonos con máscara (301) 123-456
+      (function(){
+        const formatCelular = (val) => {
+          const digits = val.replace(/\D/g, '').slice(0, 10);
+          if (digits.length <= 3) return digits ? `(${digits}` : '';
+          if (digits.length <= 6) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+          return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+        };
+        ['celular_1','celular_2','telefono'].forEach(name => {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (!input) return;
+          const apply = () => { input.value = formatCelular(input.value); };
+          input.oninput = apply;
+          input.onblur = apply;
+          apply();
+        });
+      })();
 
-  // 6d) Cuenta bancaria 900-150259-72
-  (function(){
-    const formatCuenta = (val) => {
-      const digits = val.replace(/\D/g, '').slice(0, 11);
-      if (digits.length <= 3) return digits;
-      if (digits.length <= 9)  return `${digits.slice(0,3)}-${digits.slice(3)}`;
-      return `${digits.slice(0,3)}-${digits.slice(3,9)}-${digits.slice(9)}`;
-    };
-    ['cuenta1','cuenta2'].forEach(name => {
-      const input = document.querySelector(`input[name="${name}"]`);
-      if (!input) return;
-      input.addEventListener('input', () => { input.value = formatCuenta(input.value); });
-    });
-  })();
+      // 6d) Cuenta bancaria 900-150259-72
+      (function(){
+        const formatCuenta = (val) => {
+          const digits = val.replace(/\D/g, '').slice(0, 11);
+          if (digits.length <= 3) return digits;
+          if (digits.length <= 9)  return `${digits.slice(0,3)}-${digits.slice(3)}`;
+          return `${digits.slice(0,3)}-${digits.slice(3,9)}-${digits.slice(9)}`;
+        };
+        ['cuenta1','cuenta2'].forEach(name => {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (!input) return;
+          const apply = () => { input.value = formatCuenta(input.value); };
+          input.oninput = apply;
+          input.onblur = apply;
+          apply();
+        });
+      })();
+    } catch (err) {
+      console.error('Formato de campos: error aplicando máscaras', err);
+    }
+  }
+  window.applyInputFormats = applyInputFormats;
+  // Ejecuta inmediatamente tras montar
+  applyInputFormats();
 
   // 6e) Botón custom para inputs file
   (function(){
@@ -317,6 +332,15 @@ function init() {
     function isStepValid(idx, showErr=false){
       let ok = true;
       const radiosChecked = {};
+      let firstInvalidEl = null;
+      let firstInvalidFocus = null;
+
+      const markInvalid = (node, invalid) => {
+        if (!node) return;
+        if (invalid) node.classList.add('invalid');
+        else node.classList.remove('invalid');
+      };
+
       requiredInStep(idx).forEach(el => {
         if (el.type === 'radio') {
           if (radiosChecked[el.name]) return;
@@ -327,24 +351,51 @@ function init() {
             const lbl = radio.id ? document.querySelector(`label[for="${radio.id}"]`) : radio.nextElementSibling;
             lbl?.classList.toggle('invalid', !anyChecked);
           });
-          if (!anyChecked) ok = false;
+          if (!anyChecked) {
+            ok = false;
+            if (!firstInvalidEl) {
+              firstInvalidEl = group[0];
+              firstInvalidFocus = group[0];
+            }
+          }
         } else if (el.type === 'checkbox') {
           const lbl = el.id ? document.querySelector(`label[for="${el.id}"]`) : el.closest('label');
           lbl?.classList.toggle('invalid', !el.checked);
-          if (!el.checked) ok = false;
-        } else if (!el.checkValidity()) {
-          ok = false;
-          if (showErr) {
-            el.classList.add('invalid');
-            const msg = el.closest('div')?.querySelector('.help-error');
-            if (msg) msg.style.display = 'block';
+          if (!el.checked) {
+            ok = false;
+            if (!firstInvalidEl) {
+              firstInvalidEl = el;
+              firstInvalidFocus = el;
+            }
           }
         } else {
-          el.classList.remove('invalid');
+          const valid = el.checkValidity();
           const msg = el.closest('div')?.querySelector('.help-error');
-          if (msg) msg.style.display = 'none';
+          if (showErr) {
+            markInvalid(el, !valid);
+            const fileBtn = el.type === 'file' ? el.closest('.file-upload')?.querySelector('.file-btn') : null;
+            markInvalid(fileBtn, !valid);
+            if (msg) msg.style.display = valid ? 'none' : 'block';
+          } else if (valid) {
+            markInvalid(el, false);
+            if (msg) msg.style.display = 'none';
+          }
+          if (!valid) {
+            ok = false;
+            if (!firstInvalidEl) {
+              firstInvalidEl = el;
+              firstInvalidFocus = el.type === 'file'
+                ? el.closest('.file-upload')?.querySelector('.file-btn') || el
+                : el;
+            }
+          }
         }
       });
+
+      if (showErr && firstInvalidFocus) {
+        firstInvalidFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalidFocus.focus({ preventScroll: true });
+      }
       return ok;
     }
 
@@ -394,12 +445,7 @@ function init() {
       stepEl.addEventListener('change', updateButtonsState);
       const next = stepEl.querySelector('#nextBtn'); // ideal .nextBtn
       next?.addEventListener('click', () => {
-        if (isStepValid(idx, true)) {
-          showStep(Math.min(idx + 1, totalSteps - 1));
-        } else {
-          const missing = collectMissingFields(idx);
-          alert('Completa los siguientes campos antes de continuar:\n- ' + missing.join('\n- '));
-        }
+        if (isStepValid(idx, true)) showStep(Math.min(idx + 1, totalSteps - 1));
       });
       const prev = stepEl.querySelector('#prevBtn'); // ideal .prevBtn
       prev?.addEventListener('click', () => showStep(Math.max(idx - 1, 0)));
@@ -410,12 +456,6 @@ function init() {
       e.preventDefault();
       if (submitting) return;
       if (!isStepValid(current, true)) {
-        const missing = collectMissingFields(current);
-        if (missing.length) {
-          alert('Completa los siguientes campos antes de enviar:\n- ' + missing.join('\n- '));
-        } else {
-          alert('Hay campos requeridos pendientes. Por favor revisa el paso actual.');
-        }
         return;
       }
       submitting = true;

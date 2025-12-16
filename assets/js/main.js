@@ -507,9 +507,9 @@ const initSimulador=()=>{
   const calcular=()=>{
     if(!montoInput||!plazoInput||!resCuota)return;
     const montoBase=parseInt(montoInput.value, 10);
-    const monto=Math.round(montoBase*1.5532606667);
+    const monto=Math.round(montoBase*1.4370516306);
     const plazo=parseInt(plazoInput.value, 10);
-    const tasa=2.08/100;
+    const tasa=1.81/100;
     const cuota=(monto*tasa*Math.pow(1+tasa, plazo))/(Math.pow(1+tasa, plazo)-1);
     resCuota.textContent=`$${Math.round(cuota).toLocaleString("es-CO")}`;
   };

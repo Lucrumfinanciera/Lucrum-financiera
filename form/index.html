@@ -1835,6 +1835,78 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
   </template>
 
   <!-- Script que monta el formulario -->
+  <script nonce="lucrum-secure">
+    // Formatos locales (backup para navegadores con bloqueos de caché/JS)
+    (function () {
+      const formatMoney = (val) => val ? '$' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+      const formatId = (val) => val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      const formatCel = (val) => {
+        const digits = val.replace(/\D/g, '').slice(0, 10);
+        if (digits.length <= 3) return digits ? `(${digits}` : '';
+        if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+        return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+      };
+      const formatCuenta = (val) => {
+        const digits = val.replace(/\D/g, '').slice(0, 11);
+        if (digits.length <= 3) return digits;
+        if (digits.length <= 9) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+        return `${digits.slice(0, 3)}-${digits.slice(3, 9)}-${digits.slice(9)}`;
+      };
+
+      function applyFormats() {
+        document.querySelectorAll('.monto-visual').forEach((input) => {
+          let hidden = null;
+          if (input.id && input.id.endsWith('Visual')) hidden = document.getElementById(input.id.replace(/Visual$/, 'Real'));
+          if (!hidden) hidden = input.parentElement?.querySelector('.monto-real');
+          if (!hidden) return;
+          const apply = () => {
+            const digits = input.value.replace(/\D/g, '');
+            hidden.value = digits;
+            input.value = digits ? formatMoney(digits) : '';
+          };
+          input.addEventListener('input', apply);
+          input.addEventListener('blur', apply);
+          apply();
+        });
+
+        const idInput = document.querySelector('input[name="numero_identificacion"]');
+        if (idInput) {
+          const applyId = () => {
+            const digits = idInput.value.replace(/\D/g, '');
+            idInput.value = digits ? formatId(digits) : '';
+          };
+          idInput.addEventListener('input', applyId);
+          idInput.addEventListener('blur', applyId);
+          applyId();
+        }
+
+        ['celular_1', 'celular_2', 'telefono'].forEach((name) => {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (!input) return;
+          const applyCel = () => { input.value = formatCel(input.value); };
+          input.addEventListener('input', applyCel);
+          input.addEventListener('blur', applyCel);
+          applyCel();
+        });
+
+        ['cuenta1', 'cuenta2'].forEach((name) => {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (!input) return;
+          const applyCta = () => { input.value = formatCuenta(input.value); };
+          input.addEventListener('input', applyCta);
+          input.addEventListener('blur', applyCta);
+          applyCta();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyFormats, { once: true });
+      } else {
+        applyFormats();
+      }
+      window.applyFormatsFallback = applyFormats;
+    })();
+  </script>
   <script defer src="../assets/js/form.js"></script>
 
   <script defer src="../assets/js/main.js"></script>
