@@ -242,6 +242,15 @@ function init() {
     const form = document.getElementById('formulario-conocimiento'); // si tu form tiene otro id, cámbialo aquí
     if (!form) return;
 
+    // Pinta asteriscos rojos
+    (function(){
+      document.querySelectorAll('.form-container label, .form-container legend').forEach(el => {
+        if (el.dataset.reqStyled) return;
+        el.innerHTML = el.innerHTML.replace(/\*/g, '<span class="req-star">*</span>');
+        el.dataset.reqStyled = '1';
+      });
+    })();
+
     const steps = Array.from(document.querySelectorAll('.form-step'));
     const totalSteps = steps.length;
     let current = 0;
@@ -271,6 +280,40 @@ function init() {
     const loadingOverlay = $('#loadingOverlay');
     const thankyouView   = $('#thankyouView');
 
+    const labelTextFor = (input) => {
+      if (!input) return 'Campo requerido';
+      if (input.getAttribute('aria-label')) return input.getAttribute('aria-label');
+      if (input.title) return input.title;
+      if (input.id) {
+        const forLabel = document.querySelector(`label[for="${input.id}"]`);
+        if (forLabel) return forLabel.textContent.trim();
+      }
+      const parentLabel = input.closest('label');
+      if (parentLabel) return parentLabel.textContent.trim();
+      const legend = input.closest('fieldset')?.querySelector('legend');
+      if (legend) return legend.textContent.trim();
+      return input.name || 'Campo requerido';
+    };
+
+    const collectMissingFields = (idx) => {
+      const missing = [];
+      const radiosChecked = {};
+      requiredInStep(idx).forEach(el => {
+        if (el.type === 'radio') {
+          if (radiosChecked[el.name]) return;
+          radiosChecked[el.name] = true;
+          const group = getStep(idx).querySelectorAll(`input[type="radio"][name="${el.name}"]`);
+          const anyChecked = Array.from(group).some(r => r.checked);
+          if (!anyChecked) missing.push(labelTextFor(el));
+        } else if (el.type === 'checkbox') {
+          if (!el.checked) missing.push(labelTextFor(el));
+        } else if (!el.checkValidity()) {
+          missing.push(labelTextFor(el));
+        }
+      });
+      return missing;
+    };
+
     function isStepValid(idx, showErr=false){
       let ok = true;
       const radiosChecked = {};
@@ -280,8 +323,14 @@ function init() {
           radiosChecked[el.name] = true;
           const group = getStep(idx).querySelectorAll(`input[type="radio"][name="${el.name}"]`);
           const anyChecked = Array.from(group).some(r => r.checked);
+          group.forEach(radio => {
+            const lbl = radio.id ? document.querySelector(`label[for="${radio.id}"]`) : radio.nextElementSibling;
+            lbl?.classList.toggle('invalid', !anyChecked);
+          });
           if (!anyChecked) ok = false;
         } else if (el.type === 'checkbox') {
+          const lbl = el.id ? document.querySelector(`label[for="${el.id}"]`) : el.closest('label');
+          lbl?.classList.toggle('invalid', !el.checked);
           if (!el.checked) ok = false;
         } else if (!el.checkValidity()) {
           ok = false;
@@ -356,7 +405,15 @@ function init() {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (submitting) return;
-      if (!isStepValid(current, true)) return;
+      if (!isStepValid(current, true)) {
+        const missing = collectMissingFields(current);
+        if (missing.length) {
+          alert('Completa los siguientes campos antes de enviar:\n- ' + missing.join('\n- '));
+        } else {
+          alert('Hay campos requeridos pendientes. Por favor revisa el paso actual.');
+        }
+        return;
+      }
       submitting = true;
       updateButtonsState();
 

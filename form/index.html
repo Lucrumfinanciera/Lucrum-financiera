@@ -161,6 +161,9 @@
   .button-group--inline input[type="radio"]:checked + .option-btn{background-color:var(--clr-primary);color:#fff;border-color:var(--clr-primary)}
   @media (max-width:480px){.button-group--inline{grid-template-columns:1fr}}
 
+  .req-star{color:#d62828;font-weight:700;}
+  .required-note{color:#d62828;font-weight:600;font-size:.88rem;}
+
   /* ====== Declaraciones con sí/no a la derecha ====== */
   .declaracion-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:1rem;flex-wrap:wrap}
   .declaracion-text{flex:1 1 60%;font-weight:500}
@@ -1095,6 +1098,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 </fieldset>
 
           <div class="step-footer">
+            <span class="required-note">Los puntos con un (*) son obligatorios</span>
             <span class="step-indicator">Paso <strong>1</strong> de 4</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
@@ -1276,6 +1280,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
             <span class="step-indicator">Paso <strong>2</strong> de 4</span>
+            <span class="required-note">Los puntos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1581,6 +1586,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
             <span class="step-indicator">Paso <strong>3</strong> de 4</span>
+            <span class="required-note">Los puntos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1612,14 +1618,14 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
 <div class="file-upload">
   <label for="file-cedula">Cédula Frontal (PDF/JPG/PNG)*</label>
   <input type="file" id="file-cedula" name="filedata_cedula"
-         accept=".pdf,.webp,.webp,.webp" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
 <div class="file-upload">
   <label for="file-cedula2">Cédula Reverso (PDF/JPG/PNG)*</label>
   <input type="file" id="file-cedula2" name="filedata_cedula2"
-         accept=".pdf,.webp,.webp,.webp" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
@@ -1627,14 +1633,14 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
 <div class="file-upload">
   <label for="file-bancaria">Certificación Bancaria*</label>
   <input type="file" id="file-bancaria" name="filedata_bancaria"
-         accept=".pdf,.webp,.webp,.webp" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
 <div class="file-upload">
   <label for="file-laboral">Certificación Laboral (Menor a 30 días)*</label>
   <input type="file" id="file-laboral" name="filedata_laboral"
-         accept=".pdf,.webp,.webp,.webp" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
@@ -1659,13 +1665,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         Volantes de Pago Últimos 3 meses (Mes 1)*
       </label>
       <input type="file" id="file-volantes" name="filedata_volantes"
-             accept=".pdf,.webp,.webp,.webp" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
     <div class="file-upload hidden" data-role="mes-1-b">
       <label for="file-volantes1b">Quincena (2/6)*</label>
       <input type="file" id="file-volantes1b" name="filedata_volantes1b"
-             accept=".pdf,.webp,.webp,.webp" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
   </div>
@@ -1681,13 +1687,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         Volantes de Pago Últimos 3 meses (Mes 2)*
       </label>
       <input type="file" id="file-volantes2" name="filedata_volantes2"
-             accept=".pdf,.webp,.webp,.webp" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
     <div class="file-upload hidden" data-role="mes-2-b">
       <label for="file-volantes2b">Quincena (4/6)*</label>
       <input type="file" id="file-volantes2b" name="filedata_volantes2b"
-             accept=".pdf,.webp,.webp,.webp" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
   </div>
@@ -1703,13 +1709,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         Volantes de Pago Últimos 3 meses (Mes 3)*
       </label>
       <input type="file" id="file-volantes3" name="filedata_volantes3"
-             accept=".pdf,.webp,.webp,.webp" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
     <div class="file-upload hidden" data-role="mes-3-b">
       <label for="file-volantes3b">Quincena (6/6)*</label>
       <input type="file" id="file-volantes3b" name="filedata_volantes3b"
-             accept=".pdf,.webp,.webp,.webp" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
   </div>
@@ -1720,6 +1726,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
             <span class="step-indicator">Paso <strong>4</strong> de 4</span>
+            <span class="required-note">Los puntos con un (*) son obligatorios</span>
             <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Enviar</button>
           </div>
         </section>
@@ -1784,7 +1791,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
     <!-- Imagen superior -->
     <img
       class="thank-img"
-      src="https://assets.zyrosite.com/AMq1Kr5MDyteLG4E/fondo-de-a06a-eliminado-A0xjyJrJqqUJ74kl.webp"
+      src="../assets/img/lukeform.png"
       alt="Gracias - Lucrum Financiera"
       loading="lazy"
     />
