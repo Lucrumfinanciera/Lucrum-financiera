@@ -354,9 +354,8 @@ function init() {
       const isLast = (current === totalSteps - 1);
       const next = getNextBtn(current);
       const submit = getSubmitBtn();
-      const valid = isStepValid(current, false);
-      if (!isLast && next) next.disabled = !valid;
-      if (isLast && submit) submit.disabled = !valid || submitting;
+      if (!isLast && next) next.disabled = false; // siempre clickeable
+      if (isLast && submit) submit.disabled = submitting;
     }
 
     function updateProgressBarUI() {
@@ -395,7 +394,12 @@ function init() {
       stepEl.addEventListener('change', updateButtonsState);
       const next = stepEl.querySelector('#nextBtn'); // ideal .nextBtn
       next?.addEventListener('click', () => {
-        if (isStepValid(idx, true)) showStep(Math.min(idx + 1, totalSteps - 1));
+        if (isStepValid(idx, true)) {
+          showStep(Math.min(idx + 1, totalSteps - 1));
+        } else {
+          const missing = collectMissingFields(idx);
+          alert('Completa los siguientes campos antes de continuar:\n- ' + missing.join('\n- '));
+        }
       });
       const prev = stepEl.querySelector('#prevBtn'); // ideal .prevBtn
       prev?.addEventListener('click', () => showStep(Math.max(idx - 1, 0)));
