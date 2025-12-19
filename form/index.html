@@ -855,7 +855,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
       <form
       id="formulario-conocimiento"
-      action="https://script.google.com/macros/s/AKfycbzOl8_47Jv5WNB2duuyoALOZkvrH2n8OJ4TLbtKQ4SnZs9i7_Jy5rJE_gGS2FKTPjr-fQ/exec"
+      action="https://script.google.com/macros/s/AKfycbyzI2PCdY3O8rRTEHHaWxNZkM9faRHbGIPbRjXwbTBNQlZYp7OAOEbm1SW_69R5sFvLtQ/exec"
       method="POST"
       enctype="multipart/form-data"
     >
@@ -1099,7 +1099,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 </fieldset>
 
           <div class="step-footer">
-            <span class="required-note">Los puntos con un (*) son obligatorios</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <span class="step-indicator">Paso <strong>1</strong> de 4</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
@@ -1281,7 +1281,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
             <span class="step-indicator">Paso <strong>2</strong> de 4</span>
-            <span class="required-note">Los puntos con un (*) son obligatorios</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1587,7 +1587,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
             <span class="step-indicator">Paso <strong>3</strong> de 4</span>
-            <span class="required-note">Los puntos con un (*) son obligatorios</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1727,7 +1727,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
             <span class="step-indicator">Paso <strong>4</strong> de 4</span>
-            <span class="required-note">Los puntos con un (*) son obligatorios</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Enviar</button>
           </div>
         </section>
@@ -1905,6 +1905,21 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         applyFormats();
       }
       window.applyFormatsFallback = applyFormats;
+    })();
+  </script>
+  <script nonce="lucrum-secure">
+    (function () {
+      var MAX_SIZE = 50 * 1024 * 1024;
+      document.addEventListener('change', function (event) {
+        var input = event.target;
+        if (!input || input.type !== 'file' || !input.files || !input.files.length) return;
+        var file = input.files[0];
+        if (file.size > MAX_SIZE) {
+          alert('El archivo supera el límite de 50 MB. Selecciona uno más pequeño.');
+          input.value = '';
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }, true);
     })();
   </script>
   <script defer src="../assets/js/form.js"></script>
