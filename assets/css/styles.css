@@ -1234,6 +1234,332 @@ input:focus,select:focus,textarea:focus {
     order:-1
   }
 }
+.btn-large {
+  padding:14px 22px;
+  font-size:1rem
+}
+.whatsapp-btn {
+  gap:10px
+}
+.whatsapp-icon {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#12af5a;
+  color:#fff;
+  padding:6px;
+  border-radius:50%
+}
+.aliados-hero {
+  position:relative;
+  overflow:hidden
+}
+.aliados-hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 16% 18%,rgba(32,78,120,0.09),transparent 28%),radial-gradient(circle at 84% 12%,rgba(32,78,120,0.08),transparent 26%),linear-gradient(135deg,#f6f9fc 0%,#eef3fb 45%,#f9fbff 100%);
+  z-index:0
+}
+.aliados-hero>.container {
+  position:relative;
+  z-index:1
+}
+.hero-copy .core-message {
+  margin-top:18px;
+  padding:18px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid var(--gris-claro);
+  box-shadow:var(--sombra);
+  font-weight:600;
+  line-height:1.5
+}
+.section-header {
+  margin-bottom:20px
+}
+.directory-controls {
+  display:grid;
+  gap:12px;
+  margin:20px 0
+}
+#partner-search {
+  width:100%;
+  padding:14px 16px;
+  border:1px solid var(--gris-claro);
+  border-radius:14px;
+  background:#fff;
+  font-size:1rem;
+  box-shadow:0 6px 20px rgba(15,27,43,0.06)
+}
+.chip-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px
+}
+.chip {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:#f2f6fb;
+  border:1px solid transparent;
+  font-weight:700;
+  color:#153652;
+  cursor:pointer;
+  transition:var(--transition)
+}
+.chip:hover,.chip:focus-visible {
+  border-color:var(--azul);
+  box-shadow:0 10px 26px rgba(15,27,43,0.1)
+}
+.chip.active {
+  background:var(--azul);
+  color:var(--blanco);
+  border-color:var(--azul);
+  box-shadow:0 10px 30px rgba(32,78,120,0.3)
+}
+.partners-grid {
+  display:grid;
+  gap:16px
+}
+.ally-card {
+  display:grid;
+  gap:14px;
+  grid-template-rows:auto auto 1fr auto
+}
+.ally-card .logo-row {
+  display:flex;
+  align-items:center;
+  gap:12px
+}
+.ally-card .ally-logo {
+  width:54px;
+  height:54px;
+  border-radius:14px;
+  background:#f5f7fb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border:1px solid var(--gris-claro)
+}
+.ally-card .ally-logo img {
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+.ally-card .ally-logo.placeholder {
+  font-weight:800;
+  color:var(--azul);
+  font-size:1rem
+}
+.ally-card .ally-image {
+  width:100%;
+  aspect-ratio:4/3;
+  border-radius:16px;
+  overflow:hidden;
+  background:#eef3fb;
+  border:1px solid var(--gris-claro)
+}
+.ally-card .ally-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+.ally-card .ally-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  font-size:0.88rem;
+  color:#153652
+}
+.ally-card .ally-tags span {
+  background:#f2f6fb;
+  padding:6px 10px;
+  border-radius:10px;
+  border:1px solid var(--gris-claro)
+}
+.card-footer {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap
+}
+.card-footer small {
+  color:#6c7884;
+  font-weight:600
+}
+.empty-state {
+  display:none;
+  margin-top:20px;
+  color:#6c7884;
+  font-weight:600
+}
+.empty-state.visible {
+  display:block
+}
+.ally-modal {
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.25s ease
+}
+.ally-modal.is-visible {
+  opacity:1;
+  pointer-events:auto
+}
+.ally-modal__overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(15,27,43,0.55);
+  backdrop-filter:blur(4px)
+}
+.ally-modal__dialog {
+  position:relative;
+  background:#fff;
+  border-radius:18px;
+  width:min(960px,92vw);
+  max-height:90vh;
+  overflow:hidden;
+  z-index:1;
+  box-shadow:0 24px 60px rgba(15,27,43,0.24);
+  display:grid;
+  grid-template-rows:auto 1fr
+}
+.ally-modal__close {
+  position:absolute;
+  top:12px;
+  right:12px;
+  border:none;
+  background:#eef3fb;
+  color:#0f1b2b;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  font-size:1.4rem;
+  font-weight:800;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.ally-modal__content {
+  padding:20px;
+  overflow:auto;
+  display:grid;
+  gap:18px
+}
+.ally-header {
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+.ally-header .ally-logo {
+  width:64px;
+  height:64px
+}
+.ally-gallery {
+  display:grid;
+  gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr))
+}
+.ally-gallery .ally-image {
+  aspect-ratio:4/3;
+  border-radius:12px
+}
+.ally-services {
+  margin:0;
+  padding-left:1.1em;
+  display:grid;
+  gap:6px
+}
+.ally-cta-row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap
+}
+.ally-cta-row .btn {
+  flex:1 1 200px
+}
+.big-bullets {
+  font-size:1.05rem;
+  font-weight:600
+}
+.partner-meta {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  color:#6c7884;
+  font-weight:600
+}
+.partner-meta span {
+  display:inline-flex;
+  align-items:center;
+  gap:6px
+}
+.city-select {
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--gris-claro);
+  background:#f9fbfd;
+  font-weight:600
+}
+.inline-label {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  margin-bottom:6px
+}
+.cta-note {
+  margin:0;
+  color:#6c7884;
+  font-size:0.92rem
+}
+.partner-pill {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:10px;
+  background:#f2f6fb;
+  border:1px solid var(--gris-claro);
+  font-weight:700;
+  color:#153652
+}
+.partner-pill svg {
+  width:16px;
+  height:16px
+}
+.partners-grid[aria-busy="true"] {
+  opacity:0.6
+}
+@media (min-width:720px) {
+  .directory-controls {
+    grid-template-columns:1.2fr auto
+  }
+}
+@media (min-width:820px) {
+  .partners-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
+@media (min-width:1100px) {
+  .partners-grid {
+    grid-template-columns:repeat(3,minmax(0,1fr))
+  }
+}
+body.modal-open {
+  overflow:hidden
+}
 @media (max-width:720px) {
   .footer-cta,
   .footer-links {
