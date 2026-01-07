@@ -848,7 +848,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
      alt="Lucrum Financiera Logo" loading="lazy" />
 
       <h1>Formulario de Conocimiento</h1>
-      <p class="subtitle">Completa los 4 pasos. Solo avanzas si los campos requeridos están completos.</p>
+      <p class="subtitle">Completa los 3 pasos. Solo avanzas si los campos requeridos están completos.</p>
 
       <!-- Barra de progreso -->
       <div class="steps" id="progressBar"></div>
@@ -883,7 +883,13 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     name="monto_solicitado"
   />
 </label>
+        <label>Promesa de uso:*
+            <input type="text" name="promesa_uso" placeholder="Para qué se usará el dinero" required/>
+          </label>
 
+          <div class="col-1">
+  <div class="field-pair-50">
+    <div class="form-control">
           <label>Meses:*
             <select name="meses" placeholder="6" required>
               <option value=""> </option>
@@ -892,9 +898,22 @@ section[data-step="4"] .grid-dos-columnas{display:block}
               <option>9</option><option>10</option><option>11</option><option>12</option>
             </select>
           </label>
-          <label>Promesa de uso:*
-            <input type="text" name="promesa_uso" placeholder="Para qué se usará el dinero" required/>
-          </label>
+          </div>
+          <div class="form-control">
+          <label>Asesor: *
+                <select name="codigo_empresa" required>
+                  <option value=""> </option>
+                  <option>45</option>
+                  <option>47</option>
+                  <option>53</option>
+                  <option>54</option>
+                </select>
+              </label>
+    </div>
+    </div>
+    </div>
+          
+          
           <input type="hidden" id="fecha" name="fecha_envio"/>
           <div class="form-group">
   <label id="tipo_cliente_label" class="label-center">Tipo de cliente:*</label>
@@ -965,16 +984,16 @@ section[data-step="4"] .grid-dos-columnas{display:block}
           <label>Personas a cargo: *<input type="number" name="personas_a_cargo" required></label>
           </div>
           <div class="form-control">
-<label>Estado Civil: *
-      <select name="estado_civil" required>
-        <option value=""> </option>
-        <option>Soltero/a</option>
-        <option>Casado/a</option>
-        <option>U. Libre</option>
-        <option>Separado/a</option>
-        <option>Viudo/a</option>
-      </select>
-    </label>
+          <label>Estado Civil: *
+                <select name="estado_civil" required>
+                  <option value=""> </option>
+                  <option>Soltero/a</option>
+                  <option>Casado/a</option>
+                  <option>U. Libre</option>
+                  <option>Separado/a</option>
+                  <option>Viudo/a</option>
+                </select>
+              </label>
     </div>
     </div>
     </div>
@@ -1100,7 +1119,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
           <div class="step-footer">
             <span class="required-note">Los campos con un (*) son obligatorios</span>
-            <span class="step-indicator">Paso <strong>1</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>1</strong> de 3</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1230,7 +1249,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <!-- Columna Izquierda: Referencia Bancaria 1 -->
     <div>
       <label>Referencia Bancaria 1: *
-        <input type="text" name="entidad1" required>
+        <input type="text" name="entidad1" placeholder="Nombre del Banco" required>
       </label>
       <label>Sucursal: *
         <input type="text" name="sucursal1" placeholder="Ciudad" required>
@@ -1255,7 +1274,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <!-- Columna Derecha: Referencia Bancaria 2 -->
     <div>
       <label>Referencia Bancaria 2:
-        <input type="text" name="entidad2">
+        <input type="text" name="entidad2" placeholder="Nombre del Banco">
       </label>
       <label>Sucursal:
         <input type="text" name="sucursal2" placeholder="Ciudad">
@@ -1280,14 +1299,14 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
-            <span class="step-indicator">Paso <strong>2</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>2</strong> de 3</span>
             <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
 
         <!-- ============ SECCIÓN 3 ============ -->
-        <section class="form-step hidden" data-step="3">
+        <section class="form-step hidden" data-step="3" data-skip="true" aria-hidden="true">
          
           <fieldset>
             <legend>
@@ -1300,9 +1319,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="recursos_publicos_label" class="fatca-question__label">¿Maneja recursos públicos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="recursos_publicos_label">
-        <input type="radio" id="recursos_no" name="recursos_publicos" value="No" required>
+        <input type="radio" id="recursos_no" name="recursos_publicos" value="No">
         <label for="recursos_no">No</label>
-        <input type="radio" id="recursos_si" name="recursos_publicos" value="Sí" required>
+        <input type="radio" id="recursos_si" name="recursos_publicos" value="Sí">
         <label for="recursos_si">Sí</label>
       </div>
     </div>
@@ -1313,9 +1332,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="cargos_publicos_label" class="fatca-question__label">¿Ejerce cargos públicos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="cargos_publicos_label">
-        <input type="radio" id="cargos_no" name="cargos_publicos" value="No" required>
+        <input type="radio" id="cargos_no" name="cargos_publicos" value="No">
         <label for="cargos_no">No</label>
-        <input type="radio" id="cargos_si" name="cargos_publicos" value="Sí" required>
+        <input type="radio" id="cargos_si" name="cargos_publicos" value="Sí">
         <label for="cargos_si">Sí</label>
       </div>
     </div>
@@ -1326,9 +1345,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_nacimiento_label" class="fatca-question__label">¿Nació en Estados Unidos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_nacimiento_label">
-        <input type="radio" id="fatca_nacimiento_no" name="fatca_nacimiento" value="No" required>
+        <input type="radio" id="fatca_nacimiento_no" name="fatca_nacimiento" value="No">
         <label for="fatca_nacimiento_no">No</label>
-        <input type="radio" id="fatca_nacimiento_si" name="fatca_nacimiento" value="Sí" required>
+        <input type="radio" id="fatca_nacimiento_si" name="fatca_nacimiento" value="Sí">
         <label for="fatca_nacimiento_si">Sí</label>
       </div>
     </div>
@@ -1339,9 +1358,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="reconocimiento_label" class="fatca-question__label">¿Tiene reconocimiento público?*</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="reconocimiento_label">
-        <input type="radio" id="reconocimiento_no" name="reconocimiento_publico" value="No" required>
+        <input type="radio" id="reconocimiento_no" name="reconocimiento_publico" value="No">
         <label for="reconocimiento_no">No</label>
-        <input type="radio" id="reconocimiento_si" name="reconocimiento_publico" value="Sí" required>
+        <input type="radio" id="reconocimiento_si" name="reconocimiento_publico" value="Sí">
         <label for="reconocimiento_si">Sí</label>
       </div>
     </div>
@@ -1352,9 +1371,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="parentesco_label" class="fatca-question__label">¿Tiene parentesco de 2º de afinidad o consanguinidad con un PEP? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="parentesco_label">
-        <input type="radio" id="parentesco_no" name="parentesco_pep" value="No" required>
+        <input type="radio" id="parentesco_no" name="parentesco_pep" value="No">
         <label for="parentesco_no">No</label>
-        <input type="radio" id="parentesco_si" name="parentesco_pep" value="Sí" required>
+        <input type="radio" id="parentesco_si" name="parentesco_pep" value="Sí">
         <label for="parentesco_si">Sí</label>
       </div>
     </div>
@@ -1365,9 +1384,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_nacionalidad_label" class="fatca-question__label">¿Como persona natural, posee usted Nacionalidad Estadounidense? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_nacionalidad_label">
-        <input type="radio" id="fatca_nacionalidad_no" name="fatca_nacionalidad" value="No" required>
+        <input type="radio" id="fatca_nacionalidad_no" name="fatca_nacionalidad" value="No">
         <label for="fatca_nacionalidad_no">No</label>
-        <input type="radio" id="fatca_nacionalidad_si" name="fatca_nacionalidad" value="Sí" required>
+        <input type="radio" id="fatca_nacionalidad_si" name="fatca_nacionalidad" value="Sí">
         <label for="fatca_nacionalidad_si">Sí</label>
       </div>
     </div>
@@ -1378,9 +1397,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="relacion_pep_label" class="fatca-question__label">¿Tiene relación con persona expuesta públicamente (PEP)? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="relacion_pep_label">
-        <input type="radio" id="rel_pep_no" name="relacion_pep" value="No" required>
+        <input type="radio" id="rel_pep_no" name="relacion_pep" value="No">
         <label for="rel_pep_no">No</label>
-        <input type="radio" id="rel_pep_si" name="relacion_pep" value="Sí" required>
+        <input type="radio" id="rel_pep_si" name="relacion_pep" value="Sí">
         <label for="rel_pep_si">Sí</label>
       </div>
     </div>
@@ -1430,9 +1449,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_green_card_label" class="fatca-question__label">¿Usted posee Tarjeta de Residencia Americana (Green Card)? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_green_card_label">
-        <input type="radio" id="fatca_green_card_no" name="fatca_green_card" value="No" required>
+        <input type="radio" id="fatca_green_card_no" name="fatca_green_card" value="No">
         <label for="fatca_green_card_no">No</label>
-        <input type="radio" id="fatca_green_card_si" name="fatca_green_card" value="Sí" required>
+        <input type="radio" id="fatca_green_card_si" name="fatca_green_card" value="Sí">
         <label for="fatca_green_card_si">Sí</label>
       </div>
     </div>
@@ -1456,9 +1475,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_residencia_label" class="fatca-question__label">¿Vivió las 2/3 partes del año anterior en Estados Unidos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_residencia_label">
-        <input type="radio" id="fatca_residencia_no" name="fatca_residencia" value="No" required>
+        <input type="radio" id="fatca_residencia_no" name="fatca_residencia" value="No">
         <label for="fatca_residencia_no">No</label>
-        <input type="radio" id="fatca_residencia_si" name="fatca_residencia" value="Sí" required>
+        <input type="radio" id="fatca_residencia_si" name="fatca_residencia" value="Sí">
         <label for="fatca_residencia_si">Sí</label>
       </div>
     </div>
@@ -1469,9 +1488,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_transferencias_label" class="fatca-question__label">¿Usted transfiere o da instrucciones permanentes para transferir fondos a una cuenta de Estados Unidos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_transferencias_label">
-        <input type="radio" id="fatca_transferencias_no" name="fatca_transferencias" value="No" required>
+        <input type="radio" id="fatca_transferencias_no" name="fatca_transferencias" value="No">
         <label for="fatca_transferencias_no">No</label>
-        <input type="radio" id="fatca_transferencias_si" name="fatca_transferencias" value="Sí" required>
+        <input type="radio" id="fatca_transferencias_si" name="fatca_transferencias" value="Sí">
         <label for="fatca_transferencias_si">Sí</label>
       </div>
     </div>
@@ -1530,7 +1549,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
   <div class="grid-dos-columnas">
     <!-- A -->
     <label class="decl-item" for="declaracion_a">
-      <input type="checkbox" id="declaracion_a" name="declaracion_a" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_a" name="declaracion_a" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>a.</strong> Mi actividad comercial, profesión u oficio es lícita y la ejerzo dentro del marco legal; 
         los recursos que poseo no provienen de actividades ilícitas de las contempladas en el Código Penal Colombiano. *
@@ -1539,7 +1558,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- B -->
     <label class="decl-item" for="declaracion_b">
-      <input type="checkbox" id="declaracion_b" name="declaracion_b" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_b" name="declaracion_b" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>b.</strong> La información que he suministrado en este formato es veraz y verificable; me obligo a confirmar
         los datos y actualizarlos anualmente conforme a los procedimientos establecidos por la Cooperativa. *
@@ -1548,7 +1567,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- C -->
     <label class="decl-item" for="declaracion_c">
-      <input type="checkbox" id="declaracion_c" name="declaracion_c" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_c" name="declaracion_c" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>c.</strong> El incumplimiento del literal b) faculta a la Cooperativa para revocar unilateralmente el contrato.
         Los recursos derivados no se destinarán a la financiación del terrorismo, grupos terroristas o actividades terroristas. *
@@ -1557,7 +1576,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- D -->
     <label class="decl-item" for="declaracion_d">
-      <input type="checkbox" id="declaracion_d" name="declaracion_d" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_d" name="declaracion_d" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>d.</strong> No he sido declarado responsable judicialmente por delitos contra la Administración Pública
         con pena privativa de la libertad ni por delitos relacionados con grupos ilegales, lesa humanidad, narcotráfico
@@ -1567,7 +1586,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- E -->
     <label class="decl-item" for="declaracion_e">
-      <input type="checkbox" id="declaracion_e" name="declaracion_e" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_e" name="declaracion_e" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>e.</strong> Las declaraciones contenidas en estos documentos son exactas, completas y verídicas en la forma en que aparecen escritas. *
       </span>
@@ -1575,7 +1594,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- F -->
     <label class="decl-item" for="declaracion_f">
-      <input type="checkbox" id="declaracion_f" name="declaracion_f" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_f" name="declaracion_f" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>f.</strong> He leído y entiendo el contenido de este documento y acepto las responsabilidades civiles, fiscales
         y penales respecto de la veracidad de esta información. *
@@ -1586,7 +1605,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
-            <span class="step-indicator">Paso <strong>3</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>3</strong> de 3</span>
             <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
@@ -1726,7 +1745,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
 
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
-            <span class="step-indicator">Paso <strong>4</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>3</strong> de 3</span>
             <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Enviar</button>
           </div>

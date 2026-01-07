@@ -152,6 +152,9 @@
   .button-group--inline input[type="radio"]:checked + .option-btn{background-color:var(--clr-primary);color:#fff;border-color:var(--clr-primary)}
   @media (max-width:480px){.button-group--inline{grid-template-columns:1fr}}
 
+  .req-star{color:#d62828;font-weight:700;}
+  .required-note{color:#d62828;font-weight:600;font-size:.88rem;}
+
   /* ====== Declaraciones con sí/no a la derecha ====== */
   .declaracion-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:1rem;flex-wrap:wrap}
   .declaracion-text{flex:1 1 60%;font-weight:500}
@@ -832,18 +835,18 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <div class="form-container" role="form">
         
         <img class="secure-logo"
-     src="https://assets.zyrosite.com/AMq1Kr5MDyteLG4E/2-d954NWNMXJiE5bNx.png"
-     alt="Lucrum Financiera Logo" />
+     src="assets/img/logo.webp"
+     alt="Lucrum Financiera Logo" loading="lazy" />
 
       <h1>Formulario de Conocimiento</h1>
-      <p class="subtitle">Completa los 4 pasos. Solo avanzas si los campos requeridos están completos.</p>
+      <p class="subtitle">Completa los 3 pasos. Solo avanzas si los campos requeridos están completos.</p>
 
       <!-- Barra de progreso -->
       <div class="steps" id="progressBar"></div>
 
       <form
       id="formulario-conocimiento"
-      action="https://script.google.com/macros/s/AKfycbwrqYcqWKn8QNYSy29IOcrjONYChB47psgbB2bZqjYdl5Sr5KB9m3AX4IjGC_ErXtvePA/exec"
+      action="https://script.google.com/macros/s/AKfycbzcYYV5RcLZObUjxI2lG6NZgvWhxYTWoNiHr0NiOoCns5H0xVyKHEIt4K0nX6Dx1fJN3w/exec"
       method="POST"
       enctype="multipart/form-data"
     >
@@ -871,17 +874,37 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     name="monto_solicitado"
   />
 </label>
+        <label>Promesa de uso:*
+            <input type="text" name="promesa_uso" placeholder="Para qué se usará el dinero" required/>
+          </label>
 
+          <div class="col-1">
+  <div class="field-pair-50">
+    <div class="form-control">
           <label>Meses:*
             <select name="meses" placeholder="6" required>
               <option value=""> </option>
               <option>1</option><option>2</option><option>3</option><option>4</option>
               <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option>9</option><option>10</option><option>11</option><option>12</option>
             </select>
           </label>
-          <label>Promesa de uso:*
-            <input type="text" name="promesa_uso" placeholder="Para qué se usará el dinero" required/>
-          </label>
+          </div>
+          <div class="form-control">
+          <label>Asesor: *
+                <select name="codigo_empresa" required>
+                  <option value=""> </option>
+                  <option>45</option>
+                  <option>47</option>
+                  <option>53</option>
+                  <option>54</option>
+                </select>
+              </label>
+    </div>
+    </div>
+    </div>
+          
+          
           <input type="hidden" id="fecha" name="fecha_envio"/>
           <div class="form-group">
   <label id="tipo_cliente_label" class="label-center">Tipo de cliente:*</label>
@@ -952,16 +975,16 @@ section[data-step="4"] .grid-dos-columnas{display:block}
           <label>Personas a cargo: *<input type="number" name="personas_a_cargo" required></label>
           </div>
           <div class="form-control">
-<label>Estado Civil: *
-      <select name="estado_civil" required>
-        <option value=""> </option>
-        <option>Soltero/a</option>
-        <option>Casado/a</option>
-        <option>U. Libre</option>
-        <option>Separado/a</option>
-        <option>Viudo/a</option>
-      </select>
-    </label>
+          <label>Estado Civil: *
+                <select name="estado_civil" required>
+                  <option value=""> </option>
+                  <option>Soltero/a</option>
+                  <option>Casado/a</option>
+                  <option>U. Libre</option>
+                  <option>Separado/a</option>
+                  <option>Viudo/a</option>
+                </select>
+              </label>
     </div>
     </div>
     </div>
@@ -980,7 +1003,13 @@ section[data-step="4"] .grid-dos-columnas{display:block}
             </label>
             </div>
             <div class="form-control">
-          <label>Ocupación: *<input type="text" name="ocupacion" required></label>
+          <label>Ocupación: *<select name="ocupacion" required>
+              <option value=""> </option>
+              <option>Empleado(a)</option>
+              <option>Independiente</option>
+              <option>Rentista</option>
+              <option>Pensionado(a)</option>
+            </select></label>
           </div>
     </div>
     </div>
@@ -990,7 +1019,39 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <div class="form-control">
             <label>Departamento:*
             <select name="departamento" required>
-              <option value=""> <option>Amazonas</option> <option>Antioquia</option> <option>Arauca</option> <option>Atlántico</option> <option>Bolívar</option> <option>Boyacá</option> <option>Caldas</option> <option>Caquetá</option> <option>Casanare</option> <option>Cauca</option> <option>Cesar</option> <option>Chocó</option> <option>Córdoba</option> <option>Cundinamarca</option> <option>Guainía</option> <option>Guaviare</option> <option>Huila</option> <option>La Guajira</option> <option>Magdalena</option> <option>Meta</option> <option>Nariño</option> <option>Norte de Santander</option> <option>Putumayo</option> <option>Quindío</option> <option>Risaralda</option> <option>San Andrés y Providencia</option> <option>Santander</option> <option>Sucre</option> <option>Tolima</option> <option>Valle del Cauca</option> <option>Vaupés</option> <option>Vichada</option>
+              <option value=""> </option>
+              <option>Amazonas</option>
+              <option>Antioquia</option>
+              <option>Arauca</option>
+              <option>Atlántico</option>
+              <option>Bolívar</option>
+              <option>Boyacá</option>
+              <option>Caldas</option>
+              <option>Caquetá</option>
+              <option>Casanare</option>
+              <option>Cauca</option>
+              <option>Cesar</option>
+              <option>Chocó</option>
+              <option>Córdoba</option>
+              <option>Cundinamarca</option>
+              <option>Guainía</option>
+              <option>Guaviare</option>
+              <option>Huila</option>
+              <option>La Guajira</option>
+              <option>Magdalena</option>
+              <option>Meta</option>
+              <option>Nariño</option>
+              <option>Norte de Santander</option>
+              <option>Putumayo</option>
+              <option>Quindío</option>
+              <option>Risaralda</option>
+              <option>San Andrés y Providencia</option>
+              <option>Santander</option>
+              <option>Sucre</option>
+              <option>Tolima</option>
+              <option>Valle del Cauca</option>
+              <option>Vaupés</option>
+              <option>Vichada</option>
             </select>
           </label>
             </div>
@@ -1048,7 +1109,8 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 </fieldset>
 
           <div class="step-footer">
-            <span class="step-indicator">Paso <strong>1</strong> de 4</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
+            <span class="step-indicator">Paso <strong>1</strong> de 3</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1178,7 +1240,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <!-- Columna Izquierda: Referencia Bancaria 1 -->
     <div>
       <label>Referencia Bancaria 1: *
-        <input type="text" name="entidad1" required>
+        <input type="text" name="entidad1" placeholder="Nombre del Banco" required>
       </label>
       <label>Sucursal: *
         <input type="text" name="sucursal1" placeholder="Ciudad" required>
@@ -1203,7 +1265,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <!-- Columna Derecha: Referencia Bancaria 2 -->
     <div>
       <label>Referencia Bancaria 2:
-        <input type="text" name="entidad2">
+        <input type="text" name="entidad2" placeholder="Nombre del Banco">
       </label>
       <label>Sucursal:
         <input type="text" name="sucursal2" placeholder="Ciudad">
@@ -1228,13 +1290,14 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
-            <span class="step-indicator">Paso <strong>2</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>2</strong> de 3</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
 
         <!-- ============ SECCIÓN 3 ============ -->
-        <section class="form-step hidden" data-step="3">
+        <section class="form-step hidden" data-step="3" data-skip="true" aria-hidden="true">
          
           <fieldset>
             <legend>
@@ -1247,9 +1310,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="recursos_publicos_label" class="fatca-question__label">¿Maneja recursos públicos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="recursos_publicos_label">
-        <input type="radio" id="recursos_no" name="recursos_publicos" value="No" required>
+        <input type="radio" id="recursos_no" name="recursos_publicos" value="No">
         <label for="recursos_no">No</label>
-        <input type="radio" id="recursos_si" name="recursos_publicos" value="Sí" required>
+        <input type="radio" id="recursos_si" name="recursos_publicos" value="Sí">
         <label for="recursos_si">Sí</label>
       </div>
     </div>
@@ -1260,9 +1323,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="cargos_publicos_label" class="fatca-question__label">¿Ejerce cargos públicos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="cargos_publicos_label">
-        <input type="radio" id="cargos_no" name="cargos_publicos" value="No" required>
+        <input type="radio" id="cargos_no" name="cargos_publicos" value="No">
         <label for="cargos_no">No</label>
-        <input type="radio" id="cargos_si" name="cargos_publicos" value="Sí" required>
+        <input type="radio" id="cargos_si" name="cargos_publicos" value="Sí">
         <label for="cargos_si">Sí</label>
       </div>
     </div>
@@ -1273,9 +1336,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_nacimiento_label" class="fatca-question__label">¿Nació en Estados Unidos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_nacimiento_label">
-        <input type="radio" id="fatca_nacimiento_no" name="fatca_nacimiento" value="No" required>
+        <input type="radio" id="fatca_nacimiento_no" name="fatca_nacimiento" value="No">
         <label for="fatca_nacimiento_no">No</label>
-        <input type="radio" id="fatca_nacimiento_si" name="fatca_nacimiento" value="Sí" required>
+        <input type="radio" id="fatca_nacimiento_si" name="fatca_nacimiento" value="Sí">
         <label for="fatca_nacimiento_si">Sí</label>
       </div>
     </div>
@@ -1286,9 +1349,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="reconocimiento_label" class="fatca-question__label">¿Tiene reconocimiento público?*</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="reconocimiento_label">
-        <input type="radio" id="reconocimiento_no" name="reconocimiento_publico" value="No" required>
+        <input type="radio" id="reconocimiento_no" name="reconocimiento_publico" value="No">
         <label for="reconocimiento_no">No</label>
-        <input type="radio" id="reconocimiento_si" name="reconocimiento_publico" value="Sí" required>
+        <input type="radio" id="reconocimiento_si" name="reconocimiento_publico" value="Sí">
         <label for="reconocimiento_si">Sí</label>
       </div>
     </div>
@@ -1299,9 +1362,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="parentesco_label" class="fatca-question__label">¿Tiene parentesco de 2º de afinidad o consanguinidad con un PEP? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="parentesco_label">
-        <input type="radio" id="parentesco_no" name="parentesco_pep" value="No" required>
+        <input type="radio" id="parentesco_no" name="parentesco_pep" value="No">
         <label for="parentesco_no">No</label>
-        <input type="radio" id="parentesco_si" name="parentesco_pep" value="Sí" required>
+        <input type="radio" id="parentesco_si" name="parentesco_pep" value="Sí">
         <label for="parentesco_si">Sí</label>
       </div>
     </div>
@@ -1312,9 +1375,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_nacionalidad_label" class="fatca-question__label">¿Como persona natural, posee usted Nacionalidad Estadounidense? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_nacionalidad_label">
-        <input type="radio" id="fatca_nacionalidad_no" name="fatca_nacionalidad" value="No" required>
+        <input type="radio" id="fatca_nacionalidad_no" name="fatca_nacionalidad" value="No">
         <label for="fatca_nacionalidad_no">No</label>
-        <input type="radio" id="fatca_nacionalidad_si" name="fatca_nacionalidad" value="Sí" required>
+        <input type="radio" id="fatca_nacionalidad_si" name="fatca_nacionalidad" value="Sí">
         <label for="fatca_nacionalidad_si">Sí</label>
       </div>
     </div>
@@ -1325,9 +1388,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="relacion_pep_label" class="fatca-question__label">¿Tiene relación con persona expuesta públicamente (PEP)? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="relacion_pep_label">
-        <input type="radio" id="rel_pep_no" name="relacion_pep" value="No" required>
+        <input type="radio" id="rel_pep_no" name="relacion_pep" value="No">
         <label for="rel_pep_no">No</label>
-        <input type="radio" id="rel_pep_si" name="relacion_pep" value="Sí" required>
+        <input type="radio" id="rel_pep_si" name="relacion_pep" value="Sí">
         <label for="rel_pep_si">Sí</label>
       </div>
     </div>
@@ -1377,9 +1440,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_green_card_label" class="fatca-question__label">¿Usted posee Tarjeta de Residencia Americana (Green Card)? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_green_card_label">
-        <input type="radio" id="fatca_green_card_no" name="fatca_green_card" value="No" required>
+        <input type="radio" id="fatca_green_card_no" name="fatca_green_card" value="No">
         <label for="fatca_green_card_no">No</label>
-        <input type="radio" id="fatca_green_card_si" name="fatca_green_card" value="Sí" required>
+        <input type="radio" id="fatca_green_card_si" name="fatca_green_card" value="Sí">
         <label for="fatca_green_card_si">Sí</label>
       </div>
     </div>
@@ -1403,9 +1466,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_residencia_label" class="fatca-question__label">¿Vivió las 2/3 partes del año anterior en Estados Unidos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_residencia_label">
-        <input type="radio" id="fatca_residencia_no" name="fatca_residencia" value="No" required>
+        <input type="radio" id="fatca_residencia_no" name="fatca_residencia" value="No">
         <label for="fatca_residencia_no">No</label>
-        <input type="radio" id="fatca_residencia_si" name="fatca_residencia" value="Sí" required>
+        <input type="radio" id="fatca_residencia_si" name="fatca_residencia" value="Sí">
         <label for="fatca_residencia_si">Sí</label>
       </div>
     </div>
@@ -1416,9 +1479,9 @@ section[data-step="4"] .grid-dos-columnas{display:block}
     <label id="fatca_transferencias_label" class="fatca-question__label">¿Usted transfiere o da instrucciones permanentes para transferir fondos a una cuenta de Estados Unidos? *</label>
     <div class="fatca-question__control">
       <div class="toggle-btn-group" role="radiogroup" aria-labelledby="fatca_transferencias_label">
-        <input type="radio" id="fatca_transferencias_no" name="fatca_transferencias" value="No" required>
+        <input type="radio" id="fatca_transferencias_no" name="fatca_transferencias" value="No">
         <label for="fatca_transferencias_no">No</label>
-        <input type="radio" id="fatca_transferencias_si" name="fatca_transferencias" value="Sí" required>
+        <input type="radio" id="fatca_transferencias_si" name="fatca_transferencias" value="Sí">
         <label for="fatca_transferencias_si">Sí</label>
       </div>
     </div>
@@ -1477,7 +1540,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
   <div class="grid-dos-columnas">
     <!-- A -->
     <label class="decl-item" for="declaracion_a">
-      <input type="checkbox" id="declaracion_a" name="declaracion_a" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_a" name="declaracion_a" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>a.</strong> Mi actividad comercial, profesión u oficio es lícita y la ejerzo dentro del marco legal; 
         los recursos que poseo no provienen de actividades ilícitas de las contempladas en el Código Penal Colombiano. *
@@ -1486,7 +1549,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- B -->
     <label class="decl-item" for="declaracion_b">
-      <input type="checkbox" id="declaracion_b" name="declaracion_b" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_b" name="declaracion_b" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>b.</strong> La información que he suministrado en este formato es veraz y verificable; me obligo a confirmar
         los datos y actualizarlos anualmente conforme a los procedimientos establecidos por la Cooperativa. *
@@ -1495,7 +1558,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- C -->
     <label class="decl-item" for="declaracion_c">
-      <input type="checkbox" id="declaracion_c" name="declaracion_c" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_c" name="declaracion_c" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>c.</strong> El incumplimiento del literal b) faculta a la Cooperativa para revocar unilateralmente el contrato.
         Los recursos derivados no se destinarán a la financiación del terrorismo, grupos terroristas o actividades terroristas. *
@@ -1504,7 +1567,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- D -->
     <label class="decl-item" for="declaracion_d">
-      <input type="checkbox" id="declaracion_d" name="declaracion_d" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_d" name="declaracion_d" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>d.</strong> No he sido declarado responsable judicialmente por delitos contra la Administración Pública
         con pena privativa de la libertad ni por delitos relacionados con grupos ilegales, lesa humanidad, narcotráfico
@@ -1514,7 +1577,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- E -->
     <label class="decl-item" for="declaracion_e">
-      <input type="checkbox" id="declaracion_e" name="declaracion_e" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_e" name="declaracion_e" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>e.</strong> Las declaraciones contenidas en estos documentos son exactas, completas y verídicas en la forma en que aparecen escritas. *
       </span>
@@ -1522,7 +1585,7 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
     <!-- F -->
     <label class="decl-item" for="declaracion_f">
-      <input type="checkbox" id="declaracion_f" name="declaracion_f" value="Sí" class="decl-check" required>
+      <input type="checkbox" id="declaracion_f" name="declaracion_f" value="Sí" class="decl-check">
       <span class="decl-text">
         <strong>f.</strong> He leído y entiendo el contenido de este documento y acepto las responsabilidades civiles, fiscales
         y penales respecto de la veracidad de esta información. *
@@ -1533,7 +1596,8 @@ section[data-step="4"] .grid-dos-columnas{display:block}
 
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
-            <span class="step-indicator">Paso <strong>3</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>3</strong> de 3</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>Siguiente</button>
           </div>
         </section>
@@ -1565,14 +1629,14 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
 <div class="file-upload">
   <label for="file-cedula">Cédula Frontal (PDF/JPG/PNG)*</label>
   <input type="file" id="file-cedula" name="filedata_cedula"
-         accept=".pdf,.jpg,.jpeg,.png" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
 <div class="file-upload">
   <label for="file-cedula2">Cédula Reverso (PDF/JPG/PNG)*</label>
   <input type="file" id="file-cedula2" name="filedata_cedula2"
-         accept=".pdf,.jpg,.jpeg,.png" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
@@ -1580,14 +1644,14 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
 <div class="file-upload">
   <label for="file-bancaria">Certificación Bancaria*</label>
   <input type="file" id="file-bancaria" name="filedata_bancaria"
-         accept=".pdf,.jpg,.jpeg,.png" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
 <div class="file-upload">
   <label for="file-laboral">Certificación Laboral (Menor a 30 días)*</label>
   <input type="file" id="file-laboral" name="filedata_laboral"
-         accept=".pdf,.jpg,.jpeg,.png" required />
+         accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" required />
   <span class="file-btn">📂 Seleccionar archivo</span>
 </div>
 
@@ -1612,13 +1676,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         Volantes de Pago Últimos 3 meses (Mes 1)*
       </label>
       <input type="file" id="file-volantes" name="filedata_volantes"
-             accept=".pdf,.jpg,.jpeg,.png" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
     <div class="file-upload hidden" data-role="mes-1-b">
       <label for="file-volantes1b">Quincena (2/6)*</label>
       <input type="file" id="file-volantes1b" name="filedata_volantes1b"
-             accept=".pdf,.jpg,.jpeg,.png" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
   </div>
@@ -1634,13 +1698,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         Volantes de Pago Últimos 3 meses (Mes 2)*
       </label>
       <input type="file" id="file-volantes2" name="filedata_volantes2"
-             accept=".pdf,.jpg,.jpeg,.png" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
     <div class="file-upload hidden" data-role="mes-2-b">
       <label for="file-volantes2b">Quincena (4/6)*</label>
       <input type="file" id="file-volantes2b" name="filedata_volantes2b"
-             accept=".pdf,.jpg,.jpeg,.png" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
   </div>
@@ -1656,13 +1720,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
         Volantes de Pago Últimos 3 meses (Mes 3)*
       </label>
       <input type="file" id="file-volantes3" name="filedata_volantes3"
-             accept=".pdf,.jpg,.jpeg,.png" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
     <div class="file-upload hidden" data-role="mes-3-b">
       <label for="file-volantes3b">Quincena (6/6)*</label>
       <input type="file" id="file-volantes3b" name="filedata_volantes3b"
-             accept=".pdf,.jpg,.jpeg,.png" />
+             accept=".pdf,.jpg,.jpeg,.png,.webp,image/*" />
       <span class="file-btn">📂 PDF/JPG/PNG</span>
     </div>
   </div>
@@ -1672,13 +1736,13 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
 
           <div class="step-footer">
             <button type="button" class="btn btn-ghost" id="prevBtn">Atrás</button>
-            <span class="step-indicator">Paso <strong>4</strong> de 4</span>
+            <span class="step-indicator">Paso <strong>3</strong> de 3</span>
+            <span class="required-note">Los campos con un (*) son obligatorios</span>
             <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Enviar</button>
           </div>
         </section>
 
         </form>
-
 
       <!-- ========== OVERLAY DE CARGA (SPINNER) ========== -->
       <div id="loadingOverlay" class="hidden" aria-live="polite" aria-busy="true"
@@ -1694,6 +1758,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
       <!-- Animación spinner (ligera, incrustada para que no toques tu <style>) -->
       <style>
         @keyframes spin { to { transform: rotate(360deg); } }
+
         /* Columna única que contiene ambos campos */
   .col-1 { grid-column: span 1; min-width: 0; }
 
@@ -1737,7 +1802,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
     <!-- Imagen superior -->
     <img
       class="thank-img"
-      src="https://assets.zyrosite.com/AMq1Kr5MDyteLG4E/fondo-de-a06a-eliminado-A0xjyJrJqqUJ74kl.png"
+      src="assets/img/lukeform.png"
       alt="Gracias - Lucrum Financiera"
       loading="lazy"
     />
@@ -1757,7 +1822,7 @@ ESTE DOCUMENTO EXPRESA LA LECTURA, ENTENDIMIENTO Y ACEPTACIÓN TOTAL DE LA INFOR
       </a>
 
       <a class="btn btn-whatsapp"
-         href="https://wa.me/573008633225?text=Hola%20Lucrum%20Financiera%2C%20acabo%20de%20enviar%20mi%20solicitud%20desde%20la%20web%20y%20quiero%20saber%20el%20siguiente%20paso."
+         href="https://wa.me/573007807831?text=Hola%20Lucrum%20Financiera%2C%20acabo%20de%20enviar%20mi%20solicitud%20desde%20la%20web%20y%20quiero%20saber%20el%20siguiente%20paso."
          target="_blank" rel="noopener noreferrer">
         <!-- Logo WhatsApp SVG -->
         <svg class="wa-ico" viewBox="0 0 32 32" aria-hidden="true">
@@ -1804,6 +1869,37 @@ function mount() {
 // Inicialización (listeners mínimos para navegar sin bloquear pasos)
 // ==========================================
 function init() {
+  // Prefill sección 3 (oculta)
+  (function(){
+    const check = (id) => {
+      const el = document.getElementById(id);
+      if (el) el.checked = true;
+    };
+    [
+      'recursos_no',
+      'cargos_no',
+      'reconocimiento_no',
+      'parentesco_no',
+      'rel_pep_no',
+      'fatca_nacimiento_no',
+      'fatca_nacionalidad_no',
+      'fatca_green_card_no',
+      'fatca_residencia_no',
+      'fatca_transferencias_no',
+      'fatca_ingresos_no',
+      'transacciones_exterior_no'
+    ].forEach(check);
+
+    [
+      'declaracion_a',
+      'declaracion_b',
+      'declaracion_c',
+      'declaracion_d',
+      'declaracion_e',
+      'declaracion_f'
+    ].forEach(check);
+  })();
+
   // FATCA / Transferencias a EE.UU.
   const trYes = $('#fatca_transferencias_si');
   const trNo  = $('#fatca_transferencias_no');
@@ -2024,9 +2120,12 @@ function init() {
   (function(){
     const form = document.getElementById('formulario-conocimiento');
     if (!form) return;
+    form.setAttribute('novalidate', 'novalidate');
 
     const steps = Array.from(document.querySelectorAll('.form-step'));
-    const totalSteps = steps.length;
+    const visibleSteps = steps.filter(step => !step.hasAttribute('data-skip'));
+    const stepsCount = steps.length;
+    const totalSteps = visibleSteps.length;
     let current = 0;
     let submitting = false;
 
@@ -2054,6 +2153,12 @@ function init() {
 
     const loadingOverlay = $('#loadingOverlay');
     const thankyouView   = $('#thankyouView');
+    const lastVisibleIndex = (() => {
+      for (let i = steps.length - 1; i >= 0; i--) {
+        if (!steps[i]?.hasAttribute('data-skip')) return i;
+      }
+      return steps.length - 1;
+    })();
 
     function isStepValid() {
       return true; // Avanza sin bloquear por validaciones
@@ -2062,7 +2167,7 @@ function init() {
     function updateButtonsState() {
       const prev = getPrevBtn(current);
       if (prev) prev.disabled = (current === 0);
-      const isLast = (current === totalSteps - 1);
+      const isLast = (current === lastVisibleIndex);
       const next = getNextBtn(current);
       const submit = getSubmitBtn();
       if (!isLast && next) next.disabled = false;
@@ -2071,14 +2176,16 @@ function init() {
 
     function updateProgressBarUI() {
       if (!progressBar) return;
+      const currentVisible = visibleSteps.indexOf(steps[current]);
+      if (currentVisible < 0) return;
       const dots = progressBar.querySelectorAll('.step-dot');
       const lines = progressBar.querySelectorAll('.step-line');
       dots.forEach((d, i) => {
         d.classList.remove('current', 'done');
-        if (i < current) d.classList.add('done');
-        if (i === current) d.classList.add('current');
+        if (i < currentVisible) d.classList.add('done');
+        if (i === currentVisible) d.classList.add('current');
       });
-      lines.forEach((l, i) => l.classList.toggle('active', i < current));
+      lines.forEach((l, i) => l.classList.toggle('active', i < currentVisible));
     }
 
     function centerCurrentDotOnMobile(){
@@ -2089,6 +2196,15 @@ function init() {
       const left = currentDot.offsetLeft - (progressBar.clientWidth / 2 - currentDot.clientWidth / 2);
       progressBar.scrollTo({ left: Math.max(left, 0), behavior: 'smooth' });
     }
+
+    const isSkippableStep = (idx) => steps[idx]?.hasAttribute('data-skip');
+    const findStep = (idx, dir) => {
+      let next = idx;
+      while (steps[next] && isSkippableStep(next)) {
+        next += dir;
+      }
+      return Math.min(Math.max(next, 0), stepsCount - 1);
+    };
 
     function showStep(idx) {
       steps.forEach((s, i) => s.classList.toggle('hidden', i !== idx));
@@ -2102,9 +2218,9 @@ function init() {
 
     steps.forEach((stepEl, idx) => {
       const next = stepEl.querySelector('#nextBtn');
-      next?.addEventListener('click', () => showStep(Math.min(idx + 1, totalSteps - 1)));
+      next?.addEventListener('click', () => showStep(findStep(idx + 1, 1)));
       const prev = stepEl.querySelector('#prevBtn');
-      prev?.addEventListener('click', () => showStep(Math.max(idx - 1, 0)));
+      prev?.addEventListener('click', () => showStep(findStep(idx - 1, -1)));
     });
 
     // Submit con FormData + archivos en base64 (sin validación previa)
@@ -2131,6 +2247,16 @@ function init() {
         if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) continue;
         fd.append(el.name, el.value);
       }
+      [
+        'declaracion_a',
+        'declaracion_b',
+        'declaracion_c',
+        'declaracion_d',
+        'declaracion_e',
+        'declaracion_f'
+      ].forEach((name) => {
+        if (!fd.has(name)) fd.append(name, 'Sí');
+      });
 
       // 2) Archivos
       const fileIds = [
@@ -2191,7 +2317,7 @@ function init() {
     });
 
     // Inicio en el paso 0
-    showStep(0);
+    showStep(findStep(0, 1));
   })();
 }
 

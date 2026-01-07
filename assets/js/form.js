@@ -21,6 +21,37 @@ function mount() {
 // Inicialización (todos tus listeners)
 // ==========================================
 function init() {
+  // --------- 0) Prefill sección 3 (oculta) ---------
+  (function(){
+    const check = (id) => {
+      const el = document.getElementById(id);
+      if (el) el.checked = true;
+    };
+    [
+      'recursos_no',
+      'cargos_no',
+      'reconocimiento_no',
+      'parentesco_no',
+      'rel_pep_no',
+      'fatca_nacimiento_no',
+      'fatca_nacionalidad_no',
+      'fatca_green_card_no',
+      'fatca_residencia_no',
+      'fatca_transferencias_no',
+      'fatca_ingresos_no',
+      'transacciones_exterior_no'
+    ].forEach(check);
+
+    [
+      'declaracion_a',
+      'declaracion_b',
+      'declaracion_c',
+      'declaracion_d',
+      'declaracion_e',
+      'declaracion_f'
+    ].forEach(check);
+  })();
+
   // --------- 1) FATCA / Transferencias a EE.UU. ---------
   const trYes = $('#fatca_transferencias_si');
   const trNo  = $('#fatca_transferencias_no');
@@ -267,7 +298,9 @@ function init() {
     })();
 
     const steps = Array.from(document.querySelectorAll('.form-step'));
-    const totalSteps = steps.length;
+    const visibleSteps = steps.filter(step => !step.hasAttribute('data-skip'));
+    const stepsCount = steps.length;
+    const totalSteps = visibleSteps.length;
     let current = 0;
     let submitting = false;
 
@@ -294,6 +327,12 @@ function init() {
     const requiredInStep = (idx) => Array.from(getStep(idx)?.querySelectorAll('[required]') || []);
     const loadingOverlay = $('#loadingOverlay');
     const thankyouView   = $('#thankyouView');
+    const lastVisibleIndex = (() => {
+      for (let i = steps.length - 1; i >= 0; i--) {
+        if (!steps[i]?.hasAttribute('data-skip')) return i;
+      }
+      return steps.length - 1;
+    })();
 
     const labelTextFor = (input) => {
       if (!input) return 'Campo requerido';
@@ -402,7 +441,7 @@ function init() {
     function updateButtonsState() {
       const prev = getPrevBtn(current);
       if (prev) prev.disabled = (current === 0);
-      const isLast = (current === totalSteps - 1);
+      const isLast = (current === lastVisibleIndex);
       const next = getNextBtn(current);
       const submit = getSubmitBtn();
       if (!isLast && next) next.disabled = false; // siempre clickeable
@@ -411,14 +450,16 @@ function init() {
 
     function updateProgressBarUI() {
       if (!progressBar) return;
+      const currentVisible = visibleSteps.indexOf(steps[current]);
+      if (currentVisible < 0) return;
       const dots = progressBar.querySelectorAll('.step-dot');
       const lines = progressBar.querySelectorAll('.step-line');
       dots.forEach((d, i) => {
         d.classList.remove('current', 'done');
-        if (i < current) d.classList.add('done');
-        if (i === current) d.classList.add('current');
+        if (i < currentVisible) d.classList.add('done');
+        if (i === currentVisible) d.classList.add('current');
       });
-      lines.forEach((l, i) => l.classList.toggle('active', i < current));
+      lines.forEach((l, i) => l.classList.toggle('active', i < currentVisible));
     }
 
     function centerCurrentDotOnMobile(){
@@ -429,6 +470,15 @@ function init() {
       const left = currentDot.offsetLeft - (progressBar.clientWidth / 2 - currentDot.clientWidth / 2);
       progressBar.scrollTo({ left: Math.max(left, 0), behavior: 'smooth' });
     }
+
+    const isSkippableStep = (idx) => steps[idx]?.hasAttribute('data-skip');
+    const findStep = (idx, dir) => {
+      let next = idx;
+      while (steps[next] && isSkippableStep(next)) {
+        next += dir;
+      }
+      return Math.min(Math.max(next, 0), stepsCount - 1);
+    };
 
     function showStep(idx) {
       steps.forEach((s, i) => s.classList.toggle('hidden', i !== idx));
@@ -445,10 +495,10 @@ function init() {
       stepEl.addEventListener('change', updateButtonsState);
       const next = stepEl.querySelector('#nextBtn'); // ideal .nextBtn
       next?.addEventListener('click', () => {
-        if (isStepValid(idx, true)) showStep(Math.min(idx + 1, totalSteps - 1));
+        if (isStepValid(idx, true)) showStep(findStep(idx + 1, 1));
       });
       const prev = stepEl.querySelector('#prevBtn'); // ideal .prevBtn
-      prev?.addEventListener('click', () => showStep(Math.max(idx - 1, 0)));
+      prev?.addEventListener('click', () => showStep(findStep(idx - 1, -1)));
     });
 
     // Submit con FormData + archivos en base64
@@ -456,6 +506,10 @@ function init() {
       e.preventDefault();
       if (submitting) return;
       if (!isStepValid(current, true)) {
+        const missing = collectMissingFields(current);
+        if (missing.length) {
+          alert('Faltan campos obligatorios:\n- ' + missing.join('\n- '));
+        }
         return;
       }
       submitting = true;
@@ -478,6 +532,16 @@ function init() {
         if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) continue;
         fd.append(el.name, el.value);
       }
+      [
+        'declaracion_a',
+        'declaracion_b',
+        'declaracion_c',
+        'declaracion_d',
+        'declaracion_e',
+        'declaracion_f'
+      ].forEach((name) => {
+        if (!fd.has(name)) fd.append(name, 'Sí');
+      });
 
       // 2) Archivos (IDs esperados, ajusta si cambia tu HTML)
       const fileIds = [
@@ -540,7 +604,7 @@ function init() {
     });
 
     // Inicio en el paso 0
-    showStep(0);
+    showStep(findStep(0, 1));
   })();
 }
 
