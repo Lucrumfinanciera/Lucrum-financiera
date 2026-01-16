@@ -1,6 +1,7 @@
 (() => {
   const PARTNERS_URL = "../data/partners.json";
   const WHATSAPP_BASE = "https://wa.me/573007807831";
+  const GENERIC_WA_MESSAGE = "Hola Lucrum, quiero financiar una compra con un aliado.";
   const searchInput = document.getElementById("partner-search");
   const chipsContainer = document.getElementById("partner-chips");
   const partnersGrid = document.getElementById("partners-grid");
@@ -8,6 +9,9 @@
   const detailContainer = document.getElementById("partners-detail-content");
   const modal = document.getElementById("ally-modal");
   const modalContent = document.getElementById("ally-modal-content");
+  const mainContent = document.getElementById("main-content");
+  const headerPlaceholder = document.getElementById("header-placeholder");
+  const footer = document.getElementById("footer");
   let revealObserver = null;
   let partners = [];
   let partnerMap = {};
@@ -19,23 +23,33 @@
   const originalDescription = metaDescriptionTag ? metaDescriptionTag.getAttribute("content") : "";
   const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   const normalize = (value) => value?.toLowerCase().trim() || "";
+  const getBasePath = () => {
+    const segments = window.location.pathname.split("/").filter(Boolean);
+    const aliadosIndex = segments.indexOf("aliados");
+    if (aliadosIndex === -1) return "/aliados/";
+    const baseSegments = segments.slice(0, aliadosIndex + 1);
+    return `/${baseSegments.join("/")}/`;
+  };
   const getPartnerFromUrl = () => {
+    const pathname = window.location.pathname.replace(/\/+$/, "");
+    const segments = pathname.split("/").filter(Boolean);
+    const aliadosIndex = segments.indexOf("aliados");
+    if (aliadosIndex !== -1 && segments.length > aliadosIndex + 1) {
+      const slug = segments[segments.length - 1];
+      if (!slug.includes(".") && slug !== "aliados") return slug;
+    }
     const params = new URLSearchParams(window.location.search);
     const fromQuery = params.get("partner");
     if (fromQuery) return fromQuery;
     const hash = window.location.hash.replace("#", "");
     return hash || "";
   };
+  // Routing: use history state to keep /aliados/<slug> shareable without leaving the page.
   const updateUrl = (slug, { replace } = {}) => {
-    const url = new URL(window.location.href);
-    if (slug) {
-      url.searchParams.set("partner", slug);
-    } else {
-      url.searchParams.delete("partner");
-      url.hash = "";
-    }
+    const basePath = getBasePath();
+    const nextPath = slug ? `${basePath}${slug}/` : basePath;
     const method = replace ? "replaceState" : "pushState";
-    history[method](slug ? { partner: slug } : {}, "", url);
+    history[method](slug ? { partner: slug } : {}, "", nextPath);
   };
   const setMetaForPartner = (partner) => {
     const title = `${partner.name} | Aliados Lucrum – Financia tu compra`;
@@ -66,13 +80,23 @@
     }
     return wrapper;
   };
+  const formatWaNumber = (value) => (value || "").replace(/\D/g, "");
+  const buildLucrumMessage = (partner) => {
+    const cityText = partner.city ? `, ${partner.city}` : "";
+    return `Hola Lucrum, quiero financiar una compra con ${partner.name} (${partner.category}${cityText}).`;
+  };
+  const buildBusinessMessage = (partner) => {
+    return `Hola, quiero financiar mi compra en ${partner.name} con Lucrum. ¿Me ayudas con la información?`;
+  };
   const buildCard = (partner) => {
     const card = document.createElement("article");
     card.className = "card ally-card reveal";
     card.setAttribute("role", "listitem");
+    card.dataset.partner = partner.slug;
+    card.tabIndex = -1;
     const logoRow = document.createElement("div");
     logoRow.className = "logo-row";
-    logoRow.appendChild(buildLogo(partner.logo, partner.name));
+    logoRow.appendChild(buildLogo(partner.logoUrl, partner.name));
     const textWrap = document.createElement("div");
     const nameEl = document.createElement("h3");
     nameEl.textContent = partner.name;
@@ -85,7 +109,7 @@
     const figure = document.createElement("div");
     figure.className = "ally-image";
     const img = document.createElement("img");
-    img.src = partner.images?.[0] || partner.logo || "../assets/img/logo.webp";
+    img.src = partner.images?.[0] || partner.logoUrl || "../assets/img/logo.webp";
     img.alt = `${partner.name} aliado Lucrum`;
     img.loading = "lazy";
     figure.appendChild(img);
@@ -104,9 +128,9 @@
     btn.type = "button";
     btn.className = "btn btn-secondary";
     btn.textContent = "Ver aliado";
-    btn.addEventListener("click", () => openModal(partner.slug));
+    btn.dataset.partner = partner.slug;
     const city = document.createElement("small");
-    city.textContent = partner.cities?.join(", ") || "Cobertura nacional";
+    city.textContent = partner.city || "Cobertura nacional";
     footer.appendChild(city);
     footer.appendChild(btn);
     card.appendChild(logoRow);
@@ -122,9 +146,9 @@
     article.id = `partner-${partner.slug}`;
     article.innerHTML = `
       <h3>${partner.name}</h3>
-      <p>${partner.longDescription}</p>
+      <p>${partner.shortDescription}</p>
       <ul>
-        ${(partner.services || []).map((service) => `<li>${service}</li>`).join("")}
+        ${(partner.tags || []).map((tag) => `<li>${tag}</li>`).join("")}
       </ul>
     `;
     detailContainer.appendChild(article);
@@ -152,22 +176,22 @@
         partner.name,
         partner.category,
         ...(partner.tags || []),
-        partner.shortDescription,
-        partner.longDescription,
-        ...(partner.services || [])
+        partner.shortDescription
       ].map(normalize).join(" ");
       return haystack.includes(searchTerm);
     });
     emptyState?.classList.toggle("visible", filtered.length === 0);
+    const fragment = document.createDocumentFragment();
     filtered.forEach((partner) => {
       const card = buildCard(partner);
-      partnersGrid.appendChild(card);
+      fragment.appendChild(card);
       if (revealObserver) {
         revealObserver.observe(card);
       } else {
         card.classList.add("visible");
       }
     });
+    partnersGrid.appendChild(fragment);
   };
   const renderChips = () => {
     if (!chipsContainer) return;
@@ -194,10 +218,13 @@
     if (!modal) return;
     modal.classList.remove("is-visible");
     modal.setAttribute("aria-hidden", "true");
+    mainContent?.setAttribute("aria-hidden", "false");
+    headerPlaceholder?.setAttribute("aria-hidden", "false");
+    footer?.setAttribute("aria-hidden", "false");
     document.body.classList.remove("modal-open");
     modalContent.innerHTML = "";
     if (!skipHistory) {
-      updateUrl("", { replace: true });
+      updateUrl("");
       resetMeta();
     }
     if (previousFocus && typeof previousFocus.focus === "function") {
@@ -227,19 +254,27 @@
     wrapper.className = "ally-modal-body";
     const header = document.createElement("div");
     header.className = "ally-header";
-    header.appendChild(buildLogo(partner.logo, partner.name));
+    header.appendChild(buildLogo(partner.logoUrl, partner.name));
     const text = document.createElement("div");
     const title = document.createElement("h3");
     title.id = "ally-modal-title";
     title.textContent = partner.name;
     const meta = document.createElement("div");
     meta.className = "partner-meta";
-    meta.innerHTML = `<span class="partner-pill">${partner.category}</span>`;
+    const categoryPill = document.createElement("span");
+    categoryPill.className = "partner-pill";
+    categoryPill.textContent = partner.category;
+    meta.appendChild(categoryPill);
+    if (partner.city) {
+      const cityPill = document.createElement("span");
+      cityPill.textContent = partner.city;
+      meta.appendChild(cityPill);
+    }
     text.appendChild(title);
     text.appendChild(meta);
     header.appendChild(text);
     const description = document.createElement("p");
-    description.textContent = partner.longDescription;
+    description.textContent = partner.shortDescription;
     const gallery = document.createElement("div");
     gallery.className = "ally-gallery";
     (partner.images || []).forEach((src, index) => {
@@ -253,30 +288,17 @@
       gallery.appendChild(imgWrap);
     });
     if (!partner.images || partner.images.length === 0) {
-      gallery.appendChild(buildLogo(partner.logo, partner.name));
+      gallery.appendChild(buildLogo(partner.logoUrl, partner.name));
     }
     const servicesTitle = document.createElement("h4");
     servicesTitle.className = "inline-label";
-    servicesTitle.textContent = "Servicios";
+    servicesTitle.textContent = "Servicios y categorías";
     const services = document.createElement("ul");
     services.className = "ally-services";
-    (partner.services || []).forEach((service) => {
+    (partner.tags || []).forEach((service) => {
       const li = document.createElement("li");
       li.textContent = service;
       services.appendChild(li);
-    });
-    const cityLabel = document.createElement("label");
-    cityLabel.className = "inline-label";
-    cityLabel.htmlFor = "city-select";
-    cityLabel.textContent = "Selecciona tu ciudad";
-    const citySelect = document.createElement("select");
-    citySelect.id = "city-select";
-    citySelect.className = "city-select";
-    (partner.cities && partner.cities.length ? partner.cities : ["Medellín", "Bucaramanga", "Pereira"]).forEach((city) => {
-      const option = document.createElement("option");
-      option.value = city;
-      option.textContent = city;
-      citySelect.appendChild(option);
     });
     const ctaRow = document.createElement("div");
     ctaRow.className = "ally-cta-row";
@@ -284,32 +306,39 @@
     waBtn.className = "btn btn-primary whatsapp-btn";
     waBtn.target = "_blank";
     waBtn.rel = "noopener";
-    const buildWaHref = (city) => `${WHATSAPP_BASE}?text=${encodeURIComponent(`Hola Lucrum, quiero financiar una compra con el aliado: ${partner.name}. Estoy en ${city}.`)}`;
-    waBtn.href = buildWaHref(citySelect.value);
+    // Primary CTA: finance with Lucrum and include partner context.
+    waBtn.href = `${WHATSAPP_BASE}?text=${encodeURIComponent(buildLucrumMessage(partner))}`;
     waBtn.innerHTML = `
       <span class="whatsapp-icon" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.77 14.89L2 22l5.27-1.37A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.09-1.12l-.29-.17-2.5.65.66-2.44-.18-.3A8 8 0 1 1 12 20Zm3.86-5.57c-.21-.1-1.25-.62-1.44-.68-.19-.07-.33-.1-.47.1-.14.19-.55.68-.68.82-.12.14-.25.15-.46.05-.21-.1-.9-.33-1.71-1.05-.63-.56-1.05-1.26-1.18-1.47-.12-.21-.01-.32.09-.42.09-.09.21-.25.32-.37.11-.12.14-.21.21-.35.07-.14.04-.26-.02-.37-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.35-.47-.36h-.4c-.14 0-.37.05-.57.26-.19.21-.75.73-.75 1.77 0 1.04.77 2.04.88 2.18.11.14 1.52 2.32 3.67 3.26 2.15.94 2.15.63 2.54.6.39-.04 1.25-.51 1.43-1 .18-.49.18-.9.12-.99-.05-.09-.19-.14-.4-.24Z"/></svg>
       </span>
-      QUIERO FINANCIAR
+      Financia con Lucrum
     `;
-    citySelect.addEventListener("change", () => {
-      waBtn.href = buildWaHref(citySelect.value);
-    });
-    const igBtn = document.createElement("a");
-    igBtn.className = "btn btn-secondary";
-    igBtn.target = "_blank";
-    igBtn.rel = "noopener";
-    igBtn.textContent = "Instagram del aliado";
-    igBtn.href = partner.ctas?.instagram || "#";
-    const fbBtn = document.createElement("a");
-    fbBtn.className = "btn btn-secondary";
-    fbBtn.target = "_blank";
-    fbBtn.rel = "noopener";
-    fbBtn.textContent = "Facebook del aliado";
-    fbBtn.href = partner.ctas?.facebook || "#";
+    const businessBtn = document.createElement("a");
+    businessBtn.className = "btn btn-secondary";
+    businessBtn.target = "_blank";
+    businessBtn.rel = "noopener";
+    // Secondary CTA: send the user to the ally's own WhatsApp with a Lucrum reference.
+    businessBtn.href = `https://wa.me/${formatWaNumber(partner.whatsappBusiness)}?text=${encodeURIComponent(buildBusinessMessage(partner))}`;
+    businessBtn.textContent = "Contactar al negocio";
     ctaRow.appendChild(waBtn);
-    ctaRow.appendChild(igBtn);
-    ctaRow.appendChild(fbBtn);
+    ctaRow.appendChild(businessBtn);
+    const socialRow = document.createElement("div");
+    socialRow.className = "ally-social-row";
+    if (partner.instagram) {
+      const igLink = document.createElement("a");
+      igLink.className = "ally-social-link";
+      igLink.href = partner.instagram;
+      igLink.target = "_blank";
+      igLink.rel = "noopener";
+      igLink.setAttribute("aria-label", "Instagram del aliado");
+      igLink.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm0 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7Zm5 3.2A3.8 3.8 0 1 1 8.2 10 3.8 3.8 0 0 1 12 8.2Zm0 6.09A2.29 2.29 0 1 0 9.71 12 2.29 2.29 0 0 0 12 14.29Zm4.35-6.89a1.02 1.02 0 1 1 1.02-1.02 1.02 1.02 0 0 1-1.02 1.02Z" fill="currentColor"/>
+        </svg>
+      `;
+      socialRow.appendChild(igLink);
+    }
     const ctaNote = document.createElement("p");
     ctaNote.className = "cta-note";
     ctaNote.textContent = "Respuesta rápida por WhatsApp. Pagas a cuotas, el aliado recibe el pago de inmediato.";
@@ -318,21 +347,25 @@
     wrapper.appendChild(gallery);
     wrapper.appendChild(servicesTitle);
     wrapper.appendChild(services);
-    wrapper.appendChild(cityLabel);
-    wrapper.appendChild(citySelect);
     wrapper.appendChild(ctaRow);
+    if (socialRow.children.length) {
+      wrapper.appendChild(socialRow);
+    }
     wrapper.appendChild(ctaNote);
     return wrapper;
   };
-  const openModal = (slug, { skipPush } = {}) => {
+  const openModal = (slug, { skipPush, focusTarget } = {}) => {
     const partner = partnerMap[slug];
     if (!partner || !modal || !modalContent) return;
     modalContent.innerHTML = "";
     modalContent.appendChild(buildModal(partner));
     modal.classList.add("is-visible");
     modal.setAttribute("aria-hidden", "false");
+    mainContent?.setAttribute("aria-hidden", "true");
+    headerPlaceholder?.setAttribute("aria-hidden", "true");
+    footer?.setAttribute("aria-hidden", "true");
     document.body.classList.add("modal-open");
-    previousFocus = document.activeElement;
+    previousFocus = focusTarget || document.activeElement;
     const closeBtn = modal.querySelector(".ally-modal__close");
     closeBtn?.focus();
     setMetaForPartner(partner);
@@ -346,6 +379,7 @@
     });
     modal?.querySelector(".ally-modal__close")?.addEventListener("click", () => closeModal());
     window.addEventListener("keydown", handleKeydown);
+    // Routing: respond to back/forward navigation and keep modal state in sync.
     window.addEventListener("popstate", () => {
       const slug = getPartnerFromUrl();
       if (slug && partnerMap[slug]) {
@@ -355,6 +389,35 @@
         resetMeta();
       }
     });
+  };
+  const attachGridListeners = () => {
+    partnersGrid?.addEventListener("click", (event) => {
+      const target = event.target instanceof HTMLElement ? event.target : null;
+      if (!target) return;
+      const trigger = target.closest("[data-partner]");
+      if (!trigger) return;
+      const slug = trigger.getAttribute("data-partner");
+      if (!slug) return;
+      const card = trigger.closest(".ally-card");
+      openModal(slug, { focusTarget: card || trigger });
+    });
+  };
+  const setEmptyStateCta = () => {
+    if (!emptyState) return;
+    if (!emptyState.querySelector(".empty-state__text")) {
+      emptyState.innerHTML = "";
+      const text = document.createElement("span");
+      text.className = "empty-state__text";
+      text.textContent = "No encontramos aliados con ese criterio. Ajusta tu búsqueda o categoría.";
+      const cta = document.createElement("a");
+      cta.className = "btn btn-secondary";
+      cta.target = "_blank";
+      cta.rel = "noopener";
+      cta.href = `${WHATSAPP_BASE}?text=${encodeURIComponent(GENERIC_WA_MESSAGE)}`;
+      cta.textContent = "Quiero financiar con un aliado";
+      emptyState.appendChild(text);
+      emptyState.appendChild(cta);
+    }
   };
   const initSearch = () => {
     if (!searchInput) return;
@@ -388,7 +451,9 @@
       partnersGrid.removeAttribute("aria-busy");
     }
     initSearch();
+    setEmptyStateCta();
     attachModalListeners();
+    attachGridListeners();
   };
   document.addEventListener("DOMContentLoaded", init);
 })();

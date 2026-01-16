@@ -3,92 +3,59 @@
     "name": "Servicell",
     "slug": "servicell",
     "category": "Tecnología",
+    "shortDescription": "Repara, renueva o compra tu celular y págalo a cuotas.",
     "tags": [
       "Celulares",
       "Reparación",
       "Accesorios"
     ],
-    "shortDescription": "Repara, renueva o compra tu celular y págalo a cuotas.",
-    "longDescription": "En Servicell encuentras reparación express, venta de celulares y accesorios. Con Lucrum puedes financiar tu compra de forma rápida y sin trámites complicados.",
-    "services": [
-      "Reparación de celulares",
-      "Venta de equipos nuevos y usados",
-      "Accesorios y protectores",
-      "Diagnóstico técnico"
-    ],
+    "city": "Medellín",
+    "whatsappBusiness": "573001112233",
+    "instagram": "https://www.instagram.com/",
+    "logoUrl": "/assets/aliados/servicell.webp",
     "images": [
       "/assets/aliados/servicell-1.webp",
       "/assets/aliados/servicell-2.webp"
     ],
-    "logo": "/assets/aliados/servicell.webp",
-    "ctas": {
-      "instagram": "https://www.instagram.com/",
-      "facebook": "https://www.facebook.com/"
-    },
-    "cities": [
-      "Medellín",
-      "Bucaramanga",
-      "Pereira"
-    ]
+    "featured": true
   },
   {
     "name": "NovaSkin",
     "slug": "novaskin",
     "category": "Salud y estética",
+    "shortDescription": "Tratamientos estéticos que puedes pagar cómodamente.",
     "tags": [
       "Estética",
       "Bienestar",
       "Cuidado personal"
     ],
-    "shortDescription": "Tratamientos estéticos que puedes pagar cómodamente.",
-    "longDescription": "NovaSkin ofrece procedimientos estéticos y de bienestar con acompañamiento profesional. Con Lucrum puedes financiar tu tratamiento y pagarlo a cuotas.",
-    "services": [
-      "Limpieza facial",
-      "Tratamientos corporales",
-      "Cuidado de la piel",
-      "Valoración personalizada"
-    ],
+    "city": "Pereira",
+    "whatsappBusiness": "573002223344",
+    "instagram": "https://www.instagram.com/",
+    "logoUrl": "/assets/aliados/novaskin.webp",
     "images": [
       "/assets/aliados/novaskin-1.webp",
       "/assets/aliados/novaskin-2.webp"
     ],
-    "logo": "/assets/aliados/novaskin.webp",
-    "ctas": {
-      "instagram": "https://www.instagram.com/",
-      "facebook": "https://www.facebook.com/"
-    },
-    "cities": [
-      "Medellín",
-      "Pereira"
-    ]
+    "featured": false
   },
   {
     "name": "Salud Financiera (Curso)",
     "slug": "salud-financiera",
     "category": "Educación",
+    "shortDescription": "Ordena tu dinero y toma control de tus finanzas con un curso práctico.",
     "tags": [
       "Finanzas",
       "Curso",
       "Organización"
     ],
-    "shortDescription": "Ordena tu dinero y toma control de tus finanzas.",
-    "longDescription": "Un curso práctico para organizar ingresos, gastos y deudas. Ideal para quienes quieren claridad financiera sin teorías complicadas.",
-    "services": [
-      "Diagnóstico financiero personal",
-      "Sistema de presupuesto simple",
-      "Plan para salir de deudas",
-      "Hábitos financieros sostenibles"
-    ],
+    "city": "Colombia",
+    "whatsappBusiness": "573003334455",
+    "instagram": "https://www.instagram.com/",
+    "logoUrl": "/assets/aliados/salud-financiera.webp",
     "images": [
       "/assets/aliados/salud-financiera-1.webp"
     ],
-    "logo": "/assets/aliados/salud-financiera.webp",
-    "ctas": {
-      "instagram": "https://www.instagram.com/",
-      "facebook": "https://www.facebook.com/"
-    },
-    "cities": [
-      "Colombia"
-    ]
+    "featured": false
   }
 ]

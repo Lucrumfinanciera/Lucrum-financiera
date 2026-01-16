@@ -1399,7 +1399,8 @@ input:focus,select:focus,textarea:focus {
   font-weight:600
 }
 .empty-state.visible {
-  display:block
+  display:grid;
+  gap:12px
 }
 .ally-modal {
   position:fixed;
@@ -1488,6 +1489,25 @@ input:focus,select:focus,textarea:focus {
 }
 .ally-cta-row .btn {
   flex:1 1 200px
+}
+.ally-social-row {
+  display:flex;
+  align-items:center;
+  gap:12px
+}
+.ally-social-link {
+  width:36px;
+  height:36px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#eef3fb;
+  color:#153652
+}
+.ally-social-link svg {
+  width:18px;
+  height:18px
 }
 .big-bullets {
   font-size:1.05rem;
