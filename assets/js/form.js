@@ -160,7 +160,7 @@ function init() {
       // 6d) Cuenta bancaria 900-150259-72
       (function(){
         const formatCuenta = (val) => {
-          const digits = val.replace(/\D/g, '').slice(0, 11);
+          const digits = val.replace(/\D/g, '');
           if (digits.length <= 3) return digits;
           if (digits.length <= 9)  return `${digits.slice(0,3)}-${digits.slice(3)}`;
           return `${digits.slice(0,3)}-${digits.slice(3,9)}-${digits.slice(9)}`;
