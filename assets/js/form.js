@@ -162,9 +162,11 @@ function init() {
         const formatCuenta = (val) => {
           const digits = val.replace(/\D/g, '');
           if (digits.length <= 3) return digits;
-          if (digits.length <= 9)  return `${digits.slice(0,3)}-${digits.slice(3)}`;
-          return `${digits.slice(0,3)}-${digits.slice(3,9)}-${digits.slice(9)}`;
+          if (digits.length <= 9) return `${digits.slice(0,3)}-${digits.slice(3)}`;
+          const rest = digits.substring(9); // sin límite
+          return `${digits.slice(0,3)}-${digits.slice(3,9)}-${rest}`;
         };
+
         ['cuenta1','cuenta2'].forEach(name => {
           const input = document.querySelector(`input[name="${name}"]`);
           if (!input) return;
