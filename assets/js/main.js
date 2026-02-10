@@ -1,5 +1,5 @@
 const restrictedDomains=["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"];
-const FORM_ENDPOINT="https://script.google.com/macros/s/AKfycbxnXG9WuLzFjSLOR0tJenPlna_TqyqAAn1XrXI04_bq7V2WQ-s2JrDgxmKsGH_W2_GFZw/exec";
+const FORM_ENDPOINT="https://script.google.com/macros/s/AKfycbz0FYxMwtSnYTgsYTCn55v4xOUY8LbiVgy7G4efQxTqR0C1GbFRJ1OZViajorNB9Y-uMA/exec";
 const MIN_SUBMIT_MS=1200;
 const formLoadTime=Date.now();
 let headerInitialized=false;
