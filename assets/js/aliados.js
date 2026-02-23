@@ -1,6 +1,6 @@
 (() => {
   const PARTNERS_URL = "../data/partners.json";
-  const WHATSAPP_BASE = "https://wa.me/573007807831";
+  const WHATSAPP_BASE = "https://wa.me/573011007567";
   const GENERIC_WA_MESSAGE = "Hola Lucrum, quiero financiar una compra con un aliado.";
   const searchInput = document.getElementById("partner-search");
   const chipsContainer = document.getElementById("partner-chips");
