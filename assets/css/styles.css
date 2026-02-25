@@ -245,6 +245,15 @@ ul {
 #lead-form.hidden #lead-success {
   display:block !important
 }
+#form-contacto.hidden {
+  display:block !important
+}
+#form-contacto.hidden > :not(#contacto-success) {
+  display:none !important
+}
+#form-contacto.hidden #contacto-success {
+  display:block !important
+}
 .hidden {
   display:none !important
 }

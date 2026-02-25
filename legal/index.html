@@ -34,6 +34,7 @@
     <link rel="preconnect" href="https://assets.zyrosite.com" crossorigin>
     <link rel="preload" as="image" href="../assets/img/hero-creditos-por-nomina.webp">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/legal.css">
     <script type="application/ld+json" nonce="lucrum-secure">
       {
         "@context": "https://schema.org",
@@ -45,6 +46,13 @@
     </script>
   </head>
     <body>
+      <!--
+        README: Legal policies content
+        1) Pega el contenido de cada política dentro del contenedor `.legal-content` de su panel.
+        2) Usa HTML limpio: h2/h3/p/ul/ol/li/table/thead/tbody/tr/th/td.
+        3) Evita el HTML de Word/Docs. Si necesitas conservar estructura, pega en formato HTML simple.
+        4) Actualiza el texto de "Última actualización" por la fecha real cuando esté disponible.
+      -->
       <a class="skip-link" href="#main-content">
         Saltar al contenido principal
       </a>
@@ -56,123 +64,423 @@
             Legal
           </p>
           <h1>
-            Términos y Política de Privacidad
+            Políticas y Tratamiento de Datos
           </h1>
           <p>
-            Consulta la información completa sobre el uso del sitio, protección de datos y derechos de los usuarios.
+            Consulta la información completa sobre cobranza, privacidad y tratamiento de datos personales.
           </p>
-          <section class="legal-section light" id="terminos-condiciones">
-            <h3>
-              Términos y Condiciones
-            </h3>
-            <p>
-              Bienvenido al sitio web de
-              <strong>
-                Lucrum Financiera
-              </strong>
-              . Al acceder y utilizar nuestro sitio web, aceptas cumplir con los siguientes términos y condiciones.
-            </p>
-            <ul>
-              <li>
-                <strong>
-                  Uso del sitio:
-                </strong>
-                Utiliza este sitio solo para fines legales y sin afectar derechos de terceros.
-              </li>
-              <li>
-                <strong>
-                  Contenido:
-                </strong>
-                La información es informativa; buscamos precisión pero no garantizamos exactitud absoluta.
-              </li>
-              <li>
-                <strong>
-                  Propiedad intelectual:
-                </strong>
-                Contenidos, logotipos, textos e imágenes pertenecen a Lucrum Financiera o licenciantes.
-              </li>
-              <li>
-                <strong>
-                  Modificaciones:
-                </strong>
-                Podemos ajustar estos términos y serán vigentes al publicarse.
-              </li>
-              <li>
-                <strong>
-                  Responsabilidad:
-                </strong>
-                No respondemos por daños derivados del uso o imposibilidad de acceso.
-              </li>
-              <li>
-                <strong>
-                  Vínculos externos:
-                </strong>
-                No somos responsables por contenido o prácticas de privacidad de sitios enlazados.
-              </li>
-              <li>
-                <strong>
-                  Jurisdicción:
-                </strong>
-                Controversias se rigen por la legislación vigente en Colombia.
-              </li>
-            </ul>
-          </section>
-          <section class="legal-section light" id="politica-privacidad">
-            <h3>
-              Política de Privacidad
-            </h3>
-            <p>
-              En
-              <strong>
-                Lucrum Financiera
-              </strong>
-              protegemos tu privacidad. Esta política describe cómo recopilamos, usamos y resguardamos tu información personal.
-            </p>
-            <ul>
-              <li>
-                <strong>
-                  Recopilación de datos:
-                </strong>
-                Nombre, correo, teléfono y datos suministrados en formularios y comunicaciones.
-              </li>
-              <li>
-                <strong>
-                  Finalidad:
-                </strong>
-                Ofrecer servicios, responder consultas, análisis internos y comunicaciones relevantes.
-              </li>
-              <li>
-                <strong>
-                  Seguridad:
-                </strong>
-                Medidas administrativas y técnicas para evitar accesos no autorizados.
-              </li>
-              <li>
-                <strong>
-                  Compartición:
-                </strong>
-                No vendemos ni alquilamos. Solo compartimos con aliados operativos bajo confidencialidad.
-              </li>
-              <li>
-                <strong>
-                  Cookies:
-                </strong>
-                Podemos usar cookies para mejorar navegación; puedes configurarlas en tu navegador.
-              </li>
-              <li>
-                <strong>
-                  Derechos del usuario:
-                </strong>
-                Acceder, rectificar, cancelar u oponerse escribiendo a contacto@lucrumfinanciera.com.
-              </li>
-              <li>
-                <strong>
-                  Actualizaciones:
-                </strong>
-                Podemos modificar esta política; los cambios aplican al publicarse.
-              </li>
-            </ul>
-          </section>
+          <div class="legal-tabs" role="tablist" aria-label="Políticas legales">
+            <button class="legal-tab is-active" type="button" role="tab" id="tab-cobranza" aria-selected="true" aria-controls="panel-cobranza" data-legal-tab="cobranza">
+              Cobranza
+            </button>
+            <button class="legal-tab" type="button" role="tab" id="tab-privacidad" aria-selected="false" aria-controls="panel-privacidad" data-legal-tab="privacidad" tabindex="-1">
+              Privacidad
+            </button>
+            <button class="legal-tab" type="button" role="tab" id="tab-tratamiento" aria-selected="false" aria-controls="panel-tratamiento" data-legal-tab="tratamiento" tabindex="-1">
+              Tratamiento de Datos
+            </button>
+          </div>
+          <div class="legal-panels">
+            <section class="legal-panel is-active" id="panel-cobranza" role="tabpanel" tabindex="0" aria-labelledby="tab-cobranza" data-legal-panel="cobranza">
+              <div class="legal-panel-header">
+                <h2>
+                  Política de Cobranza
+                </h2>
+                <p class="legal-last-updated">
+                  Última actualización: 01-Oct-2025
+                </p>
+              </div>
+              <div class="legal-content">                
+                <h2>POLÍTICAS DE GESTIÓN DE CARTERA Y COBRANZA</h2>
+
+                  <p>Las presentes políticas, tienen el objetivo de garantizar una gestión eficiente y ética de la cartera crediticia de LUCRUM FINANCIERA S.A.S., sociedad de naturaleza comercial, constituida con el lleno de los requisitos legales, inscrita en la Cámara de Comercio de BARRANQUILLA, identificada con el NIT 901.934.019 - 6, maximizando la recuperación de activos y preservando relaciones positivas con los clientes.</p>
+
+                  <h3>1. ¿EN QUÉ CONSISTE LA GESTIÓN DE COBRANZA?</h3>
+                  <p>La gestión de cobranza es una actividad cuyo objetivo es prevenir el ingreso en mora o lograr la recuperación de los valores dejados de pagar por el Cliente, procurando que mantenga sus créditos al día.</p>
+
+                  <h3>¿CÓMO SE REALIZA LA GESTIÓN DE COBRANZA?</h3>
+
+                  <p>· Gestión de cobranza preventiva:</p>
+                  <p>Se lleva a cabo antes de la fecha de vencimiento de la cuota con el fin de recordarle al Cliente la fecha límite y el valor a pagar. Esta actividad no genera costos adicionales al Cliente.</p>
+                  <p>La gestión se realiza utilizando diferentes mecanismos dentro de los cuales se encuentran:</p>
+                  <ul>
+                    <li>· Gestión telefónica con especialistas de cobranza.</li>
+                    <li>· Comunicaciones mediante extractos, cartas, mensajes de texto y e-mails.</li>
+                    <li>· WhatsApp o chatbot.</li>
+                  </ul>
+
+                  <p>· Gestión de cobranza prejudicial:</p>
+                  <p>La gestión de cobranza prejudicial se inicia a partir del día siguiente al incumplimiento del pago y se mantiene vigente mientras persista la mora. Su finalidad es contactar al cliente, informarle sobre el estado de su obligación y ofrecer alternativas de solución, incluyendo acuerdos de pago que faciliten la normalización del crédito.</p>
+
+                  <p>Para cumplir este propósito, LUCRUM FINANCIERA S.A.S. implementa diversos mecanismos de contacto, orientados a garantizar una comunicación oportuna, respetuosa y efectiva, entre los cuales se incluyen:</p>
+                  <ul>
+                    <li>· Gestión telefónica personalizada, realizada por especialistas de cobranza y, cuando sea pertinente, mediante mensajes pregrabados o automatizados.</li>
+                    <li>· Comunicaciones escritas, tales como extractos, cartas, mensajes de texto (SMS) y correos electrónicos.</li>
+                    <li>· Medios digitales, como WhatsApp y el chatbot institucional.</li>
+                    <li>· Visitas domiciliarias, aplicables únicamente en el caso de productos de microcrédito o cuando el cliente se encuentre ilocalizado, y siempre que se evidencie que los canales anteriores no resultaron efectivos.</li>
+                  </ul>
+
+                  <h3>2. ¿CUÁLES SON LOS HORARIOS EN LOS QUE SE REALIZA LA GESTIÓN DE COBRANZA?</h3>
+                  <p>En concordancia con la ley 2300 de 2023, nuestro horario asignado será el siguiente:</p>
+                  <p>Lunes a viernes: Entre las 08:00 A.M. y las 06:00 P.M.</p>
+
+                  <h3>3. ¿CUÁLES SON LAS ENTIDADES AUTORIZADAS PARA REALIZAR LA GESTIÓN DE COBRO?</h3>
+                  <p>La gestión de cobro será realizada directamente por LUCRUM FINANCIERA S.A.S., o por entidades externas debidamente contratadas y especializadas en la labor de recuperación de cartera. Dichas entidades actúan en calidad de gestores autorizados, conforme a los lineamientos, políticas y estándares definidos por LUCRUM FINANCIERA S.A.S., garantizando en todo momento el respeto por los derechos de los Consumidores Financieros y el cumplimiento de la normatividad vigente.</p>
+                  <p>Las casas de cobranza externas podrán realizar gestiones de contacto, negociación y formalización de acuerdos de pago, siempre dentro de los parámetros establecidos por esta entidad. No obstante, no están autorizadas para recibir directamente dinero, consignaciones ni ningún tipo de pago en efectivo por parte de los clientes o terceros.</p>
+                  <p>Todos los pagos, abonos o consignaciones deberán efectuarse exclusivamente a través de los canales y puntos de recaudo autorizados e informados por LUCRUM FINANCIERA S.A.S., los cuáles serán comunicados oportunamente al cliente mediante los medios oficiales de la entidad (sitio web, extractos, comunicaciones escritas o digitales).</p>
+
+                  <h3>4. ¿CUÁLES SON ALGUNAS DE LAS CONSECUENCIAS DE ESTAR EN MORA EN SUS CRÉDITOS?</h3>
+
+                  <p>· Historia de crédito</p>
+                  <p>El estado de la cartera de LUCRUM FINANCIERA S.A.S. es reportado mensualmente a las centrales de información financiera, dando a conocer el comportamiento de los clientes frente a las obligaciones adquiridas. Esto quiere decir que, en caso de entrar en una mora esta será reportada en ese estado, afectando la reputación comercial y financiera del cliente.</p>
+
+                  <p>· Mayor valor de las obligaciones</p>
+                  <p>Los créditos causarán intereses por mora a partir del primer día después del vencimiento de la obligación. De igual manera, se causarán honorarios de cobranza según muestra la Tabla 1 y que deben ser asumidos por el cliente</p>
+                  <p>Las tarifas vigentes para honorarios de cobranza se establecen con base en el costo que incurre LUCRUM FINANCIERA S.A.S. en realizar esta gestión de cobro y a la altura de mora en que se encuentra la obligación.</p>
+
+                  <p>TABLA HONORARIOS DE COBRANZA</p>
+                  <table>
+                    <tr>
+                      <th>DIAS DE MORA</th>
+                      <th>HONORARIOS</th>
+                    </tr>
+                    <tr>
+                      <td>10 -30</td>
+                      <td>5%</td>
+                    </tr>
+                    <tr>
+                      <td>31- 60</td>
+                      <td>10%</td>
+                    </tr>
+                    <tr>
+                      <td>61- 90</td>
+                      <td>15%</td>
+                    </tr>
+                    <tr>
+                      <td>91 - 180</td>
+                      <td>20%</td>
+                    </tr>
+                    <tr>
+                      <td>&gt;180</td>
+                      <td>23%</td>
+                    </tr>
+                  </table>
+
+                  <p>Este porcentaje se aplicará sobre el monto total o parcial que se encuentre en mora y se descontará al momento del pago que se reciba por parte del Cliente.</p>
+
+                  <h3>5.  ¿CUÁNDO SE REALIZA LA GESTIÓN DE COBRO JUDICIAL?</h3>
+                  <p>La gestión de cobro judicial se inicia cuando el cliente incumple las cláusulas establecidas en el pagaré y/o contrato de crédito, y persiste en su negativa o renuencia a atender la obligación, pese a las gestiones prejudiciales realizadas por LUCRUM FINANCIERA S.A.S.</p>
+
+                  <p>Este proceso tiene como finalidad recuperar judicialmente los valores adeudados, garantizando el cumplimiento de las obligaciones crediticias mediante los mecanismos legales disponibles. Para ello, la entidad podrá presentar las acciones judiciales correspondientes, haciendo uso de los títulos valores, contratos y demás documentos soporte suscritos por el cliente al momento de adquirir el crédito.</p>
+
+                  <p>En cuanto a los gastos y costas derivados del proceso judicial, LUCRUM FINANCIERA S.A.S. observará las recomendaciones y decisiones impartidas por los funcionarios judiciales competentes, conforme a las disposiciones legales vigentes. No obstante, lo anterior no exime al cliente del deber de asumir la totalidad de los costos y gastos procesales que se generen durante la gestión de cobro judicial, incluyendo honorarios de abogados, tasas judiciales, gastos de notificación, avalúos, entre otros.</p>
+
+                  <p>Medidas aplicables:</p>
+                  <ul>
+                    <li>· Activación del proceso judicial con base en pagaré o contrato</li>
+                    <li>· Causación de costos y honorarios legales</li>
+                    <li>· Suspensión del acceso a nuevos productos financieros</li>
+                    <li>· El cliente será responsable por la totalidad de los gastos judiciales que genere la recuperación de su obligación.</li>
+                  </ul>
+
+                  <h3>6. ¿CUALES SON NUESTROS CANALES DE CONTACTO?</h3>
+                  <p>Para contactarte con LUCRUM FINANCIERA S.A.S., lo puedes hacer a través de los siguientes canales de comunicación:</p>
+                  <ul>
+                    <li>· Celular: +57 (300) 181-8071</li>
+                    <li>· Email: contacto@lucrumfinanciera.com</li>
+                    <li>· Sitio web: https://lucrumfinanciera.com/</li>
+                  </ul>
+
+                  <h3>7. DISPOSICIONES GENERALES:</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. se reserva el derecho de actualizar, modificar o complementar en cualquier momento sus políticas, procedimientos y lineamientos relacionados con la gestión de cartera y cobranza, de acuerdo con las necesidades operativas, los cambios en el entorno normativo o las disposiciones emitidas por las autoridades competentes.</p>
+
+                  <p>Toda modificación se realizará preservando los derechos, deberes y garantías de los clientes y usuarios, así como los principios de transparencia, equidad y protección al consumidor financiero.</p>
+
+                  <p>Las actualizaciones o modificaciones que se realicen a estas políticas serán publicadas a través de los canales oficiales de la entidad, tales como la página web institucional, comunicados internos o circulares informativas, con el fin de mantener informados a todos los interesados.</p>
+              </div>
+            </section>
+            <section class="legal-panel" id="panel-privacidad" role="tabpanel" tabindex="0" aria-labelledby="tab-privacidad" data-legal-panel="privacidad" hidden>
+              <div class="legal-panel-header">
+                <h2>
+                  Política de Privacidad
+                </h2>
+                <p class="legal-last-updated">
+                  Última actualización: 10-Oct-2025
+                </p>
+              </div>
+              <div class="legal-content">
+                <div class="legal-content">
+                  <p>LUCRUM FINANCIERA S.A.S. se compromete a proteger la privacidad de sus usuarios y a garantizar la confidencialidad de la información personal que estos proporcionen. Esta política establece los lineamientos generales para el tratamiento de datos personales en el marco de la legislación vigente.</p>
+                  <p>Contacte a legal@lucrumfinanciera.com</p>
+                </div>
+              </div>
+            </section>
+            <section class="legal-panel" id="panel-tratamiento" role="tabpanel" tabindex="0" aria-labelledby="tab-tratamiento" data-legal-panel="tratamiento" hidden>
+              <div class="legal-panel-header">
+                <h2>
+                  Política de Tratamiento de Datos Personales
+                </h2>
+                <p class="legal-last-updated">
+                  Última actualización: 01-Oct-2025
+                </p>
+              </div>
+              <div class="legal-content">
+                <h2>POLÍTICA DE TRATAMIENTO DE DATOS PERSONALES - LUCRUM FINANCIERA S.A.S.</h2>
+                  <h3>TÍTULO I</h3>
+                  <p>OBJETIVO, ALCANCE, DESTINATARIOS Y DEFINICIONES</p>
+                  <h3>1. OBJETIVO</h3>
+                  <p>El objetivo del presente documento es el de establecer los criterios para la recolección, almacenamiento, uso, circulación y supresión estableciendo lineamientos que garanticen el adecuado cumplimiento de lo dispuesto en la Ley 1581 de 2012 y las normas que lo modifiquen, deroguen o sustituyan en relación de los datos de los clientes, aliados, proveedores, colaboradores y/o cualquier vinculado sobre el cual se autorice el tratamiento de los datos personales por la LUCRUM FINANCIERA S.A.S. quien a su vez será el responsable del manejo de dicha información.</p>
+                  <h3>2. ALCANCE</h3>
+                  <p>Esta política aplica para toda la información personal registrada en las bases de datos de la LUCRUM FINANCIERA S.A.S., quien actúa en calidad de responsable del tratamiento de los datos personales, razón por la que los presentes lineamientos son de obligatorio y estricto cumplimiento para la Empresa.</p>
+                  <h3>3. DESTINATARIOS</h3>
+                  <p>Esta política se aplicará a todas las bases de datos tanto físicas como digitales, que contengan datos personales y que sean objeto de Tratamiento por parte de la LUCRUM FINANCIERA S.A.S., considerada como responsable. Igualmente, en aquellos casos en que operen como encargadas del tratamiento de datos personales.</p>
+                  <p>La política está dirigida a que la ciudadanía en general tenga a su disposición la información necesaria y suficiente sobre los diferentes tratamientos y fines sobre los que serán objeto sus datos, así́ como los derechos que ellos, como titulares de datos personales, pueden ejercer frente a la LUCRUM FINANCIERA S.A.S., cuando esta tenga el rol de responsable del tratamiento de sus datos personales.</p>
+                  <p>Esta política es de obligatorio conocimiento y cumplimiento por todas las personas naturales o jurídicas con quienes se lleven a cabo relaciones comerciales, civiles, laborales y de cualquier otra naturaleza, con la LUCRUM FINANCIERA S.A.S. Igualmente, será de obligatorio conocimiento y cumplimiento por parte de todos los colaboradores de la Empresa que administren en nombre de la misma sus bases de datos, así como la recolección y uso de los mismos.</p>
+                  <h3>4. DEFINICIONES</h3>
+                  <p>Aviso de privacidad: Comunicación verbal o escrita generada por el responsable, dirigida al titular para el tratamiento de sus datos personales, mediante la cual se le informa acerca de la existencia de las políticas de tratamiento de información que le serán aplicables, la forma de acceder a las mismas y las finalidades del tratamiento que se dará́ a los datos personales.</p>
+                  <p>Autorización: Consentimiento previo, expreso e informado del titular de los datos personales para llevar a cabo el tratamiento de los datos personales.</p>
+                  <p>Base de datos: Conjunto organizado de datos personales que sean objeto de Tratamiento.</p>
+                  <p>Dato personal: Cualquier información vinculada o que pueda asociarse a una o a varias personas naturales determinadas o determinables. Debe entonces entenderse el “dato personal” como una información relacionada con una persona natural (persona individualmente considerada).</p>
+                  <p>Dato público: Es el dato que no sea semiprivado, privado o sensible. Son considerados datos públicos, entre otros, los datos relativos al estado civil de las personas, a su profesión u oficio y a su calidad de comerciante o de servidor público. Por su naturaleza, los datos públicos pueden estar contenidos, entre otros, en registros públicos, documentos públicos, gacetas y boletines oficiales, y sentencias judiciales debidamente ejecutoriadas que no estén sometidas a reserva. También se entenderá́ que todos los datos que estén contenidos en los registros públicos tendrán esta misma naturaleza.</p>
+                  <p>Dato sensible: Aquel dato que afecta la intimidad del Titular o cuyo uso indebido puede generar su discriminación, tales como aquellos que revelen el origen racial o étnico, la orientación política, las convicciones religiosas o filosóficas, la pertenencia a sindicatos, organizaciones sociales, de derechos humanos o que promueva intereses de cualquier partido político o que garanticen los derechos y garantías de partidos políticos de oposición así́ como los datos relativos a la salud, a la vida sexual y los datos biométricos.</p>
+                  <p>Encargado del tratamiento: La Empresa actúa como encargada del tratamiento de datos personales en los casos, que por sí misma o en asocio con otros, realice el tratamiento de datos personales por cuenta de un responsable del tratamiento.</p>
+                  <p>Responsable del tratamiento: La Empresa actúa como responsable del tratamiento de datos personales frente a todos los datos personales sobre los cuales decida directamente, en cumplimiento de las funciones propias reconocidas legalmente.</p>
+                  <p>Titular: Persona natural cuyos datos personales sean objeto de Tratamiento.</p>
+                  <p>Transferencia: La transferencia de datos tiene lugar cuando el responsable y/o encargado del tratamiento de datos personales, ubicado en Colombia, envía la información o los datos personales a un receptor, que a su vez es responsable del tratamiento y se encuentra dentro o fuera del país.</p>
+                  <p>Transmisión: Tratamiento de datos personales que implica la comunicación de los mismos dentro o fuera del territorio de la República de Colombia cuando tenga por objeto la realización de un tratamiento por el encargado por cuenta del responsable.</p>
+                  <p>Tratamiento: Cualquier operación o conjunto de operaciones que La Empresa realice sobre datos de carácter personal tales como la recolección, procesamiento, publicidad, almacenamiento, uso, circulación o supresión.</p>
+                  <p>Oficial de protección de datos: Es la persona dentro de La Empresa que tiene como función la vigilancia y control de la aplicación de la Política de Protección de Datos Personales. El oficial será́ designado por el gerente o en su defecto por la Junta directiva, si esta última está en funcionamiento.</p>
+                  <h3>TITULO II.</h3>
+                  <h3>RESPONSABLE DE TRATAMIENTO</h3>
+                  <h3>5. RESPONSABLE DEL TRATAMIENTO</h3>
+                  <p>LUCRUM FINANCIERA S.A.S., sociedad comercial legalmente constituida bajo las leyes de la república de Colombia, identificada con el NIT 901.934.019 - 6, con domicilio principal en Barranquilla, Atlántico, República de Colombia, con página web y teléfono +57 (300) 863-4001.</p>
+                  <h3>6. TRATAMIENTO Y FINALIDAD:</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. será el responsable del tratamiento y, en tal virtud, podrá recolectar, almacenar, usar para las siguientes finalidades:</p>
+                  <ul>
+                    <li>· Efectuar las gestiones pertinentes para el desarrollo del objeto social de la compañía en lo que tiene que ver con el cumplimiento del objeto del contrato celebrado con el Titular de la información.</li>
+                    <li>· Realizar invitaciones a eventos y ofrecer nuevos productos y servicios.</li>
+                    <li>· Gestionar trámites (solicitudes, quejas, reclamos).</li>
+                    <li>· Efectuar encuestas de satisfacción respecto de los bienes y servicios ofrecidos por Carnes Santacruz.</li>
+                  </ul>
+                  <p>Manifiesto que me informaron que, en caso de recolección de mi información sensible, tengo derecho a contestar o no las preguntas que me formulen y a entregar o no los datos solicitados.</p>
+                  <p>Entiendo que son datos sensibles aquellos que afectan la intimidad del Titular o cuyo uso indebido puede generar discriminación, como lo son: política, convicciones religiosas o filosóficas, datos relativos a la salud, a la vida sexual y los datos biométricos.</p>
+                  <p>Manifiesto que me informaron que los datos sensibles que se recolectarán serán utilizados para las siguientes finalidades:</p>
+                  <ul>
+                    <li>· Efectuar las gestiones pertinentes para el desarrollo del objeto social de la compañía en lo que tiene que ver con el cumplimiento del objeto del contrato celebrado con el Titular de la información.</li>
+                    <li>· Realizar invitaciones a eventos y ofrecer nuevos productos y servicios.</li>
+                    <li>· Gestionar trámites (solicitudes, quejas, reclamos).</li>
+                    <li>· Efectuar encuestas de satisfacción respecto de los bienes y servicios ofrecidos por Almacén Sandra.</li>
+                  </ul>
+                  <p>El tratamiento que realizará la LUCRUM FINANCIERA S.A.S. con la información personal será́ el siguiente:</p>
+                  <p>La recolección, almacenamiento, uso, circulación y en general el tratamiento de los datos personales para efectos de estudio y consulta, contrataciones comerciales, laborales, así como cualquier otro tipo de relación que en ejercicio de la actividad comercial de la LUCRUM FINANCIERA S.A.S. requiera de la recolección de datos y para los fines de la autorización otorgada por el titular.</p>
+                  <h3>6.1. TRATAMIENTO DE DATOS SENSIBLES:</h3>
+                  <p>Se prohíbe el Tratamiento de datos sensibles, excepto cuando:</p>
+                  <ol>
+                    <li>1. El Titular haya dado su autorización explícita a dicho Tratamiento, salvo en los casos que por ley no sea requerido el otorgamiento de dicha autorización.</li>
+                    <li>2. El Tratamiento sea necesario para salvaguardar el interés vital del Titular y este se encuentre física o jurídicamente incapacitado. En estos eventos, los representantes legales deberán otorgar su autorización.</li>
+                    <li>3. El Tratamiento se refiere a datos que sean necesarios para el reconocimiento, ejercicio o defensa de un derecho en un proceso judicial.</li>
+                    <li>4. El Tratamiento tenga una finalidad histórica, estadística o científica. En este evento deberán adoptarse las medidas conducentes a la supresión de identidad de los Titulares.</li>
+                  </ol>
+                  <h3>TÍTULO III</h3>
+                  <h3>DERECHOS Y CONDICIONES</h3>
+                  <h3>7. DERECHOS DE LOS TITULARES:</h3>
+                  <p>Los derechos como titular del dato son los previstos en la Constitución y en la Ley 1581 de 2012, especialmente los siguientes:</p>
+                  <ul>
+                    <li>· Acceder en forma gratuita a los datos proporcionados que hayan sido objeto de tratamiento.</li>
+                    <li>· Conocer, actualizar y rectificar los Datos frente a él o los Encargados del Tratamiento de datos.</li>
+                    <li>· Revocar la autorización y/o solicitar la supresión del dato cuando en el Tratamiento no se respeten los principios, derechos y garantías constitucionales y legales. La revocatoria y/o supresión procederá cuando la Autoridad Competente haya determinado que, en el Tratamiento LUCRUM FINANCIERA S.A.S. o Encargados del Tratamiento de Datos Personales, han incurrido en conductas contrarias a la ley y a la Constitución. La revocatoria procederá siempre y cuando no exista la obligación legal o contractual de conservar el dato personal.</li>
+                    <li>· Solicitar la actualización y rectificación de su información frente a datos parciales, inexactos, incompletos, fraccionados, que induzcan a error, o a aquellos cuyo tratamiento esté prohibido o no haya sido autorizado.</li>
+                    <li>· Solicitar prueba de la autorización otorgada.</li>
+                    <li>· Presentar ante la Superintendencia de Industria y Comercio (SIC) quejas por infracciones a lo dispuesto en la normatividad vigente.</li>
+                    <li>· Revocar la autorización y/o solicitar la supresión del dato, a menos que exista un deber legal o contractual que haga imperativo conservar la información.</li>
+                    <li>· Abstenerse de responder las preguntas sobre datos sensibles o sobre datos de las niñas y niños y adolescentes.</li>
+                    <li>· Estos derechos los podré ejercer a través de los canales o medios dispuestos por LUCRUM FINANCIERA S.A.S. para la atención al público, cuya información puedo consultar en https://lucrumfinanciera.com/, disponibles de lunes a viernes de 8:00 a.m. a 5:00 p.m., para la atención de requerimientos relacionados con el tratamiento de mis datos personales y el ejercicio de los derechos mencionados en esta autorización.</li>
+                    <li>· Todos y cada uno de los derechos y prerrogativas que de lo anterior se derive, especialmente, los dispuestos en la normatividad vigente.</li>
+                  </ul>
+                  <p>Por todo lo anterior, he otorgado mi consentimiento a la LUCRUM FINANCIERA S.A.S. para que trate mi información personal de acuerdo con la Política de Tratamiento de Datos Personales dispuesta por la sociedad que me dio a conocer antes de recolectar mis datos personales.</p>
+                  <p>Manifiesto que la presente autorización me fue solicitada y puesta de presente antes de entregar mis datos y que la suscribo de forma libre y voluntaria una vez leída en su totalidad.</p>
+                  <h3>7.1. DERECHOS DE LOS NIÑOS, NIÑAS Y ADOLESCENTES Y EL TRATAMIENTO DE SUS DATOS</h3>
+                  <p>El tratamiento de datos personales de niños, niñas y adolescentes está prohibido, excepto cuando se trate de datos de naturaleza pública, y cuando dicho tratamiento cumpla con los siguientes parámetros y/o requisitos:</p>
+                  <ol>
+                    <li>1. Que respondan y respeten el interés superior de los niños, niñas y adolescentes.</li>
+                    <li>2. Que se asegure el respeto de sus derechos fundamentales.</li>
+                  </ol>
+                  <p>Cumplidos los anteriores requisitos, el representante legal de los niños, niñas o adolescentes otorgará la autorización, bajo el entendimiento de la normatividad que protege los derechos de los niños, niñas y adolescentes.</p>
+                  <p>LUCRUM FINANCIERA S.A.S. solo tratará datos personales de menores de edad en los casos estrictamente necesarios, de acuerdo a lo expuesto, especialmente los que correspondan a la información suministrada por empleados, contratistas o clientes, al momento de su vinculación laboral o de prestación de servicios y/o sean suministrados en virtud de la actividad que desarrolla la Empresa en virtud de su objeto social.</p>
+                  <h3>8. DERECHOS Y CONDICIONES DE LEGALIDAD PARA EL TRATAMIENTO DE DATOS</h3>
+                  <h3>8.1. DERECHOS DE LOS TITULARES</h3>
+                  <p>En el Tratamiento de Datos Personales por parte de LUCRUM FINANCIERA S.A.S. se respetarán en todo momento los derechos de los titulares de Datos Personales que son:</p>
+                  <ol>
+                    <li>a. Conocer, actualizar y rectificar los Datos frente a él o los Encargados del Tratamiento de datos.</li>
+                    <li>b. Solicitar prueba de la autorización otorgada, o cualquier otra que suscriba el titular de los Datos Personales para el efecto, salvo cuando expresamente se exceptúe como requisito para el Tratamiento de datos de conformidad con la ley.</li>
+                    <li>c. Ser informado por la Entidad o el Encargado del Tratamiento, previa solicitud, respecto del uso que se les ha dado a los datos.</li>
+                    <li>d. Presentar ante la Autoridad Competente quejas por infracciones a lo dispuesto en la ley y las demás normas que la modifiquen, sustituyan o adicionen.</li>
+                    <li>e. Revocar la autorización y/o solicitar la supresión del dato cuando en el Tratamiento no se respeten los principios, derechos y garantías constitucionales y legales. La revocatoria y/o supresión procederá cuando la Autoridad Competente haya determinado que, en el Tratamiento LA SUPERINTENDENCIA DE INDUSTRIA Y COMERCIO o Encargados del Tratamiento de Datos Personales, han incurrido en conductas contrarias a la ley y a la Constitución. La revocatoria procederá siempre y cuando no exista la obligación legal o contractual de conservar el dato personal.</li>
+                    <li>f. Acceder en forma gratuita a los Datos Personales que hayan sido objeto de Tratamiento.</li>
+                  </ol>
+                  <h3>CAPITULO IV</h3>
+                  <h3>AUTORIZACIONES</h3>
+                  <h3>9. AUTORIZACIÓN DEL TITULAR</h3>
+                  <p>Sin perjuicio de las excepciones previstas en la ley, en el Tratamiento se requiere la autorización previa e informada del Titular, la cual deberá ser obtenida por cualquier medio que pueda ser objeto de consulta posterior. Se entenderá que la autorización cumple con estos requisitos cuando se manifieste (i) por escrito, (ii) de forma oral o (iii) mediante conductas inequívocas del titular que permitan concluir de forma razonable que otorgó la autorización, como cuando, por ejemplo, se remite a la Entidad una hoja de vida para participar en procesos de selección o cuando se ingresa a las instalaciones a sabiendas de la existencia de sistemas de videovigilancia.</p>
+                  <h3>9.1. CASOS EN QUE NO ES NECESARIA LA AUTORIZACIÓN</h3>
+                  <p>La autorización del Titular no será necesaria cuando se trate de:</p>
+                  <p>Información requerida por la Entidad, en ejercicio de sus funciones legales o por orden judicial.</p>
+                  <ol>
+                    <li>a) Datos de naturaleza pública.</li>
+                    <li>b) Casos de urgencia médica o sanitaria.</li>
+                    <li>c) Tratamiento de información autorizado por la ley para fines históricos, estadísticos o científicos.</li>
+                    <li>d) Datos relacionados con el Registro Civil de las Personas.</li>
+                  </ol>
+                  <p>Quien acceda a los datos personales sin que medie autorización previa deberá en todo caso cumplir con las disposiciones contenidas en la Ley 1581 de 2012 y demás normas concordantes y vigentes.</p>
+                  <h3>TÍTULO V</h3>
+                  <h3>SUMINISTRO DE LA INFORMACIÓN</h3>
+                  <h3>10. SUMINISTRO DE LA INFORMACIÓN</h3>
+                  <p>La información solicitada por los Titulares de información personal será suministrada principalmente por medios electrónicos, o por cualquier otro sólo si así lo requiere el Titular. La información suministrada por la LUCRUM FINANCIERA S.A.S. será entregada sin barreras técnicas que impidan su acceso; su contenido será de fácil lectura, acceso y tendrá que corresponder en un todo a aquella que repose en la base de datos.</p>
+                  <h3>10.1. DEBER DE INFORMAR AL TITULAR</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. al momento de solicitar al Titular la autorización, deberá informarle de manera clara y expresa lo siguiente:</p>
+                  <ol>
+                    <li>1. El Tratamiento al cual serán sometidos sus datos personales y la finalidad del mismo.</li>
+                    <li>2. El carácter facultativo de la respuesta a las preguntas que le sean hechas, cuando estas versen sobre datos sensibles o sobre los datos de las niñas, niños y adolescentes.</li>
+                    <li>3. Los derechos que le asisten como Titular.</li>
+                    <li>4. La identificación, dirección física o electrónica y teléfono del responsable del Tratamiento.</li>
+                  </ol>
+                  <p>LUCRUM FINANCIERA S.A.S. como responsable del Tratamiento, deberá conservar prueba del cumplimiento de lo previsto en el presente numeral y, cuando el Titular lo solicite, entregarle copia de esta.</p>
+                  <h3>10.2. PERSONAS A QUIENES SE LES PUEDE SUMINISTRAR LA INFORMACIÓN</h3>
+                  <p>La información que reúna las condiciones establecidas en la ley podrá ser suministrada a las siguientes personas:</p>
+                  <ol>
+                    <li>1. A los Titulares, sus causahabientes o sus representantes legales.</li>
+                    <li>2. A las Entidades públicas o administrativas en ejercicio de sus funciones legales o por orden judicial.</li>
+                    <li>3. A los terceros autorizados por el Titular o por la ley.</li>
+                  </ol>
+                  <h3>TÍTULO VI</h3>
+                  <h3>RESPONSABLES DEL TRATAMIENTO DE DATOS</h3>
+                  <h3>11. DEBERES DE LOS RESPONSABLES DEL TRATAMIENTO Y ENCARGADOS DEL TRATAMIENTO</h3>
+                  <h3>11.1. DEBERES DE LOS RESPONSABLES DEL TRATAMIENTO</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. como responsable del Tratamiento, deberá cumplir los siguientes deberes, sin perjuicio de las demás disposiciones previstas en la ley y en otras que rijan su actividad:</p>
+                  <ol>
+                    <li>a) Garantizar al Titular, en todo tiempo, el pleno y efectivo ejercicio del derecho de hábeas data.</li>
+                    <li>b) Solicitar y conservar, en las condiciones previstas en la ley, copia de la respectiva autorización otorgada por el Titular.</li>
+                    <li>c) Informar debidamente al Titular sobre la finalidad de la recolección y los derechos que le asisten por virtud de la autorización otorgada.</li>
+                    <li>d) Conservar la información bajo las condiciones de seguridad necesarias para impedir su adulteración, pérdida, consulta, uso o acceso no autorizado o fraudulento.</li>
+                    <li>e) Garantizar que la información que se suministre al Encargado del Tratamiento sea veraz, completa, exacta, actualizada, comprobable y comprensible.</li>
+                    <li>f) Actualizar la información, comunicando de forma oportuna al Encargado del Tratamiento, todas las novedades respecto de los datos que previamente le haya suministrado y adoptar las demás medidas necesarias para que la información suministrada a este se mantenga actualizada.</li>
+                    <li>g) Rectificar la información cuando sea incorrecta y comunicar lo pertinente al Encargado del Tratamiento.</li>
+                    <li>h) Suministrar al Encargado del Tratamiento, según el caso, únicamente datos cuyo Tratamiento esté previamente autorizado de conformidad con lo previsto en la ley.</li>
+                    <li>i) Exigir al Encargado del Tratamiento en todo momento, el respeto a las condiciones de seguridad y privacidad de la información del Titular.</li>
+                    <li>j) Tramitar las consultas y reclamos formulados en los términos señalados en la ley.</li>
+                    <li>k) Adoptar procedimientos específicos para garantizar el adecuado cumplimiento de la ley y en especial, para la atención de consultas y reclamos.</li>
+                    <li>l) Informar al Encargado del Tratamiento cuando determinada información se encuentra en discusión por parte del Titular, una vez se haya presentado la reclamación y no haya finalizado el trámite respectivo.</li>
+                    <li>m) Informar a solicitud del Titular sobre el uso de sus datos.</li>
+                    <li>n) Informar a la autoridad de protección de datos cuando se presenten violaciones a los códigos de seguridad y existan riesgos en la administración de la información de los Titulares.</li>
+                  </ol>
+                  <h3>11.2. DEBERES DE LOS ENCARGADOS DEL TRATAMIENTO</h3>
+                  <p>Los Encargados del Tratamiento de los datos personales recolectados por la Empresa o en su nombre, y en el evento en el cual la LUCRUM FINANCIERA S.A.S. actúe como encargada de otras personas, deberán cumplir los siguientes deberes, sin perjuicio de las demás disposiciones previstas en la ley y en otras que rijan su actividad:</p>
+                  <ol>
+                    <li>a) Garantizar al Titular, en todo tiempo, el pleno y efectivo ejercicio del derecho de hábeas data.</li>
+                    <li>b) Conservar la información bajo las condiciones de seguridad necesarias para impedir su adulteración, pérdida, consulta, uso o acceso no autorizado o fraudulento. Los encargados deberán cumplir las condiciones mínimas de seguridad definidas en el Registro Nacional de Bases de datos las cuales se pueden consultar en: https://lucrumfinanciera.com/</li>
+                    <li>c) Realizar oportunamente la actualización, rectificación o supresión de los datos en los términos de la Ley 1581 de 2012 y demás normas concordantes y vigentes.</li>
+                    <li>d) Actualizar la información reportada por los responsables del Tratamiento dentro de los cinco (5) días hábiles contados a partir de su recibo.</li>
+                    <li>e) Tramitar las consultas y los reclamos formulados por los Titulares en los términos señalados en la presente política.</li>
+                    <li>f) Adoptar un Manual interno de políticas y procedimientos para garantizar el adecuado cumplimiento de la ley y, en especial, para la atención de consultas y reclamos por parte de los Titulares.</li>
+                    <li>g) Registrar en las bases de datos la leyenda "reclamo en trámite" en la forma en que se regula en la ley.</li>
+                    <li>h) Insertar en la base de datos la leyenda "información en discusión judicial" una vez notificado por parte de la autoridad competente sobre procesos judiciales relacionados con la calidad del dato personal.</li>
+                    <li>i) Abstenerse de circular información que esté siendo controvertida por el Titular y cuyo bloqueo haya sido ordenado por la Superintendencia de Industria y Comercio.</li>
+                    <li>j) Permitir el acceso a la información únicamente a las personas que pueden tener acceso a ella.</li>
+                    <li>k) Informar a la Superintendencia de Industria y Comercio cuando se presenten violaciones a los códigos de seguridad y existan riesgos en la administración de la información de los Titulares.</li>
+                    <li>l) Cumplir las instrucciones y requerimientos que imparta la Superintendencia de Industria y Comercio.</li>
+                    <li>m) Verificar que el responsable del Tratamiento tiene la autorización para el tratamiento de datos personales del Titular.</li>
+                  </ol>
+                  <h3>12. TRANSFERENCIA Y TRANSMISIÓN DE DATOS PERSONALES</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. podrá transferir y transmitir los datos personales a terceros con quienes tenga relación operativa que le provean de servicios necesarios para su debida operación. En dichos supuestos, se adoptarán las medidas necesarias para que las personas que tengan acceso a sus datos personales cumplan con la presente Política y con los principios de protección de datos personales y obligaciones establecidas en la Ley.</p>
+                  <p>En todo caso, cuando LUCRUM FINANCIERA S.A.S. transmita los datos a uno o varios encargados ubicados dentro o fuera del territorio de la República de Colombia, establecerá cláusulas contractuales o celebrará un contrato de transmisión de datos personales en el que indicará:</p>
+                  <ol>
+                    <li>1. Alcances del tratamiento,</li>
+                    <li>2. Las actividades que el encargado realizará por cuenta del responsable para el tratamiento de los datos personales y,</li>
+                    <li>3. Las obligaciones del Encargado para con el titular y el responsable.</li>
+                  </ol>
+                  <p>Mediante dicho contrato el Encargado se comprometerá a dar aplicación a las obligaciones del responsable bajo la política de Tratamiento de la información fijada por este y a realizar el Tratamiento de datos de acuerdo con la finalidad que los Titulares hayan autorizado y con las leyes aplicables vigentes.</p>
+                  <p>Además de las obligaciones que impongan normas aplicables dentro del citado contrato, deberán incluirse las siguientes obligaciones en cabeza del respectivo encargado:</p>
+                  <ol>
+                    <li>1. Dar Tratamiento, a nombre del responsable, a los datos personales conforme a los principios que los tutelan.</li>
+                    <li>2. Salvaguardar la seguridad de las bases de datos en los que se contengan datos personales.</li>
+                    <li>3. Guardar confidencialidad respecto del tratamiento de los datos personales.</li>
+                  </ol>
+                  <p>En caso de transferencia se dará cumplimiento a las obligaciones estipuladas en la Ley 1581 de 2012 y normas reglamentarias.</p>
+                  <h3>CAPITULO VII</h3>
+                  <h3>GESTIÓN DE SEGURIDAD</h3>
+                  <h3>13. CONTROL DE ACCESO Y VIDEO VIGILANCIA</h3>
+                  <h3>13.1. CONTROL ACCESO</h3>
+                  <p>Las áreas que LUCRUM FINANCIERA S.A.S. considere conveniente contarán con controles de acceso que sólo permitan el ingreso a los colaboradores autorizados y que permita guardar la trazabilidad de los ingresos y salidas.</p>
+                  <h3>13.2. VIDEO VIGILANCIA</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. cuenta con cámaras de video vigilancia que tienen como finalidad dar cumplimiento a las políticas de seguridad física de sus instalaciones, cumpliendo con los parámetros establecidos por la normatividad y las Entidades de control vigilancia competentes.</p>
+                  <p>Las imágenes deberán ser conservadas por un tiempo máximo de 90 días. En caso que la imagen respectiva sea objeto o soporte de una reclamación, queja, o cualquier proceso de tipo judicial, hasta el momento en que sea resuelto.</p>
+                  <h3>14. MODIFICACIONES</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. se reserva el derecho de modificar, ajustar, actualizar y/o mejorar la política de Protección de Datos Personales en cualquier momento.</p>
+                  <p>En caso de efectuar cambios sustanciales en el contenido de las políticas del Tratamiento, referidos a la identificación del responsable y a la finalidad del Tratamiento de los datos personales, los cuales afecten el contenido de la autorización, LUCRUM FINANCIERA S.A.S. comunicará estos cambios y obtendrá́ del Titular una nueva autorización cuando el cambio se refiera a la finalidad del Tratamiento.</p>
+                  <p>Toda modificación se comunicará de forma oportuna a los Titulares de los datos a través de los medios habituales de contacto y los publicará, para que los titulares de la información se manifiesten y ejerzan sus derechos. Si no se manifiestan en un plazo de veinte (20) días hábiles siguientes, se entenderá́ que aceptan, siempre y cuando dicha reforma no afecte aspectos sustanciales de la Política. En el caso contrario se solicitará de nuevo la autorización a los Titulares de la información.</p>
+                  <h3>CAPITULO VIII.</h3>
+                  <h3>PROCEDIMIENTO PARA LA ATENCIÓN DE PETICIONES, CONSULTAS, RECLAMOS Y EJERCICIO DE LOS DERECHOS DE LOS TITULARES</h3>
+                  <h3>15. ATENCIÓN DE PETICIONES, CONSULTAS Y RECLAMOS</h3>
+                  <p>Las peticiones, consultas y reclamos formulados por los titulares de Datos Personales bajo Tratamiento de LUCRUM FINANCIERA S.A.S. para ejercer sus derechos a conocer, actualizar, rectificar y suprimir datos, o revocar la autorización deberán ser dirigidas a:</p>
+                  <ul>
+                    <li>· Oficina principal y de atención al cliente: N/A.</li>
+                    <li>· Línea Telefónica: +57 (300) 181-8071</li>
+                    <li>· Correo electrónico: contacto@lucrumfinanciera.com</li>
+                    <li>· Página web: https://lucrumfinanciera.com/</li>
+                  </ul>
+                  <p>El área de servicio al cliente será el contacto de los titulares de Datos Personales, para todos los efectos previstos en esta Política.</p>
+                  <h3>16. PROCEDIMIENTO PARA ATENDER LOS DERECHOS DE LOS TITULARES</h3>
+                  <p>Los titulares de Datos Personales, sin importar el tipo de vinculación que tengan con LUCRUM FINANCIERA S.A.S. pueden ejercer sus derechos a conocer, actualizar, rectificar y suprimir información y/o revocar la autorización otorgada, de acuerdo con el siguiente procedimiento:</p>
+                  <h3>16.1. PROCEDIMIENTO DE CONSULTAS</h3>
+                  <p>LUCRUM FINANCIERA S.A.S. y/o los Encargados, garantizan a los titulares de datos personales contenidos en sus bases de datos o a sus causahabientes o personas autorizadas, el derecho de consultar toda la información contenida en su registro individual o toda aquella que esté vinculada con su identificación conforme se establece en la presente Política de Tratamiento de Datos Personales.</p>
+                  <p>Responsable de atención de consultas:</p>
+                  <p>El área de servicio al cliente de LUCRUM FINANCIERA S.A.S. será el responsable de recibir y dar trámite a las solicitudes remitidas, en los términos, plazos y condiciones establecidos en la Ley 1581 de 2012 y en las presentes políticas.</p>
+                  <p>Las consultas dirigidas a LUCRUM FINANCIERA S.A.S. deberán contener como mínimo la siguiente información:</p>
+                  <ol>
+                    <li>1. Nombres y apellidos del Titular y/o su representante y/o causahabientes;</li>
+                    <li>2. Lo que se pretende consultar</li>
+                    <li>3. Dirección física, electrónica y teléfono de contacto del Titular y/o sus causahabientes o representantes;</li>
+                    <li>4. Firma, número de identificación o procedimiento de validación correspondiente.</li>
+                    <li>5. Haber sido presentada por los medios de consulta habilitados por LUCRUM FINANCIERA S.A.S.</li>
+                  </ol>
+                  <p>Una vez sea recibida la solicitud de CONSULTA de información por parte del Titular de los datos o su representante o tercero debidamente autorizado, a través de los canales establecidos, el área respectiva procederá a verificar que la solicitud contenga todas las especificaciones requeridas a efectos de poder valorar que el derecho se ejerza por un interesado o por un representante de éste, acreditando con ello, que se cuenta con la legitimidad legal para hacerlo.</p>
+                  <p>Plazos de Respuesta a consultas:</p>
+                  <p>Las solicitudes recibidas mediante los anteriores medios serán atendidas en un término máximo de quince (15) días hábiles contados a partir de la fecha de su recibo.</p>
+                  <p>Prórroga del plazo de Respuesta:</p>
+                  <p>En caso de imposibilidad de atender la consulta dentro de dicho término, se informará al interesado antes del vencimiento de los quince (15) días, expresando los motivos de la demora y señalando la fecha en que se atenderá su consulta, la cual en ningún caso podrá superar los ocho (8) días hábiles siguientes al vencimiento del primer plazo.</p>
+                  <h3>16.2. PROCEDIMIENTO DE RECLAMOS</h3>
+                  <p>Los derechos Garantizados mediante el procedimiento de reclamos:</p>
+                  <p>a) Corrección o Actualización: LUCRUM FINANCIERA S.A.S. y/o los Encargados, garantizarán a los titulares de datos personales contenidos en sus bases de datos o a sus causahabientes, el derecho de corregir o actualizar los datos personales que reposen en sus bases de datos, mediante presentación de reclamación, cuando consideren que se cumplen los parámetros establecidos por la ley o los señalados en la presente Política de Tratamiento de Datos Personales para que sea procedente la solicitud de Corrección o Actualización.</p>
+                  <p>b) Revocatoria de la autorización o Supresión de los datos Personales: LUCRUM FINANCIERA S.A.S. y/o los Encargados, garantizarán a los titulares de datos personales contenidos en sus bases de datos o a sus causahabientes, el derecho de Solicitar la Revocatoria de la autorización o solicitar la supresión de la información contenida en su registro individual o toda aquella que esté vinculada con su identificación cuando consideren que se cumplen los parámetros establecidos por la ley o los señalados en la presente Política de Tratamiento de Datos Personales. Así mismo se garantiza el derecho de presentar reclamos cuando adviertan el presunto incumplimiento de la Ley 1581 de 2012 o de la presente Política de tratamiento de datos personales.</p>
+                  <p>Responsable de atención de Reclamos:</p>
+                  <p>El área del servicio al cliente de la LUCRUM FINANCIERA S.A.S. será el responsable de recibir y dar trámite a las solicitudes remitidas, en los términos, plazos y condiciones establecidos en la Ley 1581 de 2012 y en las presentes políticas.</p>
+                  <p>Las reclamaciones presentadas deberán contener como mínimo la siguiente información:</p>
+                  <ol>
+                    <li>1. Nombres y apellidos del Titular y/o su representante y/o causahabientes;</li>
+                    <li>2. Lo que se pretende consultar</li>
+                    <li>3. Motivo(s)/hecho(s) que dan lugar al reclamo con una breve descripción del derecho que desea ejercer (actualizar, rectificar, solicitar prueba de la autorización otorgada, revocarla y/o suprimir,)</li>
+                    <li>4. Medios para recibir respuesta a su solicitud: Dirección física, electrónica y teléfono de contacto del Titular y/o sus causahabientes o representantes;</li>
+                    <li>5. Firma, número de identificación o procedimiento de validación correspondiente.</li>
+                    <li>6. Haber sido presentada por los medios de consulta habilitados por LUCRUM FINANCIERA S.A.S.</li>
+                  </ol>
+                  <p>Una vez sea recibida el RECLAMO por parte del Titular de los datos o su representante o tercero debidamente autorizado, a través de los canales establecidos, el área respectiva procederá a verificar que la solicitud contenga todas las especificaciones requeridas a efectos de poder valorar que el derecho se ejerza por un interesado o por un representante de éste, acreditando con ello, que se cuenta con la legitimidad legal para hacerlo.</p>
+                  <p>Reclamaciones sin cumplimiento de Requisitos legales:</p>
+                  <p>En caso de que la reclamación se presente sin el cumplimiento de los anteriores requisitos legales, se solicitará al reclamante dentro de los cinco (5) días siguientes a la recepción del reclamo, para que subsane las fallas y presente la información o documentos faltantes.</p>
+                  <p>Desistimiento del Reclamo:</p>
+                  <p>Transcurridos dos (2) meses desde la fecha del requerimiento sin que el solicitante presente la información requerida, se entenderá que ha desistido del reclamo.</p>
+                  <p>Plazos de Respuesta a los Reclamos:</p>
+                  <p>El término máximo para atender el reclamo será de diez (10) días hábiles contados a partir del día siguiente a la fecha de su recibo.</p>
+                  <p>Prórroga del plazo de Respuesta:</p>
+                  <p>Cuando no fuere posible atender el reclamo dentro de dicho término, se informará al interesado los motivos de la demora y la fecha en que se atenderá su reclamo, la cual en ningún caso podrá superar los cinco (5) días hábiles siguientes al vencimiento del primer término.</p>
+                  <p>Procedimiento de Supresión de Datos Personales:</p>
+                  <p>En caso de resultar procedente la Supresión de los datos personales del titular de la base de datos conforme a la reclamación presentada, LUCRUM FINANCIERA S.A.S. deberá realizar operativamente la supresión de tal manera que la eliminación no permita la recuperación de la información, sin embargo, el Titular deberá tener en cuenta que en algunos casos cierta información deberá permanecer en registros históricos por cumplimiento de deberes legales de la organización por lo que su supresión versará frente al tratamiento activo de los mismos y de acuerdo a la solicitud del titular.</p>
+                  <p>Una vez cumplidos los términos señalados por la Ley 1581 de 2012 y las demás normas que la reglamenten o complementen, el Titular al que se deniegue, total o parcialmente, el ejercicio de los derechos de acceso, actualización, rectificación, supresión y revocación, podrá́ poner su caso en conocimiento de la Superintendencia de Industria y Comercio –Delegatura para la Protección de Datos Personales-.</p>
+                  <h3>17. VIGENCIA</h3>
+                  <p>La presente Política para el Tratamiento de Datos Personales rige a partir del primer (01) de octubre de 2025.</p>
+                  <p>Las bases de datos en las que se registraran los datos personales tendrán una vigencia igual al tiempo en que se mantenga y utilice la información para las finalidades descritas en esta política. Una vez se cumpla(n) esa(s) finalidad(es) y siempre que no exista un deber legal o contractual de conservar su información, sus datos serán eliminados de nuestras bases de datos.</p>
+              </div>
+            </section>
+          </div>
         </div>
       </main>
       <footer class="site-footer" id="footer">
@@ -246,6 +554,8 @@
         </svg>
       </a>
       <script defer src="../assets/js/main.js">
+      </script>
+      <script defer src="../assets/js/legal.js">
       </script>
     </body>
   </html>
