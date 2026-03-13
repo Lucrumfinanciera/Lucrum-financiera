@@ -1993,7 +1993,7 @@ body.modal-open {
   overflow:hidden;
   background:
     linear-gradient(120deg,rgba(15,27,43,0.78),rgba(15,27,43,0.55)),
-    url("../img/aliados.jpg") center/cover no-repeat;
+    url("../img/aliados.webp") center/cover no-repeat;
 }
 .aliados-hero::after {
   content:"";
@@ -2054,6 +2054,32 @@ body.modal-open {
   padding:24px;
   border:1px solid rgba(32,78,120,0.12);
   box-shadow:0 20px 48px rgba(15,27,43,0.16);
+}
+.aliados-hero .hero-form {
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.28);
+  box-shadow:0 18px 48px rgba(0,0,0,0.25);
+  backdrop-filter:blur(8px);
+}
+.aliados-hero .hero-form .form-header h2,
+.aliados-hero .hero-form .form-header p {
+  color:#fff;
+}
+.aliados-hero .form-toggle .toggle-btn {
+  color:#e6eef8;
+  background:rgba(230,238,248,0.12);
+  border-color:rgba(230,238,248,0.35);
+}
+.aliados-hero .form-toggle .toggle-btn.active {
+  background:#2d5f8f;
+  color:#f3f7fc;
+  border-color:#2d5f8f;
+  box-shadow:0 12px 28px rgba(20,46,78,0.35);
+}
+.aliados-hero .hero-form label,
+.aliados-hero .hero-form .input-helper,
+.aliados-hero .hero-form .form-footer p {
+  color:#fff;
 }
 .form-header h2 {
   margin-bottom:6px;
