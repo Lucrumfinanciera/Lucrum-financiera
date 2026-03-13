@@ -40,7 +40,7 @@ const FOOTER_FALLBACK=`
     </div>
     <div class="footer-contact">
       <h3>Contáctanos</h3>
-      <p>WhatsApp: +57 300 780 7831</p>
+      <p>WhatsApp: +57 301 100 7567</p>
       <p>Correo: contacto@lucrumfinanciera.com</p>
     </div>
     <div class="footer-legal">
