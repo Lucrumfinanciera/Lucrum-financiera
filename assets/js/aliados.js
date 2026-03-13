@@ -1,5 +1,8 @@
 (() => {
   const PARTNERS_URL = "../data/partners.json";
+  const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbz0FYxMwtSnYTgsYTCn55v4xOUY8LbiVgy7G4efQxTqR0C1GbFRJ1OZViajorNB9Y-uMA/exec";
+  const MIN_SUBMIT_MS = 1200;
+  const formLoadTime = Date.now();
   const WHATSAPP_BASE = "https://wa.me/573011007567";
   const GENERIC_WA_MESSAGE = "Hola Lucrum, quiero financiar una compra con un aliado.";
   const searchInput = document.getElementById("partner-search");
@@ -23,6 +26,40 @@
   const originalDescription = metaDescriptionTag ? metaDescriptionTag.getAttribute("content") : "";
   const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   const normalize = (value) => value?.toLowerCase().trim() || "";
+  const isSpamSubmission = (form, statusEl) => {
+    const honeypot = form.querySelector('input[name="website"]');
+    const loadTs = Number(form.dataset.loadTs || formLoadTime);
+    if (honeypot && honeypot.value.trim()) {
+      if (statusEl) statusEl.textContent = "No pudimos enviar tu solicitud. Intenta de nuevo.";
+      return true;
+    }
+    if (Date.now() - loadTs < MIN_SUBMIT_MS) {
+      if (statusEl) statusEl.textContent = "Envío demasiado rápido. Intenta de nuevo.";
+      return true;
+    }
+    return false;
+  };
+  const postForm = async (formData, statusEl) => {
+    if (statusEl) statusEl.textContent = "Enviando...";
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: formData
+      });
+      if (!res.ok) throw new Error(`Error ${res.status}`);
+      if (statusEl) {
+        statusEl.textContent = "Recibimos tu solicitud. Un asesor te contactará en menos de 24 horas hábiles.";
+        statusEl.style.color = "inherit";
+      }
+      return true;
+    } catch (error) {
+      if (statusEl) {
+        statusEl.textContent = "No pudimos enviar tu solicitud. Intenta de nuevo.";
+        statusEl.style.color = "#b00020";
+      }
+      return false;
+    }
+  };
   const getBasePath = () => {
     const segments = window.location.pathname.split("/").filter(Boolean);
     const aliadosIndex = segments.indexOf("aliados");
@@ -427,6 +464,136 @@
       renderGrid();
     });
   };
+  const initLeadForm = () => {
+    const form = document.getElementById("aliados-form");
+    if (!form) return;
+    const buttons = form.querySelectorAll(".toggle-btn");
+    const sections = form.querySelectorAll(".form-section");
+    const hiddenField = document.getElementById("aliado-tipo");
+    const status = document.getElementById("aliados-form-status");
+    form.dataset.loadTs = String(Date.now());
+    const setMode = (mode) => {
+      if (hiddenField) hiddenField.value = mode;
+      buttons.forEach((btn) => {
+        const isActive = btn.dataset.mode === mode;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+      sections.forEach((section) => {
+        const isActive = section.dataset.mode === mode;
+        section.hidden = !isActive;
+        section.querySelectorAll("input, select, textarea").forEach((field) => {
+          const shouldRequire = field.dataset.required === "true" && isActive;
+          field.required = shouldRequire;
+          field.disabled = !isActive;
+        });
+      });
+      if (status) status.textContent = "";
+    };
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setMode(btn.dataset.mode || "empresa");
+      });
+    });
+    setMode(hiddenField?.value || "empresa");
+    form.addEventListener("submit", async (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        form.reportValidity();
+        return;
+      }
+      event.preventDefault();
+      form.dataset.loadTs = form.dataset.loadTs || String(Date.now());
+      if (isSpamSubmission(form, status)) return;
+      const mode = hiddenField?.value || "empresa";
+      const payload = new FormData();
+      const websiteField = form.querySelector('input[name="website"]');
+      if (websiteField) payload.append("website", websiteField.value || "");
+      payload.append("tipo", mode === "empresa" ? "empresa" : "persona");
+      if (mode === "empresa") {
+        const empresaNombre = document.getElementById("empresa-nombre")?.value || "";
+        const contactoNombre = document.getElementById("empresa-contacto")?.value || "";
+        const telefono = document.getElementById("empresa-telefono")?.value || "";
+        const ciudad = document.getElementById("empresa-ciudad")?.value || "";
+        const tipoNegocio = document.getElementById("empresa-tipo")?.value || "";
+        const mensaje = document.getElementById("empresa-mensaje")?.value || "";
+        payload.append("nombre", contactoNombre);
+        payload.append("empresa", empresaNombre);
+        payload.append("telefono", telefono);
+        payload.append("correo", "");
+        payload.append("correo_empresarial", "");
+        payload.append("mensaje", `Ciudad: ${ciudad}\nTipo de negocio: ${tipoNegocio}\nMensaje: ${mensaje}`);
+      } else {
+        const nombre = document.getElementById("cliente-nombre")?.value || "";
+        const telefono = document.getElementById("cliente-telefono")?.value || "";
+        const empresa = document.getElementById("cliente-empresa")?.value || "";
+        const necesidad = document.getElementById("cliente-necesidad")?.value || "";
+        const mensaje = document.getElementById("cliente-mensaje")?.value || "";
+        payload.append("nombre", nombre);
+        payload.append("empresa", empresa);
+        payload.append("telefono", telefono);
+        payload.append("correo", "");
+        payload.append("correo_empresarial", "");
+        payload.append("mensaje", `Empresa donde trabaja: ${empresa}\nQué necesita financiar: ${necesidad}\nMensaje: ${mensaje}`);
+      }
+      const ok = await postForm(payload, status);
+      if (ok) {
+        form.reset();
+        setMode(hiddenField?.value || "empresa");
+        form.dataset.loadTs = String(Date.now());
+      }
+    });
+  };
+  const initCarousel = () => {
+    const carousel = document.querySelector("[data-carousel]");
+    if (!carousel) return;
+    const track = carousel.querySelector("[data-carousel-track]");
+    const bar = carousel.querySelector("[data-carousel-bar]");
+    const prevBtn = carousel.querySelector("[data-carousel-prev]");
+    const nextBtn = carousel.querySelector("[data-carousel-next]");
+    const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
+    if (!track || !bar) return;
+    const getIndex = () => {
+      const cards = Array.from(track.children);
+      const cardWidth = cards[0]?.getBoundingClientRect().width || 1;
+      return Math.round(track.scrollLeft / (cardWidth + 16));
+    };
+    const updateUI = () => {
+      const cards = Array.from(track.children);
+      const index = Math.max(0, Math.min(getIndex(), cards.length - 1));
+      const progress = ((index + 1) / cards.length) * 100;
+      bar.style.width = `${progress}%`;
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+    };
+    const scrollToIndex = (index) => {
+      const cards = Array.from(track.children);
+      const card = cards[index];
+      if (!card) return;
+      track.scrollTo({
+        left: card.offsetLeft,
+        behavior: "smooth"
+      });
+    };
+    track.addEventListener("scroll", () => {
+      window.requestAnimationFrame(updateUI);
+    });
+    prevBtn?.addEventListener("click", () => {
+      const index = getIndex();
+      scrollToIndex(Math.max(index - 1, 0));
+    });
+    nextBtn?.addEventListener("click", () => {
+      const index = getIndex();
+      const cards = Array.from(track.children);
+      scrollToIndex(Math.min(index + 1, cards.length - 1));
+    });
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const index = Number(dot.dataset.carouselDot || 0);
+        scrollToIndex(index);
+      });
+    });
+    updateUI();
+  };
   const init = async () => {
     if (!partnersGrid) return;
     partnersGrid.setAttribute("aria-busy", "true");
@@ -455,5 +622,9 @@
     attachModalListeners();
     attachGridListeners();
   };
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", () => {
+    init();
+    initLeadForm();
+    initCarousel();
+  });
 })();

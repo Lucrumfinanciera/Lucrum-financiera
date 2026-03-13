@@ -1,0 +1,583 @@
+// ==========================================
+// Helpers
+// ==========================================
+const $  = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+const show = (el, on) => el && el.classList.toggle('hidden', !on);
+
+// ==========================================
+// Montaje del template ANTES de inicializar
+// ==========================================
+function mount() {
+  const tpl = $('#formTemplate');
+  const container = $('#formContainer');
+  if (tpl && container && !container.dataset.mounted) {
+    container.appendChild(tpl.content.cloneNode(true));
+    container.dataset.mounted = '1';
+  }
+}
+
+// ==========================================
+// Inicialización (todos tus listeners)
+// ==========================================
+function init() {
+  // --------- 0) Prefill sección 3 (oculta) ---------
+  (function(){
+    const check = (id) => {
+      const el = document.getElementById(id);
+      if (el) el.checked = true;
+    };
+    [
+      'recursos_no',
+      'cargos_no',
+      'reconocimiento_no',
+      'parentesco_no',
+      'rel_pep_no',
+      'fatca_nacimiento_no',
+      'fatca_nacionalidad_no',
+      'fatca_green_card_no',
+      'fatca_residencia_no',
+      'fatca_transferencias_no',
+      'fatca_ingresos_no',
+      'transacciones_exterior_no'
+    ].forEach(check);
+
+    [
+      'declaracion_a',
+      'declaracion_b',
+      'declaracion_c',
+      'declaracion_d',
+      'declaracion_e',
+      'declaracion_f'
+    ].forEach(check);
+  })();
+
+  // --------- 1) FATCA / Transferencias a EE.UU. ---------
+  const trYes = $('#fatca_transferencias_si');
+  const trNo  = $('#fatca_transferencias_no');
+  const secTr = $('#seccionTransferencia');
+  const updTr = () => show(secTr, trYes && trYes.checked);
+  [trYes, trNo].forEach(r => r && r.addEventListener('change', updTr));
+  updTr();
+
+  // --------- 2) Transacciones en moneda extranjera ---------
+  const exSi = $('#transacciones_exterior_si');
+  const exNo = $('#transacciones_exterior_no');
+  const opciones = $('#opcionesMoneda');
+  const updEx = () => {
+    const on = exSi && exSi.checked;
+    show(opciones, on);
+    if (!on) {
+      $$('#opcionesMoneda input[name="tipo_transaccion_moneda"]').forEach(i => i.checked = false);
+      show($('#otroTipoInput'), false);
+    }
+  };
+  [exSi, exNo].forEach(r => r && r.addEventListener('change', updEx));
+  updEx();
+
+  // --------- 3) “Otros” en tipo de transacción ---------
+  (function () {
+    const select = $('#tipoTransaccion');
+    const otrosRow = $('#otroTipoInput');
+    const updateOtroTipo = () => otrosRow?.classList.toggle('hidden', !(select && select.value === 'Otros'));
+    select?.addEventListener('change', updateOtroTipo);
+    updateOtroTipo(); // estado inicial
+  })();
+
+  // --------- 4) PEP (fila extra si relación PEP = Sí) ---------
+  (function(){
+    const pepYes = $('#rel_pep_si');
+    const pepNo  = $('#rel_pep_no');
+    const pepRow = $('#pep_info');
+    const updatePep = () => pepRow?.classList.toggle('hidden', !(pepYes && pepYes.checked));
+    [pepYes, pepNo].forEach(el => el && el.addEventListener('change', updatePep));
+    updatePep();
+  })();
+
+  // --------- 5) Inicial fecha/hora ---------
+  (function(){
+    const el = $('#fecha');
+    if (!el) return;
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    el.value = `${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  })();
+
+  // --------- 6) Formatos UX (dinero, identificación, celular, cuentas) ---------
+  function applyInputFormats() {
+    try {
+      // 6a) Montos: .monto-visual ↔ .monto-real
+      const formatMoney = (val) => val ? '$' + val.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+      $$('.monto-visual').forEach((input) => {
+        let hidden = null;
+        if (input.id && input.id.endsWith('Visual')) hidden = document.getElementById(input.id.replace(/Visual$/, 'Real'));
+        if (!hidden) hidden = input.parentElement?.querySelector('.monto-real');
+        if (!hidden) return;
+
+        const apply = () => {
+          const digits = input.value.replace(/\D/g, '');
+          hidden.value = digits;
+          input.value = digits ? formatMoney(digits) : '';
+        };
+        input.removeEventListener('input', apply); // avoid duplicates if re-run
+        input.addEventListener('input', apply);
+        input.addEventListener('blur', apply);
+        apply();
+      });
+
+      // 6b) Identificación con separador visual
+      (function(){
+        const numIdInput = document.querySelector('input[name="numero_identificacion"]');
+        if (!numIdInput) return;
+        const formatNumber = (val) => val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        const apply = (e) => {
+          const digits = e.target.value.replace(/\D/g, '');
+          e.target.value = digits ? formatNumber(digits) : '';
+        };
+        numIdInput.oninput = apply;
+        numIdInput.onblur = apply;
+        apply({ target: numIdInput });
+      })();
+
+      // 6c) Teléfonos con máscara (301) 123-456
+      (function(){
+        const formatCelular = (val) => {
+          const digits = val.replace(/\D/g, '').slice(0, 10);
+          if (digits.length <= 3) return digits ? `(${digits}` : '';
+          if (digits.length <= 6) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+          return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+        };
+        ['celular_1','celular_2','telefono'].forEach(name => {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (!input) return;
+          const apply = () => { input.value = formatCelular(input.value); };
+          input.oninput = apply;
+          input.onblur = apply;
+          apply();
+        });
+      })();
+
+      // 6d) Cuenta bancaria 900-150259-72
+      (function(){
+        const formatCuenta = (val) => {
+          const digits = val.replace(/\D/g, '');
+          if (digits.length <= 3) return digits;
+          if (digits.length <= 9) return `${digits.slice(0,3)}-${digits.slice(3)}`;
+          const rest = digits.substring(9); // sin límite
+          return `${digits.slice(0,3)}-${digits.slice(3,9)}-${rest}`;
+        };
+
+        ['cuenta1','cuenta2'].forEach(name => {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (!input) return;
+          const apply = () => { input.value = formatCuenta(input.value); };
+          input.oninput = apply;
+          input.onblur = apply;
+          apply();
+        });
+      })();
+    } catch (err) {
+      console.error('Formato de campos: error aplicando máscaras', err);
+    }
+  }
+  window.applyInputFormats = applyInputFormats;
+  // Ejecuta inmediatamente tras montar
+  applyInputFormats();
+
+  // 6e) Botón custom para inputs file
+  (function(){
+    $$('.file-upload').forEach(wrapper => {
+      const fileInput = wrapper.querySelector('input[type=file]');
+      const btn = wrapper.querySelector('.file-btn');
+      if (!fileInput || !btn) return;
+      btn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+          if (fileInput.multiple && fileInput.files.length > 1) {
+            btn.textContent = `📄 ${fileInput.files.length} archivos seleccionados`;
+          } else {
+            btn.textContent = '📄 ' + fileInput.files[0].name;
+          }
+          btn.classList.add('active');
+        } else {
+          btn.textContent = fileInput.multiple ? '📂 Seleccionar archivos' : '📂 Seleccionar archivo';
+          btn.classList.remove('active');
+        }
+      });
+    });
+  })();
+
+  // 6f) Validación simple de archivos (1..15) sin depender de frecuencia
+  (function(){
+    const fileInput = document.getElementById('file-documentos');
+    if (!fileInput) return;
+
+    const applyValidation = () => {
+      const count = fileInput.files ? fileInput.files.length : 0;
+      if (count === 0) {
+        fileInput.setCustomValidity('Adjunta al menos 1 archivo.');
+        return;
+      }
+      if (count > 15) {
+        fileInput.setCustomValidity('Máximo 15 archivos.');
+        return;
+      }
+      fileInput.setCustomValidity('');
+    };
+
+    fileInput.addEventListener('change', applyValidation);
+    applyValidation();
+  })();
+
+  // --------- 7) Multipaso + Submit ---------
+  (function(){
+    // ⚠️ Unifica este ID con tu HTML real
+    const form = document.getElementById('formulario-conocimiento'); // si tu form tiene otro id, cámbialo aquí
+    if (!form) return;
+
+    // Pinta asteriscos rojos
+    (function(){
+      document.querySelectorAll('.form-container label, .form-container legend').forEach(el => {
+        if (el.dataset.reqStyled) return;
+        el.innerHTML = el.innerHTML.replace(/\*/g, '<span class="req-star">*</span>');
+        el.dataset.reqStyled = '1';
+      });
+    })();
+
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const visibleSteps = steps.filter(step => !step.hasAttribute('data-skip'));
+    const stepsCount = steps.length;
+    const totalSteps = visibleSteps.length;
+    let current = 0;
+    let submitting = false;
+
+    const progressBar = $('#progressBar');
+    if (progressBar) {
+      progressBar.innerHTML = '';
+      for (let i = 0; i < totalSteps; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'step-dot' + (i === 0 ? ' current' : '');
+        dot.textContent = (i + 1);
+        progressBar.appendChild(dot);
+        if (i < totalSteps - 1) {
+          const line = document.createElement('div');
+          line.className = 'step-line' + (i === 0 ? ' active' : '');
+          progressBar.appendChild(line);
+        }
+      }
+    }
+
+    const getStep      = (idx) => steps[idx];
+    const getNextBtn   = (idx) => getStep(idx)?.querySelector('#nextBtn');   // ideal: .nextBtn
+    const getPrevBtn   = (idx) => getStep(idx)?.querySelector('#prevBtn');   // ideal: .prevBtn
+    const getSubmitBtn = () => document.getElementById('submitBtn');
+    const requiredInStep = (idx) => Array.from(getStep(idx)?.querySelectorAll('[required]') || []);
+    const loadingOverlay = $('#loadingOverlay');
+    const thankyouView   = $('#thankyouView');
+    const lastVisibleIndex = (() => {
+      for (let i = steps.length - 1; i >= 0; i--) {
+        if (!steps[i]?.hasAttribute('data-skip')) return i;
+      }
+      return steps.length - 1;
+    })();
+
+    const labelTextFor = (input) => {
+      if (!input) return 'Campo requerido';
+      if (input.getAttribute('aria-label')) return input.getAttribute('aria-label');
+      if (input.title) return input.title;
+      if (input.id) {
+        const forLabel = document.querySelector(`label[for="${input.id}"]`);
+        if (forLabel) return forLabel.textContent.trim();
+      }
+      const parentLabel = input.closest('label');
+      if (parentLabel) return parentLabel.textContent.trim();
+      const legend = input.closest('fieldset')?.querySelector('legend');
+      if (legend) return legend.textContent.trim();
+      return input.name || 'Campo requerido';
+    };
+
+    const collectMissingFields = (idx) => {
+      const missing = [];
+      const radiosChecked = {};
+      requiredInStep(idx).forEach(el => {
+        if (el.type === 'radio') {
+          if (radiosChecked[el.name]) return;
+          radiosChecked[el.name] = true;
+          const group = getStep(idx).querySelectorAll(`input[type="radio"][name="${el.name}"]`);
+          const anyChecked = Array.from(group).some(r => r.checked);
+          if (!anyChecked) missing.push(labelTextFor(el));
+        } else if (el.type === 'checkbox') {
+          if (!el.checked) missing.push(labelTextFor(el));
+        } else if (!el.checkValidity()) {
+          missing.push(labelTextFor(el));
+        }
+      });
+      return missing;
+    };
+
+    function isStepValid(idx, showErr=false){
+      let ok = true;
+      const radiosChecked = {};
+      let firstInvalidEl = null;
+      let firstInvalidFocus = null;
+
+      const markInvalid = (node, invalid) => {
+        if (!node) return;
+        if (invalid) node.classList.add('invalid');
+        else node.classList.remove('invalid');
+      };
+
+      requiredInStep(idx).forEach(el => {
+        if (el.type === 'radio') {
+          if (radiosChecked[el.name]) return;
+          radiosChecked[el.name] = true;
+          const group = getStep(idx).querySelectorAll(`input[type="radio"][name="${el.name}"]`);
+          const anyChecked = Array.from(group).some(r => r.checked);
+          group.forEach(radio => {
+            const lbl = radio.id ? document.querySelector(`label[for="${radio.id}"]`) : radio.nextElementSibling;
+            lbl?.classList.toggle('invalid', !anyChecked);
+          });
+          if (!anyChecked) {
+            ok = false;
+            if (!firstInvalidEl) {
+              firstInvalidEl = group[0];
+              firstInvalidFocus = group[0];
+            }
+          }
+        } else if (el.type === 'checkbox') {
+          const lbl = el.id ? document.querySelector(`label[for="${el.id}"]`) : el.closest('label');
+          lbl?.classList.toggle('invalid', !el.checked);
+          if (!el.checked) {
+            ok = false;
+            if (!firstInvalidEl) {
+              firstInvalidEl = el;
+              firstInvalidFocus = el;
+            }
+          }
+        } else {
+          const valid = el.checkValidity();
+          const msg = el.closest('div')?.querySelector('.help-error');
+          if (showErr) {
+            markInvalid(el, !valid);
+            const fileBtn = el.type === 'file' ? el.closest('.file-upload')?.querySelector('.file-btn') : null;
+            markInvalid(fileBtn, !valid);
+            if (msg) msg.style.display = valid ? 'none' : 'block';
+          } else if (valid) {
+            markInvalid(el, false);
+            if (msg) msg.style.display = 'none';
+          }
+          if (!valid) {
+            ok = false;
+            if (!firstInvalidEl) {
+              firstInvalidEl = el;
+              firstInvalidFocus = el.type === 'file'
+                ? el.closest('.file-upload')?.querySelector('.file-btn') || el
+                : el;
+            }
+          }
+        }
+      });
+
+      if (showErr && firstInvalidFocus) {
+        firstInvalidFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalidFocus.focus({ preventScroll: true });
+      }
+      return ok;
+    }
+
+    function updateButtonsState() {
+      const prev = getPrevBtn(current);
+      if (prev) prev.disabled = (current === 0);
+      const isLast = (current === lastVisibleIndex);
+      const next = getNextBtn(current);
+      const submit = getSubmitBtn();
+      if (!isLast && next) next.disabled = false; // siempre clickeable
+      if (isLast && submit) submit.disabled = submitting;
+    }
+
+    function updateProgressBarUI() {
+      if (!progressBar) return;
+      const currentVisible = visibleSteps.indexOf(steps[current]);
+      if (currentVisible < 0) return;
+      const dots = progressBar.querySelectorAll('.step-dot');
+      const lines = progressBar.querySelectorAll('.step-line');
+      dots.forEach((d, i) => {
+        d.classList.remove('current', 'done');
+        if (i < currentVisible) d.classList.add('done');
+        if (i === currentVisible) d.classList.add('current');
+      });
+      lines.forEach((l, i) => l.classList.toggle('active', i < currentVisible));
+    }
+
+    function centerCurrentDotOnMobile(){
+      if (!progressBar) return;
+      if (!window.matchMedia('(max-width: 600px)').matches) return;
+      const currentDot = progressBar.querySelector('.step-dot.current');
+      if (!currentDot) return;
+      const left = currentDot.offsetLeft - (progressBar.clientWidth / 2 - currentDot.clientWidth / 2);
+      progressBar.scrollTo({ left: Math.max(left, 0), behavior: 'smooth' });
+    }
+
+    const isSkippableStep = (idx) => steps[idx]?.hasAttribute('data-skip');
+    const findStep = (idx, dir) => {
+      let next = idx;
+      while (steps[next] && isSkippableStep(next)) {
+        next += dir;
+      }
+      return Math.min(Math.max(next, 0), stepsCount - 1);
+    };
+
+    function showStep(idx) {
+      steps.forEach((s, i) => s.classList.toggle('hidden', i !== idx));
+      current = idx;
+      updateButtonsState();
+      updateProgressBarUI();
+      centerCurrentDotOnMobile();
+      const firstReq = requiredInStep(current)[0];
+      if (firstReq) firstReq.focus({ preventScroll: true });
+    }
+
+    steps.forEach((stepEl, idx) => {
+      stepEl.addEventListener('input', updateButtonsState);
+      stepEl.addEventListener('change', updateButtonsState);
+      const next = stepEl.querySelector('#nextBtn'); // ideal .nextBtn
+      next?.addEventListener('click', () => {
+        if (isStepValid(idx, true)) showStep(findStep(idx + 1, 1));
+      });
+      const prev = stepEl.querySelector('#prevBtn'); // ideal .prevBtn
+      prev?.addEventListener('click', () => showStep(findStep(idx - 1, -1)));
+    });
+
+    // Submit con FormData + archivos en base64
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitting) return;
+      if (!isStepValid(current, true)) {
+        const missing = collectMissingFields(current);
+        if (missing.length) {
+          alert('Faltan campos obligatorios:\n- ' + missing.join('\n- '));
+        }
+        return;
+      }
+      submitting = true;
+      updateButtonsState();
+
+      // Normalización antes de enviar
+      ['celular_1','celular_2','telefono','cuenta1','cuenta2','numero_identificacion'].forEach(name => {
+        const input = form.querySelector(`input[name="${name}"]`);
+        if (input) input.value = input.value.replace(/\D/g, '');
+      });
+      form.querySelectorAll('.monto-real').forEach(h => {
+        h.value = h.value.replace(/^0+/, '') || '0';
+      });
+
+      // 1) Campos (no file)
+      const fd = new FormData();
+      for (const el of Array.from(form.elements)) {
+        if (!el.name) continue;
+        if (el.type === 'file') continue;
+        if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) continue;
+        fd.append(el.name, el.value);
+      }
+      [
+        'declaracion_a',
+        'declaracion_b',
+        'declaracion_c',
+        'declaracion_d',
+        'declaracion_e',
+        'declaracion_f'
+      ].forEach((name) => {
+        if (!fd.has(name)) fd.append(name, 'Sí');
+      });
+
+      // 2) Archivos (IDs esperados, ajusta si cambia tu HTML)
+      const toBase64 = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload  = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      const multiInput = document.getElementById('file-documentos');
+      if (multiInput) {
+        const files = Array.from(multiInput.files || []);
+        if (files.length > 15) {
+          alert('Puedes adjuntar máximo 15 archivos.');
+          submitting = false;
+          updateButtonsState();
+          return;
+        }
+        for (const file of files) {
+          const dataURL = await toBase64(file);
+          const b64 = String(dataURL).split(',')[1];
+          fd.append(multiInput.name, b64);
+          fd.append(multiInput.name + '_filename', file.name);
+          fd.append(multiInput.name + '_mimetype', file.type || 'application/octet-stream');
+        }
+      } else {
+        const fileIds = [
+          'file-cedula',
+          'file-cedula2',
+          'file-bancaria',
+          'file-laboral',
+          'file-volantes',
+          'file-volantes1b',
+          'file-volantes2',
+          'file-volantes2b',
+          'file-volantes3',
+          'file-volantes3b'
+        ];
+        for (const id of fileIds) {
+          const inp = document.getElementById(id);
+          if (inp?.files?.length) {
+            const file = inp.files[0];
+            const dataURL = await toBase64(file);
+            const b64 = String(dataURL).split(',')[1];
+            fd.append(inp.name, b64);
+            fd.append(inp.name + '_filename', file.name);
+            fd.append(inp.name + '_mimetype', file.type || 'application/octet-stream');
+          }
+        }
+      }
+
+      // UI: spinner
+      const loadingOverlay = $('#loadingOverlay');
+      const thankyouView   = $('#thankyouView');
+      loadingOverlay?.classList.remove('hidden');
+
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: fd, mode: 'cors', redirect: 'follow' });
+        const opaqueOk = response.type === 'opaque' || response.status === 0;
+        if (!response.ok && !opaqueOk) {
+          let msg = 'No se pudo enviar el formulario';
+          try { msg = await response.text(); } catch(e){}
+          throw new Error(msg);
+        }
+        // Ocultar formulario → mostrar gracias
+        $('.subtitle')?.classList.add('hidden');
+        $('#progressBar')?.classList.add('hidden');
+        steps.forEach(s => s.classList.add('hidden'));
+        thankyouView?.classList.remove('hidden');
+      } catch (err) {
+        alert('Ocurrió un problema al enviar. Intenta de nuevo.\n' + (err.message || err));
+        console.error(err);
+      } finally {
+        loadingOverlay?.classList.add('hidden');
+        submitting = false;
+        updateButtonsState();
+      }
+    });
+
+    // Inicio en el paso 0
+    showStep(findStep(0, 1));
+  })();
+}
+
+// ==========================================
+// Arranque ordenado
+// ==========================================
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => { mount(); init(); });
+} else {
+  mount(); init();
+}
