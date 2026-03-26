@@ -54,7 +54,7 @@ const FOOTER_FALLBACK=`
     </div>
   </div>
   <div class="footer-separator"></div>
-  <div class="copyright">© 2025 | Lucrum Financiera S.A.S. | Todos los derechos reservados.</div>
+  <div class="copyright">© 2026 | Lucrum Financiera S.A.S. | Todos los derechos reservados.</div>
 </footer>
 <a class="whatsapp-bubble" href="https://wa.me/573011007567" target="_blank" rel="noopener" aria-label="WhatsApp Lucrum">
   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
