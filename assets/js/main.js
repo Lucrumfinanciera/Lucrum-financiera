@@ -85,19 +85,55 @@ const initHeader=()=>{
   const mainNav=document.getElementById("main-menu");
   const navOverlay=document.querySelector(".nav-overlay");
   const header=document.querySelector(".site-header");
+  const dropdowns=Array.from(mainNav?.querySelectorAll(".nav-dropdown")||[]);
   if(!menuToggle||!mainNav||!header)return;
   headerInitialized=true;
+  const closeDropdowns=()=>{
+    dropdowns.forEach((dropdown)=>{
+      dropdown.classList.remove("open");
+      const toggle=dropdown.querySelector(".nav-dropdown-toggle");
+      if(toggle)toggle.setAttribute("aria-expanded", "false");
+    }
+    );
+  };
   const closeNav=()=>{
     document.body.classList.remove("nav-open");
     menuToggle.setAttribute("aria-expanded", "false");
+    closeDropdowns();
   };
   const toggleNav=()=>{
     const isOpen=document.body.classList.toggle("nav-open");
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+    if(!isOpen)closeDropdowns();
   };
   menuToggle.addEventListener("click", toggleNav);
   if(navOverlay)navOverlay.addEventListener("click", closeNav);
   mainNav.querySelectorAll("a").forEach((link)=>link.addEventListener("click", closeNav));
+  dropdowns.forEach((dropdown)=>{
+    const toggle=dropdown.querySelector(".nav-dropdown-toggle");
+    if(!toggle)return;
+    toggle.addEventListener("click", (event)=>{
+      event.stopPropagation();
+      const isOpen=dropdown.classList.contains("open");
+      closeDropdowns();
+      dropdown.classList.toggle("open", !isOpen);
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+    }
+    );
+  }
+  );
+  document.addEventListener("click", (event)=>{
+    if(!dropdowns.some((dropdown)=>dropdown.contains(event.target))){
+      closeDropdowns();
+    }
+  }
+  );
+  document.addEventListener("keydown", (event)=>{
+    if(event.key==="Escape"){
+      closeNav();
+    }
+  }
+  );
   const highlightActiveLink=()=>{
     const normalize=(value)=>value.replace(/\/index\.html$/, "/").replace(/\/$/, "")||"/";
     const current=normalize(window.location.pathname||"/");
@@ -106,6 +142,12 @@ const initHeader=()=>{
       const linkPath=normalize(href.startsWith("http")?"/":href);
       const isActive=linkPath!=="/"?current.startsWith(linkPath):current==="/";
       link.classList.toggle("active", isActive);
+    }
+    );
+    dropdowns.forEach((dropdown)=>{
+      const toggle=dropdown.querySelector(".nav-dropdown-toggle");
+      const hasActiveChild=Array.from(dropdown.querySelectorAll(".nav-dropdown-menu a")).some((link)=>link.classList.contains("active"));
+      if(toggle)toggle.classList.toggle("active", hasActiveChild);
     }
     );
   };
