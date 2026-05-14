@@ -3,7 +3,7 @@
   const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbz0FYxMwtSnYTgsYTCn55v4xOUY8LbiVgy7G4efQxTqR0C1GbFRJ1OZViajorNB9Y-uMA/exec";
   const MIN_SUBMIT_MS = 1200;
   const formLoadTime = Date.now();
-  const WHATSAPP_BASE = "https://wa.me/13245871414";
+  const WHATSAPP_BASE = "https://wa.me/573245871414";
   const GENERIC_WA_MESSAGE = "Hola Lucrum, quiero financiar una compra con un aliado.";
   const searchInput = document.getElementById("partner-search");
   const chipsContainer = document.getElementById("partner-chips");
