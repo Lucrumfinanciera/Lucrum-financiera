@@ -355,8 +355,8 @@
     businessBtn.className = "btn btn-secondary";
     businessBtn.target = "_blank";
     businessBtn.rel = "noopener";
-    // Secondary CTA: send the user to the ally's own WhatsApp with a Lucrum reference.
-    businessBtn.href = `https://wa.me/${formatWaNumber(partner.whatsappBusiness)}?text=${encodeURIComponent(buildBusinessMessage(partner))}`;
+    // Secondary CTA: keep all WhatsApp conversations on Lucrum's number with ally context.
+    businessBtn.href = `${WHATSAPP_BASE}?text=${encodeURIComponent(buildBusinessMessage(partner))}`;
     businessBtn.textContent = "Contactar al negocio";
     ctaRow.appendChild(waBtn);
     ctaRow.appendChild(businessBtn);
